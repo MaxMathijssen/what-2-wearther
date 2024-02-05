@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import useSWR from "swr";
 
+import { LocationContext } from "../LocationProvider";
 import { API_KEY } from "@/helpers/constants";
 import { WeatherDetails, DailyForecast, WeatherAlert } from "@/typings/types";
 import styles from "./WeatherCard.module.css";
@@ -23,34 +24,14 @@ interface WeatherData {
   alerts?: WeatherAlert[]; // Optional property
 }
 
-type Location = {
-  longitude: number;
-  latitude: number;
-};
-
 const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
 function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
-  const [location, setLocation] = useState<Location>();
   const [temperature, setTemperature] = useState<number | undefined>(undefined);
+  const location = useContext(LocationContext);
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,daily,alerts&units=metric&appid=${API_KEY}`;
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position: {
-        coords: Location;
-      }) {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      });
-    } else {
-      console.log("Geolocation is not available in your browser.");
-    }
-  }, []);
 
   const { data, error, isLoading } = useSWR(url, fetcher);
 
