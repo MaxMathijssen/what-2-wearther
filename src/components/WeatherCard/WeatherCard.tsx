@@ -2,6 +2,7 @@
 
 import { useContext } from "react";
 import { TemperatureContext } from "../TemperatureProvider";
+import Card from "../Card";
 
 import styles from "./WeatherCard.module.css";
 
@@ -13,18 +14,14 @@ function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
   const { temperature, error, isLoading } = useContext(TemperatureContext);
 
   if (error) {
-    return <p>Something went wrong!</p>;
+    return <Card>Something went wrong!</Card>;
   }
 
   if (isLoading) {
-    return <p>Loading..</p>;
+    return <Card>Loading..</Card>;
   }
 
-  return (
-    <div>
-      <h1>{temperature}°C</h1>
-    </div>
-  );
+  return <Card>{temperature}°C</Card>;
 }
 
 export default WeatherCard;
