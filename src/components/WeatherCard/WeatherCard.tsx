@@ -28,14 +28,14 @@ type Location = {
   latitude: number;
 };
 
+const fetcher = (...args: Parameters<typeof fetch>) =>
+  fetch(...args).then((res) => res.json());
+
 function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
   const [location, setLocation] = useState<Location>();
   const [temperature, setTemperature] = useState<number | undefined>(undefined);
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,daily,alerts&units=metric&appid=${API_KEY}`;
-
-  const fetcher = (...args: Parameters<typeof fetch>) =>
-    fetch(...args).then((res) => res.json());
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -52,10 +52,11 @@ function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
     }
   }, []);
 
-  const { data, error } = useSWR(url, fetcher);
+  const { data, error, isLoading } = useSWR(url, fetcher);
 
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading...</div>;
+  console.log("render");
 
   return (
     <div>
