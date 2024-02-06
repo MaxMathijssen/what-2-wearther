@@ -27,11 +27,20 @@ function WeatherCard({
   }
 
   return (
-    <Card>
-      {dailyForecast?.temp.current
-        ? dailyForecast.temp.current
-        : dailyForecast?.temp.max}
-      °C
+    <Card
+      header={dailyForecast?.day}
+      title={
+        dailyForecast?.temp.current
+          ? `${Math.round(dailyForecast.temp.current)} °C`
+          : undefined
+      }
+      subTitle={dailyForecast?.weather}
+    >
+      {dailyForecast?.temp
+        ? `H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(
+            dailyForecast.temp.min
+          )}°C`
+        : undefined}
     </Card>
   );
 }

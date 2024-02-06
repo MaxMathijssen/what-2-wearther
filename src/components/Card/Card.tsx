@@ -1,10 +1,21 @@
 import { PropsWithChildren } from "react";
 import styles from "./card.module.css";
 
-function Card({ children }: PropsWithChildren) {
+interface CardProps extends PropsWithChildren {
+  header?: string;
+  title?: string;
+  subTitle?: string;
+}
+
+function Card({ header, title, subTitle, children }: CardProps) {
   return (
     <div className={styles.card}>
-      <h1>{children}</h1>
+      <h3>{header}</h3>
+      <h2>{title}</h2>
+      <h4>{subTitle}</h4>
+      <span>
+        <p>{children}</p>
+      </span>
     </div>
   );
 }

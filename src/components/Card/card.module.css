@@ -1,8 +1,11 @@
 .card {
+  display: flex; /* Make it a flex container */
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: flex-start;
   padding: 1.2rem;
-  border-radius: var(--border-radius);
+  border-radius: 5px;
   background: #a0e9ff;
-  border: 1px solid rgba(var(--card-border-rgb), 0);
+  border: 1px solid #aaaaaa;
   transition: background 200ms, border 200ms;
   width: 300px;
   height: 150px;
@@ -14,8 +17,20 @@
   transition: transform 200ms;
 }
 
-.card h1 {
+.card h2 {
   font-weight: 600;
+  margin-bottom: 0.7rem;
+  color: #ffffff;
+}
+
+.card h3 {
+  font-weight: 400;
+  margin-bottom: 0.7rem;
+  color: #ffffff;
+}
+
+.card h4 {
+  font-weight: 200;
   margin-bottom: 0.7rem;
   color: #ffffff;
 }
