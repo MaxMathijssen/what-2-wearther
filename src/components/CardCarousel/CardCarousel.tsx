@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ForecastContext } from "../ForecastProvider";
 import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";

@@ -4,12 +4,12 @@
   align-items: flex-start;
   padding: 1.2rem;
   border-radius: 5px;
-  background: #a0e9ff;
-  border: 1px solid #aaaaaa;
+  background: rgba(160, 233, 255, 0.8);
+  border: 2px solid #aaaaaa;
   transition: background 200ms, border 200ms;
   width: 300px;
-  height: 150px;
-  justify-content: center; /* Added */
+  max-height: 200px;
+  /* justify-content: center; Added */
   margin-right: 10px;
 }
 
