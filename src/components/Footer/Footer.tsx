@@ -1,19 +1,21 @@
 import React from "react";
 import Link from "next/link";
 
-async function Footer() {
+import styles from "./footer.module.css";
+
+function Footer() {
   return (
-    <header className="site-footer">
-      <div className="logo-wrapper">
-        <Link href="" className="logo">
+    <header className={styles.siteFooter}>
+      <div className={styles.logoWrapper}>
+        <Link href="" className={styles.logo}>
           What2Wearther
         </Link>
-        <p className="disclaimer">
+        <p className={styles.disclaimer}>
           Copyright © 2099 What2Wearther Inc. All Rights Reserved.
         </p>
       </div>
 
-      <div className="link-wrapper">
+      <div className={styles.linkWrapper}>
         <div className="col"></div>
         <div className="col">
           <h2>Legal</h2>

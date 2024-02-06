@@ -1,14 +1,14 @@
-.site-footer {
+.siteFooter {
   display: flex;
   justify-content: space-between;
   gap: 32px;
   background: hsl(260deg 50% 50% / 0.1);
   padding: 24px;
 }
-.site-footer .logo-wrapper {
+.siteFooter .logoWrapper {
   flex-shrink: 10000;
 }
-.site-footer .logo {
+.siteFooter .logo {
   display: block;
   width: max-content;
   font-size: 1.25rem;
@@ -19,27 +19,27 @@
   padding: 16px 24px;
   text-decoration: none;
 }
-.site-footer .disclaimer {
+.siteFooter .disclaimer {
   font-size: 0.875rem;
 }
-.site-footer .link-wrapper {
+.siteFooter .linkWrapper {
   display: flex;
   gap: 48px;
 }
-.site-footer h2 {
+.siteFooter h2 {
   font-size: 1rem;
   margin-bottom: 0.5em;
 }
-.site-footer ol {
+.siteFooter ol {
   display: flex;
   flex-direction: column;
   gap: 8px;
   font-size: 1rem;
 }
-.site-footer ol a {
+.siteFooter ol a {
   color: inherit;
   text-decoration: none;
 }
-.site-footer ol a:hover {
+.siteFooter ol a:hover {
   text-decoration: underline;
 }

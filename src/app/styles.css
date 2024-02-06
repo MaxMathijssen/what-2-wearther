@@ -26,52 +26,6 @@ main {
   font-size: 1rem;
 }
 
-.site-footer {
-  display: flex;
-  justify-content: space-between;
-  gap: 32px;
-  background: hsl(260deg 50% 50% / 0.1);
-  padding: 24px;
-}
-.site-footer .logo-wrapper {
-  flex-shrink: 10000;
-}
-.site-footer .logo {
-  display: block;
-  width: max-content;
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 8px;
-  background: hsl(260deg 100% 50%);
-  color: white;
-  padding: 16px 24px;
-  text-decoration: none;
-}
-.site-footer .disclaimer {
-  font-size: 0.875rem;
-}
-.site-footer .link-wrapper {
-  display: flex;
-  gap: 48px;
-}
-.site-footer h2 {
-  font-size: 1rem;
-  margin-bottom: 0.5em;
-}
-.site-footer ol {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 1rem;
-}
-.site-footer ol a {
-  color: inherit;
-  text-decoration: none;
-}
-.site-footer ol a:hover {
-  text-decoration: underline;
-}
-
 /* One-off styles for fake hero */
 .hero {
   position: relative;

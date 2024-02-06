@@ -1,13 +1,19 @@
 import React from "react";
+import Link from "next/link";
 
-const Header = () => {
+import styles from "./header.module.css";
+
+function Header() {
   return (
-    <header>
-      <div className="mainHeader">
-        <div className="filler" />
-      </div>
+    <header className={styles.siteHeader}>
+      <Link href="" className={styles.logo}>
+        What2Wearther
+      </Link>
+      <nav>
+        <ol className={styles.headerNavLinks}></ol>
+      </nav>
     </header>
   );
-};
+}
 
 export default Header;

@@ -1,57 +1,33 @@
-.mainHeader {
+.siteHeader {
   display: flex;
+  justify-content: space-between;
   align-items: baseline;
-  padding: 18px 32px;
-  border-bottom: 1px solid var(--color-gray-300);
-  overflow: auto;
+  border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
+  background: hsl(260deg 50% 50% / 0.1);
 }
-
-.filler {
-  flex: 1;
-}
-
-.navLink {
-  font-size: 1.125rem;
-  text-transform: uppercase;
+.siteHeader .logo {
+  font-size: 1.5rem;
+  font-weight: 500;
+  background: hsl(260deg 100% 50%);
+  color: white;
+  padding: 24px;
   text-decoration: none;
-  color: var(--color-gray-900);
-  font-weight: 600;
+  margin-bottom: -1px;
 }
-
-/* Tablet */
-@media (max-width: 59.375rem) {
-  .mainHeader {
-    justify-content: space-between;
-    align-items: center;
-    border-top: 4px solid var(--color-gray-900);
-  }
-
-  .desktopNav {
-    display: none;
-  }
-
-  .mobileActions {
-    display: flex;
-    gap: 32px;
-  }
-
-  .logoWrapper {
-    flex: revert;
-  }
-
-  .filler {
-    display: none;
-  }
+.siteHeader nav {
+  overflow: auto;
+  padding: 24px;
 }
-
-/* Mobile */
-@media (max-width: 37.5rem) {
-  .mainHeader {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-
-  .mobileActions {
-    gap: 16px;
-  }
+.header-nav-links {
+  display: flex;
+  gap: 32px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.siteHeader .headerNavLink {
+  text-decoration: none;
+  color: black;
+}
+.siteHeader .headerNavLink.primary {
+  color: hsl(260deg 100% 50%);
 }
