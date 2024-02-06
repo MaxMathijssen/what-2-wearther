@@ -4,7 +4,7 @@ import styles from "./card.module.css";
 function Card({ children }: PropsWithChildren) {
   return (
     <div className={styles.card}>
-      <h2>{children}</h2>
+      <h1>{children}</h1>
     </div>
   );
 }

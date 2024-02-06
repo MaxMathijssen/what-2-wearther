@@ -1,19 +1,24 @@
 "use client";
 
-import { useContext } from "react";
-import { TemperatureContext } from "../TemperatureProvider";
 import Card from "../Card";
+import { DailyForecast } from "@/typings/types";
 
 import styles from "./WeatherCard.module.css";
 
 interface WeatherCardProps {
+  isError: boolean;
+  isLoading: boolean;
   isPlaceHolder: boolean;
+  dailyForecast: DailyForecast | null;
 }
 
-function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
-  const { temperature, error, isLoading } = useContext(TemperatureContext);
-
-  if (error) {
+function WeatherCard({
+  isError,
+  isLoading,
+  isPlaceHolder,
+  dailyForecast,
+}: WeatherCardProps): React.JSX.Element {
+  if (isError) {
     return <Card>Something went wrong!</Card>;
   }
 
@@ -21,7 +26,14 @@ function WeatherCard({ isPlaceHolder }: WeatherCardProps): React.JSX.Element {
     return <Card>Loading..</Card>;
   }
 
-  return <Card>{temperature}°C</Card>;
+  return (
+    <Card>
+      {dailyForecast?.temp.current
+        ? dailyForecast.temp.current
+        : dailyForecast?.temp.max}
+      °C
+    </Card>
+  );
 }
 
 export default WeatherCard;
