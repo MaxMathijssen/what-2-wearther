@@ -16,8 +16,10 @@ const fetcher = (...args: Parameters<typeof fetch>) =>
 
 function ForecastProvider({ children }: PropsWithChildren) {
   const location = useContext(LocationContext);
+
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
 
+  console.log(url);
   const { data, error, isLoading } = useSWR(url, fetcher, {
     refreshInterval: 900000,
     revalidateOnFocus: false,
@@ -46,8 +48,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
       weeklyForecast.push(dailyForecast);
     }
   }
-
-  console.log("Location render");
 
   return (
     <ForecastContext.Provider value={{ weeklyForecast, error, isLoading }}>
