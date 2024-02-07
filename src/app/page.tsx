@@ -5,7 +5,9 @@ import CardCarousel from "@/components/CardCarousel";
 export default function Home() {
   return (
     <LocationProvider>
-      <main className="main">{/* <CardCarousel /> */}</main>
+      <TemperatureProvider>
+        <main className="main">{/* <CardCarousel /> */}</main>
+      </TemperatureProvider>
     </LocationProvider>
   );
 }
