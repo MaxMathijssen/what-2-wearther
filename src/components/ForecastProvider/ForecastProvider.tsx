@@ -106,7 +106,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <ForecastContext.Provider value={{ newWeeklyForecast, error, isLoading }}>
+    <ForecastContext.Provider value={{ weeklyForecast, error, isLoading }}>
       {children}
     </ForecastContext.Provider>
   );

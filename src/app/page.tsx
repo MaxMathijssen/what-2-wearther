@@ -6,7 +6,9 @@ export default function Home() {
   return (
     <LocationProvider>
       <TemperatureProvider>
-        <main className="main">{/* <CardCarousel /> */}</main>
+        <main className="main">
+          <CardCarousel />
+        </main>
       </TemperatureProvider>
     </LocationProvider>
   );
