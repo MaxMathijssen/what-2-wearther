@@ -23,8 +23,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
     revalidateOnFocus: false,
   });
 
-  console.log(url);
-
   const weeklyForecast: DailyForecast[] = [];
 
   const dayNames = getDayNames();
@@ -48,6 +46,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
       weeklyForecast.push(dailyForecast);
     }
   }
+
+  console.log("Location render");
 
   return (
     <ForecastContext.Provider value={{ weeklyForecast, error, isLoading }}>

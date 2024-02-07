@@ -11,7 +11,6 @@ import styles from "./cardCarousel.module.css";
 function CardCarousel() {
   const { weeklyForecast, error, isLoading } = useContext(ForecastContext);
 
-  console.log(weeklyForecast);
   return (
     <div className={styles.cardContainer}>
       {weeklyForecast &&
