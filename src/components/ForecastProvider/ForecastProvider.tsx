@@ -3,7 +3,7 @@
 import { useContext, createContext, useState, PropsWithChildren } from "react";
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../LocationProvider";
-import { getDayNames } from "@/helpers/utils";
+import { getDayNames, getCurrentTimestamp } from "@/helpers/utils";
 import { DailyForecast } from "@/typings/types";
 import useSWR from "swr";
 
@@ -52,7 +52,17 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
 
-  const { data, error, isLoading } = useSWR(url, fetcher, {
+  let shouldFetch: boolean = false;
+
+  if (
+    weeklyForecast === null ||
+    (weeklyForecast !== null &&
+      getCurrentTimestamp() - weeklyForecast[0].dt > 1800)
+  ) {
+    shouldFetch = true;
+  }
+
+  const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
     refreshInterval: 900000,
     revalidateOnFocus: false,
   });
@@ -62,6 +72,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const dayNames = getDayNames();
 
   if (data) {
+    console.log(url);
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
@@ -74,19 +85,23 @@ function ForecastProvider({ children }: PropsWithChildren) {
       };
 
       if (i === 0) {
+        dailyForecast.dt = data.current.dt;
         dailyForecast.temp.current = data.current.temp;
       }
       newWeeklyForecast.push(dailyForecast);
     }
 
-    if (weeklyForecast !== null && data.daily[0].dt !== weeklyForecast[0].dt) {
+    if (weeklyForecast !== null) {
       window.localStorage.setItem(
         "weeklyForecast",
         JSON.stringify(newWeeklyForecast)
       );
-
       setWeeklyForecast(newWeeklyForecast);
     }
+  }
+
+  if (isLoading) {
+    console.log("SWR is fetching data...");
   }
 
   return (

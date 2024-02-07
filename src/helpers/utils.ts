@@ -28,3 +28,9 @@ export function getDayNames(): string[] {
   }
   return days;
 }
+
+export function getCurrentTimestamp(): number {
+  const now = new Date();
+  const currentTimestampInSeconds = Math.floor(now.getTime() / 1000);
+  return currentTimestampInSeconds;
+}
