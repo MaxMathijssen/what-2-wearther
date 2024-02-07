@@ -48,20 +48,20 @@ function ForecastProvider({ children }: PropsWithChildren) {
       return null;
     }
   );
-  const location = useContext(LocationContext);
 
-  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
+  const location = useContext(LocationContext);
+  console.log(location);
 
   let shouldFetch: boolean = false;
-
   if (
-    weeklyForecast === null ||
+    (weeklyForecast === null && location !== null) ||
     (weeklyForecast !== null &&
       getCurrentTimestamp() - weeklyForecast[0].dt > 1800)
   ) {
     shouldFetch = true;
   }
 
+  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
     refreshInterval: 900000,
     revalidateOnFocus: false,
@@ -71,7 +71,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
   const dayNames = getDayNames();
 
-  if (data) {
+  if (data && location !== null) {
     console.log(url);
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
@@ -91,7 +91,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
       newWeeklyForecast.push(dailyForecast);
     }
 
-    if (weeklyForecast !== null) {
+    if (newWeeklyForecast !== null) {
+      console.log("Stored weeklyForecast", newWeeklyForecast);
       window.localStorage.setItem(
         "weeklyForecast",
         JSON.stringify(newWeeklyForecast)
