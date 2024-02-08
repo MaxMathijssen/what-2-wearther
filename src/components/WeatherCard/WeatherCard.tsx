@@ -1,35 +1,38 @@
 import Card from "../Card";
 import { DailyForecast } from "@/typings/types";
-import { LoremIpsum } from "lorem-ipsum";
-
-import { random } from "@/helpers/utils";
 
 import styles from "./WeatherCard.module.css";
 
 interface WeatherCardProps {
   isError: boolean;
   isLoading: boolean;
+  isFirstPlaceHolder: boolean;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast | null;
 }
 
-const lorem = new LoremIpsum();
-
 function WeatherCard({
   isError,
+  isFirstPlaceHolder,
   isPlaceHolder,
   dailyForecast,
 }: WeatherCardProps): React.JSX.Element {
   return (
     <>
-      {isError && <Card>Something went wrong!</Card>}
+      {isError && <Card isPlaceHolder={false}>Something went wrong!</Card>}
       {isPlaceHolder && (
-        <Card header={"Mock"} title={"Mock"} subTitle={"Mock"}>
-          {"Mock"}
+        <Card
+          isPlaceHolder={true}
+          header={"Mockday"}
+          title={isFirstPlaceHolder ? "7 °C" : undefined}
+          subTitle={"Mock"}
+        >
+          {"H:12°C L:7°C"}
         </Card>
       )}
       {dailyForecast && (
         <Card
+          isPlaceHolder={false}
           header={dailyForecast?.day}
           title={
             dailyForecast?.temp.current

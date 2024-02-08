@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Redacted_Script } from "next/font/google";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -7,6 +7,12 @@ import Footer from "@/components/Footer";
 import "./styles.css";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const loadingFont = Redacted_Script({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "block",
+});
 
 export const metadata: Metadata = {
   title: "What2Wearther",

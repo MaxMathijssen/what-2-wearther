@@ -43,3 +43,14 @@
   max-width: 30ch;
   text-wrap: balance;
 }
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+}
+
+.card.placeholder {
+  font-family: var(--font-family-loading);
+  animation: pulse 1000ms ease-in-out infinite alternate;
+}
