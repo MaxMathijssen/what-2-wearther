@@ -50,7 +50,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
   );
 
   const location = useContext(LocationContext);
-  console.log(location);
 
   let shouldFetch: boolean = false;
   if (
