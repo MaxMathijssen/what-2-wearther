@@ -3,6 +3,10 @@ html {
   background: radial-gradient(circle at 50% 100%, #cdf5fd, #ffffff);
 }
 
+.body {
+  font-family: var(--font-family-primary), sans-serif;
+}
+
 .web-base {
   display: flex;
   flex-direction: column;

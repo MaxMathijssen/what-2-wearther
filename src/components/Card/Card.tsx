@@ -9,9 +9,13 @@ interface CardProps extends PropsWithChildren {
   isPlaceHolder: boolean;
 }
 
-function Card({ header, title, subTitle, children }: CardProps) {
+function Card({ header, title, subTitle, isPlaceHolder, children }: CardProps) {
   return (
-    <div className={classNames(styles.card, styles.placeholder)}>
+    <div
+      className={classNames(styles.card, {
+        [styles.placeholder]: isPlaceHolder,
+      })}
+    >
       <h3>{header}</h3>
       <h2>{title}</h2>
       <h4>{subTitle}</h4>

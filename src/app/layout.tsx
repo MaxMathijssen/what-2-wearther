@@ -6,7 +6,12 @@ import Footer from "@/components/Footer";
 
 import "./styles.css";
 
-const inter = Inter({ subsets: ["latin"] });
+type CustomCSSVariables = {
+  "--font-family-primary": string;
+  "--font-family-loading": string;
+};
+
+const primaryFont = Inter({ subsets: ["latin"] });
 
 const loadingFont = Redacted_Script({
   weight: ["400"],
@@ -19,14 +24,23 @@ export const metadata: Metadata = {
   description: "Weather clothing recommendation app",
 };
 
+export interface CustomBodyStyle
+  extends React.CSSProperties,
+    CustomCSSVariables {}
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const customStyles: CustomBodyStyle = {
+    "--font-family-primary": primaryFont.style.fontFamily,
+    "--font-family-loading": loadingFont.style.fontFamily,
+  };
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className="body" style={customStyles}>
         <div className="web-base">
           <Header />
           {children}
