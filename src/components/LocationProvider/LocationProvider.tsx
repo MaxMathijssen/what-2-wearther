@@ -10,30 +10,29 @@ type Location = {
 export const LocationContext = createContext<Location | null>(null);
 
 function LocationProvider({ children }: PropsWithChildren) {
-  const [location, setLocation] = useState<Location | null>(() => {
-    if (typeof window !== "undefined") {
-      const storedLocation = window.localStorage.getItem("userLocation");
+  const [location, setLocation] = useState<Location | null>(null);
 
-      if (storedLocation) {
-        try {
-          const parsedLocation = JSON.parse(storedLocation);
+  useEffect(() => {
+    const storedLocation = window.localStorage.getItem("userLocation");
 
-          if (
-            parsedLocation &&
-            typeof parsedLocation === "object" &&
-            "latitude" in parsedLocation &&
-            "longitude" in parsedLocation
-          ) {
-            console.log("Parsed location", parsedLocation);
-            return parsedLocation;
-          }
-        } catch (error) {
-          console.error("Error parsing stored location:", error);
+    if (storedLocation) {
+      try {
+        const parsedLocation = JSON.parse(storedLocation);
+
+        if (
+          parsedLocation &&
+          typeof parsedLocation === "object" &&
+          "latitude" in parsedLocation &&
+          "longitude" in parsedLocation
+        ) {
+          console.log("Parsed location", parsedLocation);
+          setLocation(parsedLocation);
         }
+      } catch (error) {
+        console.error("Error parsing stored location:", error);
       }
-      return null;
     }
-  });
+  }, []);
 
   useEffect(() => {
     if ("geolocation" in navigator) {

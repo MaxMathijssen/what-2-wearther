@@ -1,6 +1,12 @@
 "use client";
 
-import { useContext, createContext, useState, PropsWithChildren } from "react";
+import {
+  useContext,
+  createContext,
+  useState,
+  useEffect,
+  PropsWithChildren,
+} from "react";
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../LocationProvider";
 import { getDayNames, getCurrentTimestamp } from "@/helpers/utils";
@@ -16,38 +22,35 @@ const fetcher = (...args: Parameters<typeof fetch>) =>
 
 function ForecastProvider({ children }: PropsWithChildren) {
   const [weeklyForecast, setWeeklyForecast] = useState<DailyForecast[] | null>(
-    (): DailyForecast[] | null => {
-      if (typeof window !== "undefined") {
-        const storedWeeklyForecast =
-          window.localStorage.getItem("weeklyForecast");
-
-        if (storedWeeklyForecast) {
-          try {
-            const parsedWeeklyForecast = JSON.parse(storedWeeklyForecast);
-
-            if (
-              parsedWeeklyForecast &&
-              Array.isArray(parsedWeeklyForecast) && // Ensure parsedWeeklyForecast is an array
-              parsedWeeklyForecast.every(
-                (item) =>
-                  typeof item === "object" &&
-                  "day" in item &&
-                  "temp" in item &&
-                  "weather" in item
-              )
-            ) {
-              console.log("Parsed weeklyForecast", parsedWeeklyForecast);
-              return parsedWeeklyForecast;
-            }
-          } catch (error) {
-            console.error("Error parsing stored weekly forecast:", error);
-          }
-        }
-        return null;
-      }
-      return null;
-    }
+    null
   );
+
+  useEffect(() => {
+    const storedWeeklyForecast = window.localStorage.getItem("weeklyForecast");
+
+    if (storedWeeklyForecast) {
+      try {
+        const parsedWeeklyForecast = JSON.parse(storedWeeklyForecast);
+
+        if (
+          parsedWeeklyForecast &&
+          Array.isArray(parsedWeeklyForecast) && // Ensure parsedWeeklyForecast is an array
+          parsedWeeklyForecast.every(
+            (item) =>
+              typeof item === "object" &&
+              "day" in item &&
+              "temp" in item &&
+              "weather" in item
+          )
+        ) {
+          console.log("Parsed weeklyForecast", parsedWeeklyForecast);
+          setWeeklyForecast(parsedWeeklyForecast);
+        }
+      } catch (error) {
+        console.error("Error parsing stored weekly forecast:", error);
+      }
+    }
+  }, []);
 
   const location = useContext(LocationContext);
 
