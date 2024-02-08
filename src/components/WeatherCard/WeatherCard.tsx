@@ -1,7 +1,8 @@
-"use client";
-
 import Card from "../Card";
 import { DailyForecast } from "@/typings/types";
+import { LoremIpsum } from "lorem-ipsum";
+
+import { random } from "@/helpers/utils";
 
 import styles from "./WeatherCard.module.css";
 
@@ -12,36 +13,39 @@ interface WeatherCardProps {
   dailyForecast: DailyForecast | null;
 }
 
+const lorem = new LoremIpsum();
+
 function WeatherCard({
   isError,
-  isLoading,
   isPlaceHolder,
   dailyForecast,
 }: WeatherCardProps): React.JSX.Element {
-  if (isError) {
-    return <Card>Something went wrong!</Card>;
-  }
-
-  if (isLoading) {
-    return <Card>Loading..</Card>;
-  }
-
   return (
-    <Card
-      header={dailyForecast?.day}
-      title={
-        dailyForecast?.temp.current
-          ? `${Math.round(dailyForecast.temp.current)} °C`
-          : undefined
-      }
-      subTitle={dailyForecast?.weather}
-    >
-      {dailyForecast?.temp
-        ? `H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(
-            dailyForecast.temp.min
-          )}°C`
-        : undefined}
-    </Card>
+    <>
+      {isError && <Card>Something went wrong!</Card>}
+      {isPlaceHolder && (
+        <Card header={"Mock"} title={"Mock"} subTitle={"Mock"}>
+          {"Mock"}
+        </Card>
+      )}
+      {dailyForecast && (
+        <Card
+          header={dailyForecast?.day}
+          title={
+            dailyForecast?.temp.current
+              ? `${Math.round(dailyForecast.temp.current)} °C`
+              : undefined
+          }
+          subTitle={dailyForecast?.weather}
+        >
+          {dailyForecast?.temp
+            ? `H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(
+                dailyForecast.temp.min
+              )}°C`
+            : undefined}
+        </Card>
+      )}
+    </>
   );
 }
 

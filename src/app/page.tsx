@@ -2,7 +2,7 @@ import LocationProvider from "@/components/LocationProvider";
 import TemperatureProvider from "@/components/ForecastProvider";
 import CardCarousel from "@/components/CardCarousel";
 
-export default function Home() {
+function HomePage() {
   return (
     <LocationProvider>
       <TemperatureProvider>
@@ -13,3 +13,5 @@ export default function Home() {
     </LocationProvider>
   );
 }
+
+export default HomePage;

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@radix-ui/themes": "^2.0.3",
+    "lorem-ipsum": "^2.0.8",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",

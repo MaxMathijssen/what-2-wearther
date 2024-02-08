@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ForecastContext } from "../ForecastProvider";
 import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";
@@ -37,14 +37,14 @@ function CardCarousel() {
             />
           );
         })}
-      {isLoading &&
+      {!weeklyForecast &&
         range(0, 7).map((index) => {
           return (
             <WeatherCard
               key={index}
               isError={false}
-              isLoading={true}
-              isPlaceHolder={false}
+              isLoading={false}
+              isPlaceHolder={true}
               dailyForecast={null}
             />
           );

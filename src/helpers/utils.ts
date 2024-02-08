@@ -34,3 +34,17 @@ export function getCurrentTimestamp(): number {
   const currentTimestampInSeconds = Math.floor(now.getTime() / 1000);
   return currentTimestampInSeconds;
 }
+
+export const random = (
+  min: number,
+  max: number,
+  { rounded } = { rounded: true }
+) => {
+  const partialVal = Math.random() * (max - min);
+
+  if (rounded) {
+    return Math.floor(partialVal) + min;
+  } else {
+    return partialVal + min;
+  }
+};
