@@ -1,22 +1,4 @@
-.cardBtn:not(:last-child) {
-  margin-right: 10px;
-}
-
-.cardBtn {
-  position: relative;
-  display: block;
-  background: transparent;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: #83e4ee;
-  border: 1px solid #010f3a;
-  transition: background 200ms, border 200ms;
-  width: 300px;
-  max-height: 200px;
-  padding: 1.2rem;
-  border-radius: 5px;
+.card {
 }
 
 .card span {

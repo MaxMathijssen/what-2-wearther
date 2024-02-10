@@ -1,3 +1,35 @@
 .weatherCardLoading {
   font-family: var(--font-family-loading);
 }
+
+.cardBtn:not(:last-child) {
+  margin-right: 10px;
+}
+
+.cardBtn {
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #83e4ee;
+  border: 1px solid #010f3a;
+  transition: background 200ms, border 200ms;
+  width: 300px;
+  height: 200px;
+  padding: 1.2rem;
+  border-radius: 5px;
+}
+
+.head {
+  width: 300px;
+  height: 50px;
+  background: rgb(223, 235, 56);
+  background: rgb(234, 235, 235);
+  background: linear-gradient(
+    163deg,
+    rgba(56, 235, 226, 1) 0%,
+    rgba(134, 221, 245, 1) 50%
+  );
+}
