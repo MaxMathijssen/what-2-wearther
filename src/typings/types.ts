@@ -10,9 +10,10 @@ export interface DailyForecast {
     min: number;
     max: number;
   };
-  feels_like: number;
+  feels_like: { x: string; y: number } | number;
   weather: string;
   clouds: number;
+  humidity: number;
   wind_speed: number;
   wind_deg: number;
   wind_gust: number;

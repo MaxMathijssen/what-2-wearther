@@ -24,7 +24,7 @@ function WeatherCard({
 }: WeatherCardProps): React.JSX.Element {
   const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (onClick && dailyForecast) {
-      onClick(dailyForecast); // Call the onClick function passed from WeeklyForecast
+      onClick(dailyForecast);
     }
   };
 

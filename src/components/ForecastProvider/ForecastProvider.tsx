@@ -81,7 +81,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const dayNames = getDayNames();
 
   if (data && location !== null) {
-    console.log(url);
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
@@ -89,13 +88,33 @@ function ForecastProvider({ children }: PropsWithChildren) {
         temp: {
           min: data.daily[i].temp.min,
           max: data.daily[i].temp.max,
+          morn: data.daily[i].temp.morn,
+          day: data.daily[i].temp.day,
+          night: data.daily[i].temp.night,
+          eve: data.daily[i].temp.eve,
         },
+        humidity: data.daily[i].humidity,
+        feels_like: data.daily[i].feels_like,
         weather: data.daily[i].weather[0].main,
+        clouds: data.daily[i].clouds,
+        wind_speed: data.daily[i].wind_speed,
+        wind_deg: data.daily[i].wind_deg,
+        wind_gust: data.daily[i].wind_gust,
+        pop: data.daily[i].pop,
+        rain: data.daily[i].rain,
+        uvi: data.daily[i].uvi,
       };
 
       if (i === 0) {
         dailyForecast.dt = data.current.dt;
         dailyForecast.temp.current = data.current.temp;
+        dailyForecast.weather = data.current.weather.main;
+        dailyForecast.feels_like = data.current.feels_like;
+        dailyForecast.humidity = data.current.humidity;
+        dailyForecast.clouds = data.current.clouds;
+        dailyForecast.wind_speed = data.current.wind_speed;
+        dailyForecast.wind_deg = data.current.wind_deg;
+        dailyForecast.wind_gust = data.current.wind_gust;
       }
       newWeeklyForecast.push(dailyForecast);
     }
