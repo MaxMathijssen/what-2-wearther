@@ -2,6 +2,7 @@ import Card from "../Card";
 import { DailyForecast } from "@/typings/types";
 
 import styles from "./WeatherCard.module.css";
+import { MouseEventHandler } from "react";
 
 interface WeatherCardProps {
   isError: boolean;
@@ -9,6 +10,7 @@ interface WeatherCardProps {
   isFirstPlaceHolder: boolean;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast | null;
+  onClick?: (dailyForecast: DailyForecast) => void;
 }
 
 function WeatherCard({
@@ -16,7 +18,16 @@ function WeatherCard({
   isFirstPlaceHolder,
   isPlaceHolder,
   dailyForecast,
+  isLoading,
+  onClick,
+  ...delegated
 }: WeatherCardProps): React.JSX.Element {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (onClick && dailyForecast) {
+      onClick(dailyForecast); // Call the onClick function passed from WeeklyForecast
+    }
+  };
+
   return (
     <>
       {isError && <Card isPlaceHolder={false}>Something went wrong!</Card>}
@@ -40,6 +51,8 @@ function WeatherCard({
               : undefined
           }
           subTitle={dailyForecast?.weather}
+          onClick={handleClick}
+          {...delegated}
         >
           {dailyForecast?.temp
             ? `H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(

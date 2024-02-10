@@ -6,10 +6,11 @@ import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";
 import { range } from "@/helpers/utils";
 
-import styles from "./cardCarousel.module.css";
+import styles from "./weeklyForecast.module.css";
 
-function CardCarousel() {
-  const { weeklyForecast, error, isLoading } = useContext(ForecastContext);
+function WeeklyForecast() {
+  const { weeklyForecast, selectDailyForecast, error, isLoading } =
+    useContext(ForecastContext);
 
   return (
     <div className={styles.cardContainer}>
@@ -23,6 +24,7 @@ function CardCarousel() {
               isFirstPlaceHolder={false}
               isPlaceHolder={false}
               dailyForecast={dailyForecast}
+              onClick={selectDailyForecast}
             />
           );
         })}
@@ -66,4 +68,4 @@ function CardCarousel() {
   );
 }
 
-export default CardCarousel;
+export default WeeklyForecast;

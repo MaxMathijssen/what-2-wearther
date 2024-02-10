@@ -1,16 +1,22 @@
-.card {
-  display: flex; /* Make it a flex container */
-  flex-direction: column; /* Stack child elements vertically */
+.cardBtn:not(:last-child) {
+  margin-right: 10px;
+}
+
+.cardBtn {
+  position: relative;
+  display: block;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  padding: 1.2rem;
-  border-radius: 5px;
-  background: rgba(160, 233, 255, 0.8);
-  border: 2px solid #aaaaaa;
+  background: #83e4ee;
+  border: 1px solid #010f3a;
   transition: background 200ms, border 200ms;
   width: 300px;
   max-height: 200px;
-  /* justify-content: center; Added */
-  margin-right: 10px;
+  padding: 1.2rem;
+  border-radius: 5px;
 }
 
 .card span {
@@ -42,6 +48,7 @@
   line-height: 1.5;
   max-width: 30ch;
   text-wrap: balance;
+  color: #010f3a;
 }
 
 @keyframes pulse {

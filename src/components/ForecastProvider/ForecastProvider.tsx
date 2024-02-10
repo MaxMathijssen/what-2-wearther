@@ -24,6 +24,13 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const [weeklyForecast, setWeeklyForecast] = useState<DailyForecast[] | null>(
     null
   );
+  const [dailyForecast, setDailyForecast] = useState<DailyForecast | null>(
+    null
+  );
+
+  function selectDailyForecast(dailyForecast: DailyForecast) {
+    setDailyForecast(dailyForecast);
+  }
 
   useEffect(() => {
     const storedWeeklyForecast = window.localStorage.getItem("weeklyForecast");
@@ -34,7 +41,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
         if (
           parsedWeeklyForecast &&
-          Array.isArray(parsedWeeklyForecast) && // Ensure parsedWeeklyForecast is an array
+          Array.isArray(parsedWeeklyForecast) &&
           parsedWeeklyForecast.every(
             (item) =>
               typeof item === "object" &&
@@ -108,7 +115,15 @@ function ForecastProvider({ children }: PropsWithChildren) {
   }
 
   return (
-    <ForecastContext.Provider value={{ weeklyForecast, error, isLoading }}>
+    <ForecastContext.Provider
+      value={{
+        dailyForecast,
+        weeklyForecast,
+        selectDailyForecast,
+        error,
+        isLoading,
+      }}
+    >
       {children}
     </ForecastContext.Provider>
   );

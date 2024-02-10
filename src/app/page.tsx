@@ -1,15 +1,17 @@
 import LocationProvider from "@/components/LocationProvider";
-import TemperatureProvider from "@/components/ForecastProvider";
-import CardCarousel from "@/components/CardCarousel";
+import ForecastProvider from "@/components/ForecastProvider";
+import WeeklyForecast from "@/components/WeekyForecast";
+import DailyForecast from "@/components/DailyForecast";
 
 function HomePage() {
   return (
     <LocationProvider>
-      <TemperatureProvider>
+      <ForecastProvider>
         <main className="main">
-          <CardCarousel />
+          <WeeklyForecast />
+          <DailyForecast />
         </main>
-      </TemperatureProvider>
+      </ForecastProvider>
     </LocationProvider>
   );
 }

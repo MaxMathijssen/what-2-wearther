@@ -1,33 +1,35 @@
 .siteHeader {
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
-  background: hsl(260deg 50% 50% / 0.1);
+  background: rgba(2, 176, 224, 0.5);
+  padding: 20px;
 }
+
+.siteTitle {
+  display: flex;
+  color: #ffffff;
+  margin-right: auto; /* Pushes the element to the center */
+  margin-left: auto; /* Pushes the element to the center */
+}
+
 .siteHeader .logo {
   font-size: 1.5rem;
   font-weight: 500;
-  background: hsl(260deg 100% 50%);
-  color: white;
+  background: rgba(255, 255, 255, 0.5);
   padding: 24px;
   text-decoration: none;
   margin-bottom: -1px;
 }
-.siteHeader nav {
-  overflow: auto;
-  padding: 24px;
-}
-.header-nav-links {
+
+.imageContainer {
   display: flex;
-  gap: 32px;
-  font-size: 1.25rem;
-  font-weight: 500;
-}
-.siteHeader .headerNavLink {
-  text-decoration: none;
-  color: black;
-}
-.siteHeader .headerNavLink.primary {
-  color: hsl(260deg 100% 50%);
+  justify-content: center;
+  align-items: center;
+  border-radius: 20%;
+  overflow: hidden;
+  width: 100px; /* Match the width of your Image component */
+  height: 100px; /* Match the height of your Image component */
 }

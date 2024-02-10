@@ -1,25 +1,28 @@
 .siteFooter {
+  border-radius: 10px;
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  background: hsl(260deg 50% 50% / 0.1);
+  background: rgba(1, 136, 193, 0.8);
   padding: 24px;
 }
 .siteFooter .logoWrapper {
   flex-shrink: 10000;
 }
 .siteFooter .logo {
+  border-radius: 10px;
   display: block;
   width: max-content;
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 8px;
-  background: hsl(260deg 100% 50%);
+  background: #010f3a;
   color: white;
   padding: 16px 24px;
   text-decoration: none;
 }
 .siteFooter .disclaimer {
+  color: white;
   font-size: 0.875rem;
 }
 .siteFooter .linkWrapper {
@@ -27,10 +30,12 @@
   gap: 48px;
 }
 .siteFooter h2 {
+  color: #010f3a;
   font-size: 1rem;
   margin-bottom: 0.5em;
 }
 .siteFooter ol {
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 8px;
