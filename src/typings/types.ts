@@ -20,4 +20,5 @@ export interface DailyForecast {
   pop: number;
   rain: number;
   uvi: number;
+  iconPath: string;
 }

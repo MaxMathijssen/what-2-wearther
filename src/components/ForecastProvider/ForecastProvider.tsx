@@ -80,41 +80,86 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
   const dayNames = getDayNames();
 
+  const getIconPath = (icon: string): string => {
+    switch (icon) {
+      case "01d":
+        return "/01d@2x.png";
+      case "01n.png":
+        return "/01n@2x.png";
+      case "02d.png":
+        return "/02d@2x.png";
+      case "02n.png":
+        return "/02n@2x.png";
+      case "03d.png":
+        return "/03d@2x.png";
+      case "03n.png":
+        return "/03n@2x.png";
+      case "04d.png":
+        return "/04d@2x.png";
+      case "04n.png":
+        return "/04n@2x.png";
+      case "09d.png":
+        return "/09d@2x.png";
+      case "09n.png":
+        return "/09n@2x.png";
+      case "10d.png":
+        return "/10d@2x.png";
+      case "10n.png":
+        return "/10n@2x.png";
+      case "11d.png":
+        return "/11d@2x.png";
+      case "11n.png":
+        return "/11n@2x.png";
+      case "13d.png":
+        return "/13d@2x.png";
+      case "13n.png":
+        return "/13n@2x.png";
+      case "50d.png":
+        return "/50d@2x.png";
+      case "50n.png":
+        return "/50n@2x.png";
+      default:
+        return "error.png";
+    }
+  };
+
   if (data && location !== null) {
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
         day: dayNames[i],
         temp: {
-          min: data.daily[i].temp.min,
-          max: data.daily[i].temp.max,
-          morn: data.daily[i].temp.morn,
-          day: data.daily[i].temp.day,
-          night: data.daily[i].temp.night,
-          eve: data.daily[i].temp.eve,
+          min: Math.round(data.daily[i].temp.min),
+          max: Math.round(data.daily[i].temp.max),
+          morn: Math.round(data.daily[i].temp.morn),
+          day: Math.round(data.daily[i].temp.day),
+          night: Math.round(data.daily[i].temp.night),
+          eve: Math.round(data.daily[i].temp.eve),
         },
-        humidity: data.daily[i].humidity,
-        feels_like: data.daily[i].feels_like,
+        humidity: Math.round(data.daily[i].humidity),
+        feels_like: Math.round(data.daily[i].feels_like),
         weather: data.daily[i].weather[0].main,
-        clouds: data.daily[i].clouds,
-        wind_speed: data.daily[i].wind_speed,
-        wind_deg: data.daily[i].wind_deg,
-        wind_gust: data.daily[i].wind_gust,
-        pop: data.daily[i].pop,
-        rain: data.daily[i].rain,
-        uvi: data.daily[i].uvi,
+        clouds: Math.round(data.daily[i].clouds),
+        wind_speed: Math.round(data.daily[i].wind_speed),
+        wind_deg: Math.round(data.daily[i].wind_deg),
+        wind_gust: Math.round(data.daily[i].wind_gust),
+        pop: Math.round(data.daily[i].pop),
+        rain: Math.round(data.daily[i].rain),
+        uvi: Math.round(data.daily[i].uvi),
+        iconPath: getIconPath(data.daily[i].weather[0].icon),
       };
 
       if (i === 0) {
-        dailyForecast.dt = data.current.dt;
-        dailyForecast.temp.current = data.current.temp;
+        dailyForecast.dt = Math.round(data.current.dt);
+        dailyForecast.temp.current = Math.round(data.current.temp);
         dailyForecast.weather = data.current.weather.main;
-        dailyForecast.feels_like = data.current.feels_like;
-        dailyForecast.humidity = data.current.humidity;
-        dailyForecast.clouds = data.current.clouds;
-        dailyForecast.wind_speed = data.current.wind_speed;
-        dailyForecast.wind_deg = data.current.wind_deg;
-        dailyForecast.wind_gust = data.current.wind_gust;
+        dailyForecast.feels_like = Math.round(data.current.feels_like);
+        dailyForecast.humidity = Math.round(data.current.humidity);
+        dailyForecast.clouds = Math.round(data.current.clouds);
+        dailyForecast.wind_speed = Math.round(data.current.wind_speed);
+        dailyForecast.wind_deg = Math.round(data.current.wind_deg);
+        dailyForecast.wind_gust = Math.round(data.current.wind_gust);
+        dailyForecast.iconPath = getIconPath(data.current.weather[0].icon);
       }
       newWeeklyForecast.push(dailyForecast);
     }

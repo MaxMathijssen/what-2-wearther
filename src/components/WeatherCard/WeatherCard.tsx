@@ -1,8 +1,8 @@
 import { MouseEventHandler } from "react";
-import Card from "../Card";
 import { DailyForecast } from "@/typings/types";
 
 import styles from "./WeatherCard.module.css";
+import classNames from "classnames";
 
 interface WeatherCardProps {
   isError: boolean;
@@ -22,7 +22,7 @@ function WeatherCard({
   onClick,
   ...delegated
 }: WeatherCardProps): React.JSX.Element {
-  const handleClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (onClick && dailyForecast) {
       onClick(dailyForecast);
     }
@@ -31,42 +31,32 @@ function WeatherCard({
   return (
     <>
       {isError && (
-        <button className={styles.cardBtn}>
-          <Card isPlaceHolder={false}>Something went wrong!</Card>
-        </button>
+        <div className={styles.cardDiv}>
+          <div className="top-section"></div>
+          <div className="bottom-section"></div>
+        </div>
       )}
       {isPlaceHolder && (
-        <button className={styles.cardBtn}>
-          <Card
-            isPlaceHolder={true}
-            header={"Mockday"}
-            title={isFirstPlaceHolder ? "7 °C" : undefined}
-            subTitle={"Mock"}
-          >
-            {"H:12°C L:7°C"}
-          </Card>
-        </button>
+        <div className={styles.cardDiv}>
+          <div className="top-section"></div>
+          <div className="bottom-section"></div>
+        </div>
       )}
       {dailyForecast && (
-        <button className={styles.cardBtn} onClick={handleClick}>
-          <Card
-            isPlaceHolder={false}
-            header={dailyForecast?.day}
-            title={
-              dailyForecast?.temp.current
-                ? `${Math.round(dailyForecast.temp.current)} °C`
-                : undefined
-            }
-            subTitle={dailyForecast?.weather}
-            {...delegated}
-          >
-            {dailyForecast?.temp
-              ? `H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(
-                  dailyForecast.temp.min
-                )}°C`
-              : undefined}
-          </Card>
-        </button>
+        <div className={styles.clickableCard} onClick={handleClick}>
+          <div className={classNames(styles.cardSection, styles.topSection)}>
+            <div className={styles.leftColumn}>Top Left</div>
+            <div className={styles.rightColumn}>
+              {dailyForecast.temp.current
+                ? dailyForecast.temp.current
+                : dailyForecast.temp.max}
+            </div>
+          </div>
+          <div className={classNames(styles.cardSection, styles.bottomSection)}>
+            <div className={styles.leftColumn}>12</div>
+            <div className={styles.rightColumn}>12</div>
+          </div>
+        </div>
       )}
     </>
   );

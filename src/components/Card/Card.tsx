@@ -24,8 +24,9 @@ function Card({
       })}
       {...delegated}
     >
-      <div className={styles.head}></div>
-      <h3>{header}</h3>
+      <div className={styles.head}>
+        <h3>{header}</h3>
+      </div>
       <h2>{title}</h2>
       <h4>{subTitle}</h4>
       <span>
