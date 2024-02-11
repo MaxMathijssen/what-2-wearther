@@ -76,55 +76,90 @@ function ForecastProvider({ children }: PropsWithChildren) {
     revalidateOnFocus: false,
   });
 
+  console.log(data);
+
   const newWeeklyForecast: DailyForecast[] = [];
 
   const dayNames = getDayNames();
 
   const getIconPath = (icon: string): string => {
+    console.log(icon);
     switch (icon) {
       case "01d":
         return "/01d@2x.png";
-      case "01n.png":
+      case "01n":
         return "/01n@2x.png";
-      case "02d.png":
+      case "02d":
         return "/02d@2x.png";
-      case "02n.png":
+      case "02n":
         return "/02n@2x.png";
-      case "03d.png":
+      case "03d":
         return "/03d@2x.png";
-      case "03n.png":
+      case "03n":
         return "/03n@2x.png";
-      case "04d.png":
+      case "04d":
         return "/04d@2x.png";
-      case "04n.png":
+      case "04n":
         return "/04n@2x.png";
-      case "09d.png":
+      case "09d":
         return "/09d@2x.png";
-      case "09n.png":
+      case "09n":
         return "/09n@2x.png";
-      case "10d.png":
+      case "10d":
         return "/10d@2x.png";
-      case "10n.png":
+      case "10n":
         return "/10n@2x.png";
-      case "11d.png":
+      case "11d":
         return "/11d@2x.png";
-      case "11n.png":
+      case "11n":
         return "/11n@2x.png";
-      case "13d.png":
+      case "13d":
         return "/13d@2x.png";
-      case "13n.png":
+      case "13n":
         return "/13n@2x.png";
-      case "50d.png":
+      case "50d":
         return "/50d@2x.png";
-      case "50n.png":
+      case "50n":
         return "/50n@2x.png";
       default:
         return "error.png";
     }
   };
 
+  function getBackgroundColor(id: string) {
+    // Thunderstorm
+    if (/^2/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(0, 0%, 30%, 0.5), hsla(0, 0%, 35%, 0.5))";
+    }
+    // Drizzle & Rain
+    else if (/^3/.test(id) || /^5/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(184, 6%, 53%, 0.5), hsla(184, 6%, 58%, 0.5))";
+    }
+    // Snow
+    else if (/^6/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(204, 8%, 76%, 0.5), hsla(204, 8%, 81%, 0.5))";
+    }
+    // Wind
+    else if (/^7/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(48, 89%, 70%, 0.5), hsla(48, 89%, 75%, 0.5))";
+    }
+    // Sun
+    else if (/^800$/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(48, 89%, 50%, 0.5), hsla(48, 89%, 55%, 0.5))";
+    }
+    // Clouds
+    else if (/^80/.test(id)) {
+      return "radial-gradient(circle at 50% 100%, hsla(184, 9%, 62%, 0.5), hsla(184, 9%, 67%, 0.5))";
+    }
+    // Default
+    else {
+      return "#fffff";
+    }
+  }
+
   if (data && location !== null) {
     for (let i = 0; i < 7; i++) {
+      console.log(data);
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
         day: dayNames[i],
@@ -147,12 +182,14 @@ function ForecastProvider({ children }: PropsWithChildren) {
         rain: Math.round(data.daily[i].rain),
         uvi: Math.round(data.daily[i].uvi),
         iconPath: getIconPath(data.daily[i].weather[0].icon),
+        color: getBackgroundColor(data.daily[i].weather[0].id),
       };
 
       if (i === 0) {
+        dailyForecast.day = "Today";
         dailyForecast.dt = Math.round(data.current.dt);
         dailyForecast.temp.current = Math.round(data.current.temp);
-        dailyForecast.weather = data.current.weather.main;
+        dailyForecast.weather = data.current.weather[0].main;
         dailyForecast.feels_like = Math.round(data.current.feels_like);
         dailyForecast.humidity = Math.round(data.current.humidity);
         dailyForecast.clouds = Math.round(data.current.clouds);
@@ -160,6 +197,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.wind_deg = Math.round(data.current.wind_deg);
         dailyForecast.wind_gust = Math.round(data.current.wind_gust);
         dailyForecast.iconPath = getIconPath(data.current.weather[0].icon);
+        dailyForecast.color = getBackgroundColor(data.current.weather[0].id);
       }
       newWeeklyForecast.push(dailyForecast);
     }

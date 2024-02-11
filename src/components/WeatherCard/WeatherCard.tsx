@@ -1,5 +1,6 @@
 import { MouseEventHandler } from "react";
 import { DailyForecast } from "@/typings/types";
+import Image from "next/image";
 
 import styles from "./WeatherCard.module.css";
 import classNames from "classnames";
@@ -28,6 +29,8 @@ function WeatherCard({
     }
   };
 
+  const gradient = dailyForecast?.color;
+
   return (
     <>
       {isError && (
@@ -44,13 +47,33 @@ function WeatherCard({
       )}
       {dailyForecast && (
         <div className={styles.clickableCard} onClick={handleClick}>
-          <div className={classNames(styles.cardSection, styles.topSection)}>
-            <div className={styles.leftColumn}>Top Left</div>
-            <div className={styles.rightColumn}>
-              {dailyForecast.temp.current
-                ? dailyForecast.temp.current
-                : dailyForecast.temp.max}
+          <div
+            className={classNames(styles.cardSection, styles.topSection)}
+            style={
+              {
+                background: gradient,
+              } as React.CSSProperties
+            } // Ensuring TypeScript compatibility
+          >
+            <div className={styles.leftColumn}>
+              {dailyForecast.iconPath !== "error.png" && (
+                <Image
+                  src={dailyForecast.iconPath}
+                  width={80}
+                  height={80}
+                  alt={dailyForecast.weather}
+                ></Image>
+              )}
             </div>
+            <div className={styles.rightColumn}>
+              <h1>{dailyForecast.weather}</h1>
+              <h2>
+                {dailyForecast.temp.current
+                  ? dailyForecast.temp.current
+                  : dailyForecast.temp.max}
+              </h2>
+            </div>
+            <h3>{dailyForecast.day}</h3>
           </div>
           <div className={classNames(styles.cardSection, styles.bottomSection)}>
             <div className={styles.leftColumn}>12</div>

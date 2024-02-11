@@ -21,4 +21,5 @@ export interface DailyForecast {
   rain: number;
   uvi: number;
   iconPath: string;
+  color: string;
 }

@@ -5,9 +5,9 @@
   width: 100%;
   max-width: 320px; /* Adjust based on your preference */
   margin: 0 auto;
-
+  margin-right: 12px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -24,21 +24,54 @@
 }
 
 .topSection {
-  background-color: #f0f0f0; /* Your desired background color */
+  background: var(--dynamic-gradient), #ffffff;
+  position: relative; /* Needed for absolute positioning context */
+  border-radius: 10px 10px 0 0;
+  padding: 0px 20px 20px 0px;
 }
 
 .bottomSection {
   background-color: white; /* Your desired background color */
+  border-radius: 0 0 10px 10px;
+  padding: 20px;
 }
 
 .leftColumn {
   display: flex;
   justify-content: flex-start; /* Aligns children to the start (left) */
-  align-items: center; /* Vertically centers children, if needed */
+  align-items: flex-start; /* Vertically centers children, if needed */
+  margin-top: 10px;
 }
 
 .rightColumn {
   display: flex;
-  justify-content: flex-end; /* Aligns children to the end (right) */
-  align-items: center; /* Vertically centers children, if needed */
+  flex-direction: column; /* Stack children vertically */
+  justify-content: flex-start; /* Aligns children to the start of the flex-direction (top, in this case) */
+  align-items: flex-end; /* Horizontally aligns children to the right */
+}
+
+.clickableCard h1 {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  padding: 0px;
+  font-size: 18px;
+  font-weight: 300;
+  /* Additional styles for h1 */
+}
+
+.clickableCard h2 {
+  margin-top: 5px;
+  margin-bottom: 0px;
+  padding: 0px;
+  font-size: 50px;
+  font-weight: 250;
+  /* Additional styles for h2 */
+}
+
+.clickableCard h3 {
+  position: absolute;
+  bottom: 5px; /* Adjust based on your padding */
+  right: 20px; /* Adjust based on your padding */
+  font-size: 15px;
+  font-weight: 300;
 }
