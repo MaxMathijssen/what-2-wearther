@@ -1,5 +1,7 @@
 .dailyForecastContainer {
-  flex: 1;
-  background-color: white;
+  display: flex;
+  display: grid;
+  grid-template-rows: 3fr 3fr;
   border-radius: 15px;
+  padding: 20px;
 }

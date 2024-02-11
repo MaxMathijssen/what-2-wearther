@@ -177,7 +177,12 @@ function ForecastProvider({ children }: PropsWithChildren) {
           eve: Math.round(data.daily[i].temp.eve),
         },
         humidity: Math.round(data.daily[i].humidity),
-        feels_like: Math.round(data.daily[i].feels_like),
+        feels_like: {
+          day: Math.round(data.daily[i].feels_like.day),
+          night: Math.round(data.daily[i].feels_like.night),
+          eve: Math.round(data.daily[i].feels_like.eve),
+          morn: Math.round(data.daily[i].feels_like.morn),
+        },
         weather: data.daily[i].weather[0].main,
         clouds: Math.round(data.daily[i].clouds),
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
@@ -195,7 +200,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.dt = Math.round(data.current.dt);
         dailyForecast.temp.current = Math.round(data.current.temp);
         dailyForecast.weather = data.current.weather[0].main;
-        dailyForecast.feels_like = Math.round(data.current.feels_like);
+        dailyForecast.feels_like.current = Math.round(data.current.feels_like);
         dailyForecast.humidity = Math.round(data.current.humidity);
         dailyForecast.clouds = Math.round(data.current.clouds);
         dailyForecast.wind_speed = Math.round(data.current.wind_speed * 3.6);

@@ -10,7 +10,13 @@ export interface DailyForecast {
     min: number;
     max: number;
   };
-  feels_like: { x: string; y: number } | number;
+  feels_like: {
+    current?: number;
+    day: number;
+    night: number;
+    eve: number;
+    morn: number;
+  };
   weather: string;
   clouds: number;
   humidity: number;

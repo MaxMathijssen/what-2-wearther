@@ -8,7 +8,7 @@ import { range } from "@/helpers/utils";
 
 import styles from "./weeklyForecast.module.css";
 
-function WeeklyForecast() {
+function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectDailyForecast, error } =
     useContext(ForecastContext);
 
