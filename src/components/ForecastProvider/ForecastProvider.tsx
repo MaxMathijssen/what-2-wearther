@@ -157,6 +157,12 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }
 
+  function convertDegreesToCardinalDirection(degrees: number) {
+    const sectors = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"];
+    const index = Math.round(degrees / 45) % 8;
+    return sectors[index];
+  }
+
   if (data && location !== null) {
     for (let i = 0; i < 7; i++) {
       console.log(data);
@@ -175,8 +181,10 @@ function ForecastProvider({ children }: PropsWithChildren) {
         feels_like: Math.round(data.daily[i].feels_like),
         weather: data.daily[i].weather[0].main,
         clouds: Math.round(data.daily[i].clouds),
-        wind_speed: Math.round(data.daily[i].wind_speed),
-        wind_deg: Math.round(data.daily[i].wind_deg),
+        wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
+        wind_direction: convertDegreesToCardinalDirection(
+          data.daily[i].wind_deg
+        ),
         wind_gust: Math.round(data.daily[i].wind_gust),
         pop: Math.round(data.daily[i].pop),
         rain: Math.round(data.daily[i].rain),
@@ -193,8 +201,10 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.feels_like = Math.round(data.current.feels_like);
         dailyForecast.humidity = Math.round(data.current.humidity);
         dailyForecast.clouds = Math.round(data.current.clouds);
-        dailyForecast.wind_speed = Math.round(data.current.wind_speed);
-        dailyForecast.wind_deg = Math.round(data.current.wind_deg);
+        dailyForecast.wind_speed = Math.round(data.current.wind_speed * 3.6);
+        dailyForecast.wind_direction = convertDegreesToCardinalDirection(
+          data.current.wind_deg
+        );
         dailyForecast.wind_gust = Math.round(data.current.wind_gust);
         dailyForecast.iconPath = getIconPath(data.current.weather[0].icon);
         dailyForecast.color = getBackgroundColor(data.current.weather[0].id);

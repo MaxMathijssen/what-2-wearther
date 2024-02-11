@@ -15,7 +15,7 @@ export interface DailyForecast {
   clouds: number;
   humidity: number;
   wind_speed: number;
-  wind_deg: number;
+  wind_direction: string;
   wind_gust: number;
   pop: number;
   rain: number;

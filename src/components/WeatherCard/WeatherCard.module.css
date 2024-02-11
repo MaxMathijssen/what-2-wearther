@@ -1,9 +1,9 @@
 .clickableCard {
   height: 300px;
   display: grid;
-  grid-template-rows: 1fr 1fr; /* Two rows, each taking up half the space */
+  grid-template-rows: 3fr 2fr;
   width: 100%;
-  max-width: 320px; /* Adjust based on your preference */
+  max-width: 320px;
   margin: 0 auto;
   margin-right: 12px;
   border: 1px solid #ccc;
@@ -13,65 +13,99 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.clickableCard:last-of-type {
+  margin-right: 0;
+}
+
 .clickableCard:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .cardSection {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Split into two columns */
+  grid-template-columns: 1fr 1fr;
 }
 
 .topSection {
   background: var(--dynamic-gradient), #ffffff;
-  position: relative; /* Needed for absolute positioning context */
+  position: relative;
   border-radius: 10px 10px 0 0;
-  padding: 0px 20px 20px 0px;
+  padding: 0px 15px 15px 0px;
 }
 
 .bottomSection {
-  background-color: white; /* Your desired background color */
+  display: flex;
+  align-items: flex-start;
+  padding: 22px 15px;
+  background-color: white;
   border-radius: 0 0 10px 10px;
-  padding: 20px;
+  justify-content: center;
 }
 
 .leftColumn {
   display: flex;
-  justify-content: flex-start; /* Aligns children to the start (left) */
-  align-items: flex-start; /* Vertically centers children, if needed */
-  margin-top: 10px;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .rightColumn {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  justify-content: flex-start; /* Aligns children to the start of the flex-direction (top, in this case) */
-  align-items: flex-end; /* Horizontally aligns children to the right */
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
 }
 
-.clickableCard h1 {
+.clickableCard .topSection h1 {
   margin-top: 20px;
   margin-bottom: 0px;
   padding: 0px;
   font-size: 18px;
   font-weight: 300;
-  /* Additional styles for h1 */
 }
 
-.clickableCard h2 {
+.clickableCard .topSection h2 {
   margin-top: 5px;
   margin-bottom: 0px;
   padding: 0px;
-  font-size: 50px;
+  font-size: 35px;
   font-weight: 250;
-  /* Additional styles for h2 */
 }
 
-.clickableCard h3 {
+.clickableCard .topSection h3 {
   position: absolute;
-  bottom: 5px; /* Adjust based on your padding */
-  right: 20px; /* Adjust based on your padding */
-  font-size: 15px;
+  bottom: 35px;
+  right: 15px;
+  font-size: 16px;
+  font-weight: 350;
+}
+
+.clickableCard .topSection p {
+  position: absolute;
+  bottom: 5px;
+  right: 15px;
+  font-size: 14px;
   font-weight: 300;
+}
+
+.clickableCard .bottomSection h3 {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.clickableCard .bottomSection p {
+  font-size: 12px;
+  font-weight: 200;
+  margin-bottom: 15px;
+  margin-top: 0px;
+}
+
+.clickableCard .bottomSection h3:last-of-type {
+  margin-bottom: 0px;
+}
+
+.clickableCard .bottomSection p:last-of-type {
+  margin-bottom: 0px;
 }

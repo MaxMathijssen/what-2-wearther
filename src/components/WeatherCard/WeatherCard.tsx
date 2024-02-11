@@ -16,12 +16,10 @@ interface WeatherCardProps {
 
 function WeatherCard({
   isError,
-  isFirstPlaceHolder,
   isPlaceHolder,
   dailyForecast,
   isLoading,
   onClick,
-  ...delegated
 }: WeatherCardProps): React.JSX.Element {
   const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
     if (onClick && dailyForecast) {
@@ -53,7 +51,7 @@ function WeatherCard({
               {
                 background: gradient,
               } as React.CSSProperties
-            } // Ensuring TypeScript compatibility
+            }
           >
             <div className={styles.leftColumn}>
               {dailyForecast.iconPath !== "error.png" && (
@@ -69,15 +67,30 @@ function WeatherCard({
               <h1>{dailyForecast.weather}</h1>
               <h2>
                 {dailyForecast.temp.current
-                  ? dailyForecast.temp.current
-                  : dailyForecast.temp.max}
+                  ? `${dailyForecast.temp.current}°`
+                  : `${dailyForecast.temp.max}°`}
               </h2>
             </div>
             <h3>{dailyForecast.day}</h3>
+            <p>
+              {`H:${Math.round(dailyForecast.temp.max)}°C L:${Math.round(
+                dailyForecast.temp.min
+              )}°C`}
+            </p>
           </div>
           <div className={classNames(styles.cardSection, styles.bottomSection)}>
-            <div className={styles.leftColumn}>12</div>
-            <div className={styles.rightColumn}>12</div>
+            <div className={styles.leftColumn}>
+              <h3>Wind</h3>
+              <h3>Clouds</h3>
+              <h3>Humidity</h3>
+            </div>
+            <div className={styles.rightColumn}>
+              <p>{`${dailyForecast.wind_direction}${` `}${
+                dailyForecast.wind_speed
+              }${` km/h`}`}</p>
+              <p>{`${dailyForecast.clouds}%`}</p>
+              <p>{`${dailyForecast.humidity}%`}</p>
+            </div>
           </div>
         </div>
       )}
