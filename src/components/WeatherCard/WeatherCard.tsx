@@ -38,9 +38,35 @@ function WeatherCard({
         </div>
       )}
       {isPlaceHolder && (
-        <div className={styles.cardDiv}>
-          <div className="top-section"></div>
-          <div className="bottom-section"></div>
+        <div className={classNames(styles.clickableCard, styles.placeholder)}>
+          <div
+            className={classNames(styles.cardSection, styles.topSection)}
+            style={
+              {
+                background: "#D3D3D3",
+              } as React.CSSProperties
+            }
+          >
+            <div className={styles.leftColumn}></div>
+            <div className={styles.rightColumn}>
+              <h1>Rain</h1>
+              <h2>15°</h2>
+            </div>
+            <h3>Mockday</h3>
+            <p>H:12°C L:7°C</p>
+          </div>
+          <div className={classNames(styles.cardSection, styles.bottomSection)}>
+            <div className={styles.leftColumn}>
+              <h3>Wind</h3>
+              <h3>Clouds</h3>
+              <h3>Humidity</h3>
+            </div>
+            <div className={styles.rightColumn}>
+              <p>10 km/h</p>
+              <p>80%</p>
+              <p>50%</p>
+            </div>
+          </div>
         </div>
       )}
       {dailyForecast && (

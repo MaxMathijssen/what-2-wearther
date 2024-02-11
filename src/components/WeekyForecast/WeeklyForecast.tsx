@@ -41,18 +41,8 @@ function WeeklyForecast() {
             />
           );
         })}
-      {!weeklyForecast && (
-        <WeatherCard
-          key={"first"}
-          isError={false}
-          isLoading={false}
-          isFirstPlaceHolder={true}
-          isPlaceHolder={true}
-          dailyForecast={null}
-        />
-      )}
       {!weeklyForecast &&
-        range(0, 6).map((index) => {
+        range(0, 7).map((index) => {
           return (
             <WeatherCard
               key={index}

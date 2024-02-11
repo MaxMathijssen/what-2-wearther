@@ -22,6 +22,17 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+}
+
+.clickableCard.placeholder {
+  font-family: var(--font-family-loading);
+  animation: pulse 1000ms ease-in-out infinite alternate;
+}
+
 .cardSection {
   display: grid;
   grid-template-columns: 1fr 1fr;
