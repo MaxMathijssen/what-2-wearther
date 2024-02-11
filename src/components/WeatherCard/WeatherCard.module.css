@@ -43,6 +43,14 @@
   position: relative;
   border-radius: 10px 10px 0 0;
   padding: 0px 15px 15px 0px;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.2)
+  );
+  backdrop-filter: blur(0.2rem);
+  z-index: 1;
+  color: white;
 }
 
 .bottomSection {
@@ -52,6 +60,7 @@
   background-color: white;
   border-radius: 0 0 10px 10px;
   justify-content: center;
+  z-index: 1;
 }
 
 .leftColumn {

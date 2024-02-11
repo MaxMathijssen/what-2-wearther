@@ -1,4 +1,41 @@
 .cardContainer {
   display: flex;
   margin-bottom: 20px;
+  background: #cfdef3;
+  background: -webkit-linear-gradient(to right, #e0eafc, #cfdef3);
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.circle1 {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.1)
+  );
+  height: 12rem;
+  width: 12rem;
+  position: absolute;
+  border-radius: 50%;
+  top: 18%;
+  left: 29%;
+  transform: translate(-10%, -10%);
+}
+
+.circle2 {
+  background: white;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.1)
+  );
+  height: 12rem;
+  width: 12rem;
+  position: absolute;
+  border-radius: 50%;
+  top: 30%;
+  left: 65%;
+  transform: translate(-50%, -50%);
 }

@@ -21,8 +21,8 @@ html {
 }
 
 main {
-  display: flex; /* Make main a flex container */
-  flex-direction: column; /* Stack children vertically */
+  display: flex;
+  flex-direction: column;
   flex: 1;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.5);

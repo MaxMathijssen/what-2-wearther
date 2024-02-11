@@ -76,6 +76,7 @@ function WeatherCard({
             style={
               {
                 background: gradient,
+                boxShadow: `0 4px 8px ${gradient}`,
               } as React.CSSProperties
             }
           >

@@ -127,33 +127,35 @@ function ForecastProvider({ children }: PropsWithChildren) {
   };
 
   function getBackgroundColor(id: string) {
+    const opacity = "0.6";
+
     // Thunderstorm
     if (/^2/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(0, 0%, 30%, 0.5), hsla(0, 0%, 35%, 0.5))";
+      return `rgba(70, 72, 79, ${opacity})`;
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(184, 6%, 53%, 0.5), hsla(184, 6%, 58%, 0.5))";
+      return `rgba(73, 152, 209, ${opacity})`;
     }
     // Snow
     else if (/^6/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(204, 8%, 76%, 0.5), hsla(204, 8%, 81%, 0.5))";
+      return `rgba(235, 241, 245, ${opacity})`;
     }
     // Wind
     else if (/^7/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(48, 89%, 70%, 0.5), hsla(48, 89%, 75%, 0.5))";
+      return `rgba(194, 200, 204, ${opacity})`;
     }
     // Sun
     else if (/^800$/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(48, 89%, 50%, 0.5), hsla(48, 89%, 55%, 0.5))";
+      return `rgba(250, 199, 32, ${opacity})`;
     }
     // Clouds
     else if (/^80/.test(id)) {
-      return "radial-gradient(circle at 50% 100%, hsla(184, 9%, 62%, 0.5), hsla(184, 9%, 67%, 0.5))";
+      return `rgba(194, 200, 204, ${opacity})`;
     }
     // Default
     else {
-      return "#fffff";
+      return `rgba(255, 255, 255, ${opacity})`;
     }
   }
 
