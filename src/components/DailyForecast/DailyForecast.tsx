@@ -2,13 +2,13 @@
 
 import { useContext } from "react";
 import styles from "./dailyForecast.module.css";
-import { ForecastContext } from "../ForecastProvider";
+import { ForecastContext } from "../../app/providers/ForecastProvider";
 
 function DailyForecast() {
-  const { dailyForecast } = useContext(ForecastContext);
+  const { selectedDailyForecast } = useContext(ForecastContext);
   return (
     <div className={styles.dailyForecastContainer}>
-      <h1>{dailyForecast?.day}</h1>
+      <h1>{selectedDailyForecast?.day}</h1>
     </div>
   );
 }

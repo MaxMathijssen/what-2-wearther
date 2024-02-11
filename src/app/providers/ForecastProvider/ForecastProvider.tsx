@@ -24,12 +24,11 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const [weeklyForecast, setWeeklyForecast] = useState<DailyForecast[] | null>(
     null
   );
-  const [dailyForecast, setDailyForecast] = useState<DailyForecast | null>(
-    null
-  );
+  const [selectedDailyForecast, setSelectedDailyForecast] =
+    useState<DailyForecast | null>(null);
 
   function selectDailyForecast(dailyForecast: DailyForecast) {
-    setDailyForecast(dailyForecast);
+    setSelectedDailyForecast(dailyForecast);
   }
 
   useEffect(() => {
@@ -52,6 +51,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         ) {
           console.log("Parsed weeklyForecast", parsedWeeklyForecast);
           setWeeklyForecast(parsedWeeklyForecast);
+          setSelectedDailyForecast(parsedWeeklyForecast[0]);
         }
       } catch (error) {
         console.error("Error parsing stored weekly forecast:", error);
@@ -76,10 +76,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     revalidateOnFocus: false,
   });
 
-  console.log(data);
-
   const newWeeklyForecast: DailyForecast[] = [];
-
   const dayNames = getDayNames();
 
   const getIconPath = (icon: string): string => {
@@ -231,7 +228,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   return (
     <ForecastContext.Provider
       value={{
-        dailyForecast,
+        selectedDailyForecast,
         weeklyForecast,
         selectDailyForecast,
         error,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { ForecastContext } from "../ForecastProvider";
+import { ForecastContext } from "../../app/providers/ForecastProvider";
 import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";
 import { range } from "@/helpers/utils";
@@ -9,7 +9,7 @@ import { range } from "@/helpers/utils";
 import styles from "./weeklyForecast.module.css";
 
 function WeeklyForecast() {
-  const { weeklyForecast, selectDailyForecast, error, isLoading } =
+  const { weeklyForecast, selectDailyForecast, error } =
     useContext(ForecastContext);
 
   return (
@@ -22,11 +22,9 @@ function WeeklyForecast() {
             <WeatherCard
               key={dailyForecast.dt}
               isError={false}
-              isLoading={false}
-              isFirstPlaceHolder={false}
               isPlaceHolder={false}
               dailyForecast={dailyForecast}
-              onClick={selectDailyForecast}
+              selectDailyForecast={selectDailyForecast}
             />
           );
         })}
@@ -36,8 +34,6 @@ function WeeklyForecast() {
             <WeatherCard
               key={index}
               isError={true}
-              isLoading={false}
-              isFirstPlaceHolder={false}
               isPlaceHolder={false}
               dailyForecast={null}
             />
@@ -49,8 +45,6 @@ function WeeklyForecast() {
             <WeatherCard
               key={index}
               isError={false}
-              isLoading={false}
-              isFirstPlaceHolder={false}
               isPlaceHolder={true}
               dailyForecast={null}
             />

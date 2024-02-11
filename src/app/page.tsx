@@ -1,5 +1,5 @@
-import LocationProvider from "@/components/LocationProvider";
-import ForecastProvider from "@/components/ForecastProvider";
+import LocationProvider from "@/app/providers/LocationProvider";
+import ForecastProvider from "@/app/providers/ForecastProvider";
 import WeeklyForecast from "@/components/WeekyForecast";
 import DailyForecast from "@/components/DailyForecast";
 

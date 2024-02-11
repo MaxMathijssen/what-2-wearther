@@ -18,7 +18,7 @@
 }
 
 .clickableCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-20px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -42,7 +42,7 @@
   background: var(--dynamic-gradient), #ffffff;
   position: relative;
   border-radius: 10px 10px 0 0;
-  padding: 0px 15px 15px 0px;
+  padding: 0px 13px 13px 0px;
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.4),
@@ -95,7 +95,7 @@
 .clickableCard .topSection h3 {
   position: absolute;
   bottom: 35px;
-  right: 15px;
+  right: 13px;
   font-size: 16px;
   font-weight: 350;
 }
@@ -103,7 +103,7 @@
 .clickableCard .topSection p {
   position: absolute;
   bottom: 5px;
-  right: 15px;
+  right: 13px;
   font-size: 14px;
   font-weight: 300;
 }

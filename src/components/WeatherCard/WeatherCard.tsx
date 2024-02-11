@@ -1,5 +1,6 @@
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, useContext } from "react";
 import { DailyForecast } from "@/typings/types";
+import { ForecastContext } from "../../app/providers/ForecastProvider";
 import Image from "next/image";
 
 import styles from "./WeatherCard.module.css";
@@ -7,27 +8,37 @@ import classNames from "classnames";
 
 interface WeatherCardProps {
   isError: boolean;
-  isLoading: boolean;
-  isFirstPlaceHolder: boolean;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast | null;
-  onClick?: (dailyForecast: DailyForecast) => void;
+  selectDailyForecast?: (dailyForecast: DailyForecast) => void;
 }
 
 function WeatherCard({
   isError,
   isPlaceHolder,
   dailyForecast,
-  isLoading,
-  onClick,
+  selectDailyForecast,
 }: WeatherCardProps): React.JSX.Element {
-  const handleClick: MouseEventHandler<HTMLDivElement> = (e) => {
-    if (onClick && dailyForecast) {
-      onClick(dailyForecast);
+  const { selectedDailyForecast } = useContext(ForecastContext);
+
+  const handleSelectDailyForecast: MouseEventHandler<HTMLDivElement> = (e) => {
+    if (selectDailyForecast && dailyForecast) {
+      selectDailyForecast(dailyForecast);
     }
   };
 
   const gradient = dailyForecast?.color;
+
+  const isSelected = selectedDailyForecast === dailyForecast;
+
+  const cardStyle = isSelected
+    ? {
+        background: gradient,
+        opacity: 1,
+        zIndex: 1,
+        boxShadow: "0px 0px 6px 6px rgba(2, 176, 224, 0.5)",
+      }
+    : {};
 
   return (
     <>
@@ -70,7 +81,13 @@ function WeatherCard({
         </div>
       )}
       {dailyForecast && (
-        <div className={styles.clickableCard} onClick={handleClick}>
+        <div
+          className={classNames(styles.clickableCard, {
+            [styles.selected]: isSelected,
+          })}
+          onClick={handleSelectDailyForecast}
+          style={cardStyle as React.CSSProperties} // Apply dynamic styles here
+        >
           <div
             className={classNames(styles.cardSection, styles.topSection)}
             style={
