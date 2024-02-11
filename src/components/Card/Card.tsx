@@ -14,7 +14,7 @@ function Card({
   children,
 }: CardProps): React.JSX.Element {
   return (
-    <div className={styles.clickableCard}>
+    <div className={styles.card}>
       <div className={classNames(styles.cardSection, styles.topSection)}>
         <h1>{title}</h1>
       </div>

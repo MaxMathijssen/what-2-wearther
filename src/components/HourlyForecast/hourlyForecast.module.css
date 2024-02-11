@@ -1,12 +1,22 @@
+.cardContainer {
+  display: flex;
+  width: 100%;
+}
+
 .card {
   height: auto;
   display: grid;
   grid-template-rows: 2fr 7fr;
   width: 100%;
-  max-width: 320px;
   margin-right: 12px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hourlyForecastContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card:last-of-type {
@@ -34,12 +44,12 @@
 
 .bottomSection {
   display: flex;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 0px 20px 20px 20px;
-  background-color: #edf2fb;
-  z-index: 1;
-  flex-direction: column;
+  flex-direction: row; /* Align children horizontally */
+  align-items: center; /* Vertically center items within the container */
+  justify-content: flex-start; /* Align items to the start of the container */
+  gap: 12px; /* Optional: adds space between items */
+  padding: 20px; /* Adjust padding as needed */
+  background-color: #edf2fb; /* Existing background color */
 }
 
 .leftColumn {
@@ -94,18 +104,16 @@
 }
 
 .card .bottomSection h2 {
-  font-size: 35px;
-  font-weight: 400;
-  margin-top: 6px;
-  margin-bottom: 0px;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0px;
 }
 
 .card .bottomSection h3 {
-  font-size: 14px;
-  font-weight: 300;
+  font-size: 30px;
+  font-weight: 400;
   margin-bottom: 15px;
-  margin-top: 0px;
-  color: grey;
+  margin-top: 10px;
 }
 
 .card .bottomSection p {

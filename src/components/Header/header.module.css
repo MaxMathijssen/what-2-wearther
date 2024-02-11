@@ -5,7 +5,7 @@
   align-items: center;
   border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
   background: rgba(2, 176, 224, 0.5);
-  padding: 20px;
+  padding: 15px 15px 15px 30px;
 }
 
 .siteTitle {

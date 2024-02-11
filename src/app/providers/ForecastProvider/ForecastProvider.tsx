@@ -9,9 +9,13 @@ import {
 } from "react";
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../LocationProvider";
-import { getDayNames, getCurrentTimestamp } from "@/helpers/utils";
+import {
+  getDayNames,
+  getCurrentTimestamp,
+  getEndOfDayTimestamp,
+} from "@/helpers/utils";
 import { REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
-import { DailyForecast } from "@/typings/types";
+import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useSWR from "swr";
 
 export const ForecastContext = createContext<number | any | boolean | null>(
@@ -71,7 +75,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     shouldFetch = true;
   }
 
-  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
     refreshInterval: REFRESH_TIME_MIN * 60 * 1000,
     revalidateOnFocus: false,
@@ -81,7 +85,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const dayNames = getDayNames();
 
   const getIconPath = (icon: string): string => {
-    console.log(icon);
     switch (icon) {
       case "01d":
         return "/01d@2x.png";
@@ -162,9 +165,46 @@ function ForecastProvider({ children }: PropsWithChildren) {
     return SECTORS[index];
   }
 
+  let hourIndex = 0;
+  let startIndex = 0;
+  let endIndex = 0;
+
+  function getHourlyForecastArray(data: any, dayNum: number) {
+    const hourlyForecastArray: HourlyForecast[] | [null] = [];
+
+    startIndex = hourIndex;
+
+    if (
+      dayNum === 0 &&
+      data.hourly[hourIndex + 1].dt <= getCurrentTimestamp()
+    ) {
+      hourIndex = 1;
+    }
+
+    if (dayNum === 0) {
+      while (data.hourly[endIndex + startIndex].dt < getEndOfDayTimestamp()) {
+        endIndex++;
+      }
+    } else {
+      endIndex = hourIndex + 24 <= 48 ? hourIndex + 24 : 48;
+    }
+
+    for (let j = startIndex; j < endIndex; j++) {
+      const hourlyForecast: HourlyForecast = {
+        dt: data.hourly[j].dt,
+        temp: data.hourly[j].temp,
+        feels_like: data.hourly[j].feels_like,
+        weather: data.hourly[j].weather,
+        iconPath: getIconPath(data.hourly[j].weather[0].icon),
+      };
+      hourIndex++;
+      hourlyForecastArray.push(hourlyForecast);
+    }
+    return hourlyForecastArray;
+  }
+
   if (data && location !== null) {
     for (let i = 0; i < 7; i++) {
-      console.log(data);
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
         day: dayNames[i],
@@ -183,6 +223,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
           eve: Math.round(data.daily[i].feels_like.eve),
           morn: Math.round(data.daily[i].feels_like.morn),
         },
+        hourly_forecast: getHourlyForecastArray(data, i),
         weather: data.daily[i].weather[0].main,
         clouds: Math.round(data.daily[i].clouds),
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
@@ -221,6 +262,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         JSON.stringify(newWeeklyForecast)
       );
       setWeeklyForecast(newWeeklyForecast);
+      setSelectedDailyForecast(newWeeklyForecast[0]);
     }
   }
 

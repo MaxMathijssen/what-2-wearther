@@ -28,4 +28,13 @@ export interface DailyForecast {
   uvi: number;
   iconPath: string;
   color: string;
+  hourly_forecast: HourlyForecast[];
+}
+
+export interface HourlyForecast {
+  dt: number;
+  temp: number;
+  feels_like: number;
+  weather: string;
+  iconPath: string;
 }
