@@ -21,9 +21,9 @@ html {
 }
 
 main {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  display: grid;
+  grid-template-rows: auto auto auto; /* Defines three rows; adjust sizing as needed */
+  gap: 20px; /* Adjust the gap between rows as needed */
   font-size: 1rem;
   background: #e2eafc;
   border-radius: 10px;

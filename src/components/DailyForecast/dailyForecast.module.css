@@ -1,7 +1,7 @@
 .dailyForecastContainer {
   display: flex;
-  display: grid;
-  grid-template-rows: 3fr 3fr;
-  border-radius: 15px;
-  padding: 20px;
+  flex-direction: row; /* Aligns children (Card components) in a row */
+  justify-content: flex-start; /* Aligns children to the start of the row (left) */
+  gap: 20px;
+  padding: 0px 15px 15px 15px;
 }

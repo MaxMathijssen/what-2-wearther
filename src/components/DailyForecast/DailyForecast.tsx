@@ -11,25 +11,27 @@ function DailyForecast(): React.JSX.Element {
   return (
     <div className={styles.dailyForecastContainer}>
       {selectedDailyForecast && (
-        <Card title="Current Conditions" isPlaceHolder={false}>
-          <Image
-            src={selectedDailyForecast.iconPath}
-            width={100}
-            height={100}
-            alt={selectedDailyForecast.weather}
-          ></Image>
-          <h1>{selectedDailyForecast.weather}</h1>
-          <h2>
-            {selectedDailyForecast.temp.current
-              ? `${selectedDailyForecast.temp.current}°`
-              : `${selectedDailyForecast.temp.max}°`}
-          </h2>
-          <h3>{`Feels like ${
-            selectedDailyForecast.feels_like.current
-              ? selectedDailyForecast.feels_like.current
-              : selectedDailyForecast.feels_like.day
-          }°`}</h3>
-        </Card>
+        <>
+          <Card title="Current Conditions" isPlaceHolder={false}>
+            <Image
+              src={selectedDailyForecast.iconPath}
+              width={100}
+              height={100}
+              alt={selectedDailyForecast.weather}
+            ></Image>
+            <h1>{selectedDailyForecast.weather}</h1>
+            <h2>
+              {selectedDailyForecast.temp.current
+                ? `${selectedDailyForecast.temp.current}°`
+                : `${selectedDailyForecast.temp.max}°`}
+            </h2>
+            <h3>{`Feels like ${
+              selectedDailyForecast.feels_like.current
+                ? selectedDailyForecast.feels_like.current
+                : selectedDailyForecast.feels_like.day
+            }°`}</h3>
+          </Card>
+        </>
       )}
     </div>
   );
