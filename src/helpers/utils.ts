@@ -1,4 +1,4 @@
-import { daysOfWeek } from "./constants";
+import { DAYS_OF_WEEK } from "./constants";
 
 export function range(start: number, end?: number, step: number = 1): number[] {
   let output: number[] = [];
@@ -21,9 +21,9 @@ export function getDayNames(): string[] {
 
   for (let i = currentDayNum; i < currentDayNum + 7; i++) {
     if (i > 6) {
-      days.push(daysOfWeek[i - 7]);
+      days.push(DAYS_OF_WEEK[i - 7]);
     } else {
-      days.push(daysOfWeek[i]);
+      days.push(DAYS_OF_WEEK[i]);
     }
   }
   return days;

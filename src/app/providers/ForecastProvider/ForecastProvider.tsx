@@ -10,6 +10,7 @@ import {
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../LocationProvider";
 import { getDayNames, getCurrentTimestamp } from "@/helpers/utils";
+import { REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
 import { DailyForecast } from "@/typings/types";
 import useSWR from "swr";
 
@@ -65,14 +66,14 @@ function ForecastProvider({ children }: PropsWithChildren) {
   if (
     (weeklyForecast === null && location !== null) ||
     (weeklyForecast !== null &&
-      getCurrentTimestamp() - weeklyForecast[0].dt > 1800)
+      getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
   ) {
     shouldFetch = true;
   }
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,hourly,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
-    refreshInterval: 900000,
+    refreshInterval: REFRESH_TIME_MIN * 60 * 1000,
     revalidateOnFocus: false,
   });
 
@@ -128,38 +129,37 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
     // Thunderstorm
     if (/^2/.test(id)) {
-      return `rgba(70, 72, 79, ${opacity})`;
+      return `rgba(70, 72, 79, ${opacity}`;
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return `rgba(73, 152, 209, ${opacity})`;
+      return `rgba(73, 152, 209, ${opacity}`;
     }
     // Snow
     else if (/^6/.test(id)) {
-      return `rgba(235, 241, 245, ${opacity})`;
+      return `rgba(235, 241, 245, ${opacity}`;
     }
     // Wind
     else if (/^7/.test(id)) {
-      return `rgba(194, 200, 204, ${opacity})`;
+      return `rgba(194, 200, 204, ${opacity}`;
     }
     // Sun
     else if (/^800$/.test(id)) {
-      return `rgba(250, 199, 32, ${opacity})`;
+      return `rgba(250, 199, 32, ${opacity}`;
     }
     // Clouds
     else if (/^80/.test(id)) {
-      return `rgba(194, 200, 204, ${opacity})`;
+      return `rgba(194, 200, 204, ${opacity}`;
     }
     // Default
     else {
-      return `rgba(255, 255, 255, ${opacity})`;
+      return `rgba(255, 255, 255, ${opacity}`;
     }
   }
 
-  function convertDegreesToCardinalDirection(degrees: number) {
-    const sectors = ["N", "NE", "E", "SE", "S", "SW", "W", "NW", "N"];
+  function convertDegreesToDirection(degrees: number) {
     const index = Math.round(degrees / 45) % 8;
-    return sectors[index];
+    return SECTORS[index];
   }
 
   if (data && location !== null) {
@@ -181,9 +181,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         weather: data.daily[i].weather[0].main,
         clouds: Math.round(data.daily[i].clouds),
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
-        wind_direction: convertDegreesToCardinalDirection(
-          data.daily[i].wind_deg
-        ),
+        wind_direction: convertDegreesToDirection(data.daily[i].wind_deg),
         wind_gust: Math.round(data.daily[i].wind_gust),
         pop: Math.round(data.daily[i].pop),
         rain: Math.round(data.daily[i].rain),
@@ -201,7 +199,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.humidity = Math.round(data.current.humidity);
         dailyForecast.clouds = Math.round(data.current.clouds);
         dailyForecast.wind_speed = Math.round(data.current.wind_speed * 3.6);
-        dailyForecast.wind_direction = convertDegreesToCardinalDirection(
+        dailyForecast.wind_direction = convertDegreesToDirection(
           data.current.wind_deg
         );
         dailyForecast.wind_gust = Math.round(data.current.wind_gust);
