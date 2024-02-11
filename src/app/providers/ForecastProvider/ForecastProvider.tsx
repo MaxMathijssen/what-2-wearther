@@ -7,14 +7,13 @@ import {
   useEffect,
   PropsWithChildren,
 } from "react";
-import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../LocationProvider";
 import {
   getDayNames,
   getCurrentTimestamp,
   getEndOfDayTimestamp,
 } from "@/helpers/utils";
-import { REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
+import { API_KEY, REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useSWR from "swr";
 
@@ -80,6 +79,9 @@ function ForecastProvider({ children }: PropsWithChildren) {
     refreshInterval: REFRESH_TIME_MIN * 60 * 1000,
     revalidateOnFocus: false,
   });
+
+  console.log(url);
+  console.log(API_KEY);
 
   const newWeeklyForecast: DailyForecast[] = [];
   const dayNames = getDayNames();

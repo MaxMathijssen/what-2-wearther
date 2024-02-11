@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@babel/core": "^7.23.9",
     "@radix-ui/themes": "^2.0.3",
+    "dotenv": "^16.4.2",
     "lorem-ipsum": "^2.0.8",
-    "next": "14.1.0",
+    "next": "^14.1.0",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.4"
@@ -20,6 +22,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "babel-eslint": "^10.1.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "typescript": "^5"
