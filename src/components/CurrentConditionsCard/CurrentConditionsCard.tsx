@@ -2,17 +2,17 @@ import { PropsWithChildren } from "react";
 import styles from "./card.module.css";
 import classNames from "classnames";
 
-interface CardProps extends PropsWithChildren {
+interface CurrentConditionsCardProps extends PropsWithChildren {
   header?: string;
   title?: string;
   isPlaceHolder: boolean;
 }
 
-function Card({
+function CurrentConditionsCard({
   title,
   isPlaceHolder,
   children,
-}: CardProps): React.JSX.Element {
+}: CurrentConditionsCardProps): React.JSX.Element {
   return (
     <div className={styles.card}>
       <div className={classNames(styles.cardSection, styles.topSection)}>
@@ -25,4 +25,4 @@ function Card({
   );
 }
 
-export default Card;
+export default CurrentConditionsCard;
