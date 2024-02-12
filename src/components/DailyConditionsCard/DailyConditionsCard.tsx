@@ -4,6 +4,7 @@ import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
 import Image from "next/image";
 import CircularProgress from "@mui/joy/CircularProgress";
+import GradualCircularProgress from "../GradualCircularProgress";
 
 interface DailyConditionsCardProps extends PropsWithChildren {
   header?: string;
@@ -49,31 +50,32 @@ function DailyConditionsCard({
         <div className={styles.bottomRow}>
           <div className={styles.bottomItem}>
             <h3>UV Index</h3>
-            <CircularProgress
-              color="danger"
-              size="lg"
-              determinate
-              value={dailyForecast.uvi * 10}
+            <GradualCircularProgress
+              targetValue={dailyForecast.uvi * 10}
+              duration={500}
+              {...{ color: "danger" }}
             >
               {`${dailyForecast.uvi}/10`}
-            </CircularProgress>
+            </GradualCircularProgress>
           </div>
           <div className={styles.bottomItem}>
             <h3>Rain Chance</h3>
-            <CircularProgress size="lg" determinate value={dailyForecast.pop}>
+            <GradualCircularProgress
+              targetValue={dailyForecast.pop}
+              duration={500}
+            >
               {`${dailyForecast.pop}%`}
-            </CircularProgress>
+            </GradualCircularProgress>
           </div>
           <div className={styles.bottomItem}>
             <h3>Humidity</h3>
-            <CircularProgress
-              color="neutral"
-              size="lg"
-              determinate
-              value={dailyForecast.humidity}
+            <GradualCircularProgress
+              targetValue={dailyForecast.humidity}
+              duration={500}
+              {...{ color: "neutral" }}
             >
               {`${dailyForecast.humidity}%`}
-            </CircularProgress>
+            </GradualCircularProgress>
           </div>
         </div>
       </div>
