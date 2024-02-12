@@ -80,9 +80,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
     revalidateOnFocus: false,
   });
 
-  console.log(url);
-  console.log(API_KEY);
-
   const newWeeklyForecast: DailyForecast[] = [];
   const dayNames = getDayNames();
 
@@ -138,27 +135,27 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return `rgba(73, 152, 209, ${opacity}`;
+      return `rgba(23,51,168, ${opacity})`;
     }
     // Snow
     else if (/^6/.test(id)) {
-      return `rgba(235, 241, 245, ${opacity}`;
+      return `rgba(235, 241, 245, ${opacity})`;
     }
     // Wind
     else if (/^7/.test(id)) {
-      return `rgba(194, 200, 204, ${opacity}`;
+      return `rgba(194, 200, 204, ${opacity})`;
     }
     // Sun
     else if (/^800$/.test(id)) {
-      return `rgba(250, 199, 32, ${opacity}`;
+      return `rgba(2, 204, 254, ${opacity})`;
     }
     // Clouds
     else if (/^80/.test(id)) {
-      return `rgba(194, 200, 204, ${opacity}`;
+      return `rgba(194, 200, 204, ${opacity})`;
     }
     // Default
     else {
-      return `rgba(255, 255, 255, ${opacity}`;
+      return `rgba(255, 255, 255, ${opacity})`;
     }
   }
 
@@ -210,6 +207,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
         day: dayNames[i],
+        day_num: i,
         temp: {
           min: Math.round(data.daily[i].temp.min),
           max: Math.round(data.daily[i].temp.max),

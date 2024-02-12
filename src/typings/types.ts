@@ -1,6 +1,7 @@
 export interface DailyForecast {
   dt: number;
   day: string;
+  day_num: number;
   temp: {
     current?: number;
     day: number;

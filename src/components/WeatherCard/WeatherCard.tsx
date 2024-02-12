@@ -94,6 +94,7 @@ function WeatherCard({
               {
                 background: gradient,
                 boxShadow: `0 4px 8px ${gradient}`,
+                color: dailyForecast?.weather === "Snow" ? "black" : "white",
               } as React.CSSProperties
             }
           >
