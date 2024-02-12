@@ -3,7 +3,7 @@
   display: grid;
   grid-template-rows: 2fr 7fr;
   width: 100%;
-  max-width: 320px;
+  max-width: 250px;
   margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -24,7 +24,7 @@
   animation: pulse 1000ms ease-in-out infinite alternate;
 }
 
-.topSection {
+.header {
   display: grid;
   position: relative;
   padding: 20px;
@@ -32,7 +32,7 @@
   background-color: white;
 }
 
-.bottomSection {
+.body {
   display: flex;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -42,20 +42,7 @@
   flex-direction: column;
 }
 
-.leftColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.rightColumn {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 100%;
-}
-
-.card .topSection h1 {
+.card .header h1 {
   margin: 0px;
   padding: 0px;
   font-size: 18px;
@@ -63,62 +50,31 @@
   color: black;
 }
 
-.card .topSection h2 {
-  margin-top: 5px;
-  margin-bottom: 0px;
-  padding: 0px;
-  font-size: 35px;
-  font-weight: 250;
-}
-
-.card .topSection h3 {
-  position: absolute;
-  bottom: 35px;
-  right: 13px;
-  font-size: 16px;
-  font-weight: 350;
-}
-
-.card .topSection p {
-  position: absolute;
-  bottom: 5px;
-  right: 13px;
-  font-size: 14px;
-  font-weight: 300;
-}
-
-.card .bottomSection h1 {
+.card .body h1 {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 450;
   margin: 0px;
 }
 
-.card .bottomSection h2 {
+.card .body h2 {
   font-size: 35px;
   font-weight: 400;
   margin-top: 6px;
   margin-bottom: 0px;
 }
 
-.card .bottomSection h3 {
+.card .body h3 {
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 350;
   margin-bottom: 15px;
   margin-top: 0px;
   color: grey;
 }
 
-.card .bottomSection p {
-  font-size: 12px;
-  font-weight: 200;
-  margin-bottom: 15px;
-  margin-top: 0px;
-}
-
-.card .bottomSection h3:last-of-type {
+.card .body h3:last-of-type {
   margin-bottom: 0px;
 }
 
-.card .bottomSection p:last-of-type {
+.card .body p:last-of-type {
   margin-bottom: 0px;
 }

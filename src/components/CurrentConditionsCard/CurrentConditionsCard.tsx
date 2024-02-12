@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import styles from "./card.module.css";
+import styles from "./currentConditionsCard.module.css";
 import classNames from "classnames";
 
 interface CurrentConditionsCardProps extends PropsWithChildren {
@@ -15,10 +15,10 @@ function CurrentConditionsCard({
 }: CurrentConditionsCardProps): React.JSX.Element {
   return (
     <div className={styles.card}>
-      <div className={classNames(styles.cardSection, styles.topSection)}>
+      <div className={classNames(styles.cardSection, styles.header)}>
         <h1>{title}</h1>
       </div>
-      <div className={classNames(styles.cardSection, styles.bottomSection)}>
+      <div className={classNames(styles.cardSection, styles.body)}>
         {children}
       </div>
     </div>

@@ -18,6 +18,8 @@ export interface DailyForecast {
     eve: number;
     morn: number;
   };
+  sunrise: string;
+  sunset: string;
   weather: string;
   clouds: number;
   humidity: number;

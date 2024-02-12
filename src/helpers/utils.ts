@@ -80,3 +80,18 @@ export function convertTimestampToHour(timestampInSeconds: number): string {
 
   return `${hour} ${ampm}`;
 }
+
+export function convertEpochToTime(epoch: number): string {
+  // Create a new Date object using the Epoch timestamp multiplied by 1000 to convert seconds to milliseconds
+  const date = new Date(epoch * 1000);
+
+  // Get hours and minutes from the Date object
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  // Format minutes to ensure it always has two digits
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
+
+  // Return the formatted time string
+  return `${hours}:${formattedMinutes}`;
+}

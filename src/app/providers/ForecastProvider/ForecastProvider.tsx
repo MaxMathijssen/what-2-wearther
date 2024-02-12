@@ -12,6 +12,7 @@ import {
   getDayNames,
   getCurrentTimestamp,
   getEndOfDayTimestamp,
+  convertEpochToTime,
 } from "@/helpers/utils";
 import { API_KEY, REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
@@ -224,6 +225,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
           morn: Math.round(data.daily[i].feels_like.morn),
         },
         hourly_forecast: getHourlyForecastArray(data, i),
+        sunrise: convertEpochToTime(data.daily[i].sunrise),
+        sunset: convertEpochToTime(data.daily[i].sunset),
         weather: data.daily[i].weather[0].main,
         clouds: Math.round(data.daily[i].clouds),
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),

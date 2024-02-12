@@ -4,6 +4,7 @@ import { useContext } from "react";
 import styles from "./dailyForecast.module.css";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
+import DailyConditionsCard from "../DailyConditionsCard";
 import HourlyForecast from "../HourlyForecast";
 import Image from "next/image";
 
@@ -39,7 +40,13 @@ function DailyForecast(): React.JSX.Element {
             <HourlyForecast dailyForecast={selectedDailyForecast} />
           </div>
 
-          <div className={styles.bottomRow}></div>
+          <div className={styles.bottomRow}>
+            <DailyConditionsCard
+              title={selectedDailyForecast.day}
+              isPlaceHolder={false}
+              dailyForecast={selectedDailyForecast}
+            ></DailyConditionsCard>
+          </div>
         </>
       )}
     </div>

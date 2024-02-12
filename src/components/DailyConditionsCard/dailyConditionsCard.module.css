@@ -1,22 +1,12 @@
-.cardContainer {
-  display: flex;
-  width: 100%;
-}
-
 .card {
   height: auto;
   display: grid;
-  grid-template-rows: 2fr 7fr;
+  grid-template-rows: 2fr 9fr;
   width: 100%;
-  margin-right: 12px;
+  max-width: 400px;
+  margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.hourlyForecastContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .card:last-of-type {
@@ -44,12 +34,11 @@
 
 .body {
   display: flex;
-  flex-direction: row; /* Align children horizontally */
-  align-items: center; /* Vertically center items within the container */
-  justify-content: flex-start; /* Align items to the start of the container */
-  gap: 12px; /* Optional: adds space between items */
-  padding: 20px; /* Adjust padding as needed */
-  background-color: #edf2fb; /* Existing background color */
+  flex-direction: column; /* Keeps topRow and bottomRow in a vertical stack */
+  align-items: center; /* Aligns children (rows) to the center horizontally */
+  padding: 0px 20px 20px 20px;
+  background-color: #edf2fb;
+  z-index: 1;
 }
 
 .card .header h1 {
@@ -60,17 +49,34 @@
   color: black;
 }
 
-.card .body h2 {
-  font-size: 14px;
-  font-weight: 300;
-  margin: 0px;
+.topRow,
+.bottomRow {
+  display: flex;
+  width: 100%; /* Ensure the row takes up the full width of its parent */
+  justify-content: space-around; /* Evenly distributes items with equal space around them */
+  padding: 15px;
 }
 
-.card .body h3 {
-  font-size: 30px;
+.topItem,
+.bottomItem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.topItem h2 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.topItem h3 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
   font-weight: 400;
-  margin-bottom: 15px;
-  margin-top: 10px;
+  color: grey;
 }
 
 .card .body h3:last-of-type {
