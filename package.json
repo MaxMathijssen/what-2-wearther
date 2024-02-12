@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@babel/core": "^7.23.9",
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/joy": "^5.0.0-beta.28",
     "@radix-ui/themes": "^2.0.3",
     "dotenv": "^16.4.2",
     "lorem-ipsum": "^2.0.8",

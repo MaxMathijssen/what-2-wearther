@@ -3,6 +3,7 @@ import styles from "./dailyConditionsCard.module.css";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
 import Image from "next/image";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 interface DailyConditionsCardProps extends PropsWithChildren {
   header?: string;
@@ -47,31 +48,32 @@ function DailyConditionsCard({
         </div>
         <div className={styles.bottomRow}>
           <div className={styles.bottomItem}>
-            <h3>UV</h3>
-            <Image
-              src={dailyForecast.iconPath}
-              width={100}
-              height={100}
-              alt={dailyForecast.weather}
-            />
+            <h3>UV Index</h3>
+            <CircularProgress
+              color="danger"
+              size="lg"
+              determinate
+              value={dailyForecast.uvi * 10}
+            >
+              {`${dailyForecast.uvi}/10`}
+            </CircularProgress>
           </div>
           <div className={styles.bottomItem}>
             <h3>Rain Chance</h3>
-            <Image
-              src={dailyForecast.iconPath}
-              width={100}
-              height={100}
-              alt={dailyForecast.weather}
-            />
+            <CircularProgress size="lg" determinate value={dailyForecast.pop}>
+              {`${dailyForecast.pop}%`}
+            </CircularProgress>
           </div>
           <div className={styles.bottomItem}>
             <h3>Humidity</h3>
-            <Image
-              src={dailyForecast.iconPath}
-              width={100}
-              height={100}
-              alt={dailyForecast.weather}
-            />
+            <CircularProgress
+              color="neutral"
+              size="lg"
+              determinate
+              value={dailyForecast.humidity}
+            >
+              {`${dailyForecast.humidity}%`}
+            </CircularProgress>
           </div>
         </div>
       </div>

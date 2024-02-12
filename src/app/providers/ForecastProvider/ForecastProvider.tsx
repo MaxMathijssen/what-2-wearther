@@ -217,7 +217,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
           night: Math.round(data.daily[i].temp.night),
           eve: Math.round(data.daily[i].temp.eve),
         },
-        humidity: Math.round(data.daily[i].humidity),
+        humidity: data.daily[i].humidity,
         feels_like: {
           day: Math.round(data.daily[i].feels_like.day),
           night: Math.round(data.daily[i].feels_like.night),
@@ -232,7 +232,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
         wind_direction: convertDegreesToDirection(data.daily[i].wind_deg),
         wind_gust: Math.round(data.daily[i].wind_gust),
-        pop: Math.round(data.daily[i].pop),
+        pop: Math.round(data.daily[i].pop * 100),
         rain: Math.round(data.daily[i].rain),
         uvi: Math.round(data.daily[i].uvi),
         iconPath: getIconPath(data.daily[i].weather[0].icon),
@@ -245,7 +245,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.temp.current = Math.round(data.current.temp);
         dailyForecast.weather = data.current.weather[0].main;
         dailyForecast.feels_like.current = Math.round(data.current.feels_like);
-        dailyForecast.humidity = Math.round(data.current.humidity);
+        dailyForecast.humidity = data.current.humidity;
         dailyForecast.clouds = Math.round(data.current.clouds);
         dailyForecast.wind_speed = Math.round(data.current.wind_speed * 3.6);
         dailyForecast.wind_direction = convertDegreesToDirection(
