@@ -1,12 +1,10 @@
-import { PropsWithChildren } from "react";
 import styles from "./dailyConditionsCard.module.css";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
 import Image from "next/image";
-import CircularProgress from "@mui/joy/CircularProgress";
 import GradualCircularProgress from "../GradualCircularProgress";
 
-interface DailyConditionsCardProps extends PropsWithChildren {
+interface DailyConditionsCardProps {
   header?: string;
   title?: string;
   isPlaceHolder: boolean;
@@ -17,7 +15,6 @@ function DailyConditionsCard({
   title,
   dailyForecast,
   isPlaceHolder,
-  children,
 }: DailyConditionsCardProps): React.JSX.Element {
   return (
     <div className={styles.card}>

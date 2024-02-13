@@ -6,7 +6,7 @@ import { ForecastContext } from "../../app/providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
 import DailyConditionsCard from "../DailyConditionsCard";
 import HourlyForecast from "../HourlyForecast";
-import Image from "next/image";
+import WindCard from "../WindCard";
 
 function DailyForecast(): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
@@ -18,25 +18,8 @@ function DailyForecast(): React.JSX.Element {
             <CurrentConditionsCard
               title="Current Conditions"
               isPlaceHolder={false}
-            >
-              <Image
-                src={selectedDailyForecast.iconPath}
-                width={100}
-                height={100}
-                alt={selectedDailyForecast.weather}
-              />
-              <h1>{selectedDailyForecast.weather}</h1>
-              <h2>
-                {selectedDailyForecast.temp.current
-                  ? `${selectedDailyForecast.temp.current}°`
-                  : `${selectedDailyForecast.temp.max}°`}
-              </h2>
-              <h3>{`Feels like ${
-                selectedDailyForecast.feels_like.current
-                  ? selectedDailyForecast.feels_like.current
-                  : selectedDailyForecast.feels_like.day
-              }°`}</h3>
-            </CurrentConditionsCard>
+              dailyForecast={selectedDailyForecast}
+            />
             <HourlyForecast dailyForecast={selectedDailyForecast} />
           </div>
 
@@ -46,6 +29,11 @@ function DailyForecast(): React.JSX.Element {
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             ></DailyConditionsCard>
+            <WindCard
+              title="Wind"
+              isPlaceHolder={false}
+              dailyForecast={selectedDailyForecast}
+            />
           </div>
         </>
       )}

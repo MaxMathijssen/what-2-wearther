@@ -231,7 +231,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         clouds: Math.round(data.daily[i].clouds),
         wind_speed: Math.round(data.daily[i].wind_speed * 3.6),
         wind_direction: convertDegreesToDirection(data.daily[i].wind_deg),
-        wind_gust: Math.round(data.daily[i].wind_gust),
+        wind_gust: Math.round(data.daily[i].wind_gust * 3.6),
         pop: Math.round(data.daily[i].pop * 100),
         rain: Math.round(data.daily[i].rain),
         uvi: Math.round(data.daily[i].uvi),
@@ -251,7 +251,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.wind_direction = convertDegreesToDirection(
           data.current.wind_deg
         );
-        dailyForecast.wind_gust = Math.round(data.current.wind_gust);
+        dailyForecast.wind_gust = Math.round(data.current.wind_gust * 3.6);
         dailyForecast.iconPath = getIconPath(data.current.weather[0].icon);
         dailyForecast.color = getBackgroundColor(data.current.weather[0].id);
       }
