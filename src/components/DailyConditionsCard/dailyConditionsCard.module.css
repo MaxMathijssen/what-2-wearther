@@ -6,11 +6,6 @@
   max-width: 400px;
   margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:last-of-type {
-  margin-right: 0;
 }
 
 @keyframes pulse {
@@ -25,20 +20,19 @@
 }
 
 .header {
+  align-items: center;
+  height: 30px;
   display: grid;
-  position: relative;
   padding: 20px;
-  z-index: 1;
   background-color: white;
 }
 
 .body {
   display: flex;
-  flex-direction: column; /* Keeps topRow and bottomRow in a vertical stack */
-  align-items: center; /* Aligns children (rows) to the center horizontally */
+  flex-direction: column;
+  align-items: center;
   padding: 0px 15px 15px 15px;
   background-color: #edf2fb;
-  z-index: 1;
 }
 
 .card .header h1 {
@@ -52,8 +46,8 @@
 .topRow,
 .bottomRow {
   display: flex;
-  width: 100%; /* Ensure the row takes up the full width of its parent */
-  justify-content: space-around; /* Evenly distributes items with equal space around them */
+  width: 100%;
+  justify-content: space-around;
   padding: 15px;
 }
 

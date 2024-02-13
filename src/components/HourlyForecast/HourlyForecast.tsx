@@ -3,7 +3,7 @@ import { convertTimestampToHour } from "@/helpers/utils";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import styles from "./hourlyForecast.module.css";
 import classNames from "classnames";
 

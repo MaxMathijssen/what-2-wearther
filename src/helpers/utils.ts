@@ -36,7 +36,7 @@ export function getCurrentTimestamp(): number {
 }
 
 export function getEndOfDayTimestamp(): number {
-  const now = new Date(); // Current date and time
+  const now = new Date();
   const endOfDay = new Date(
     now.getFullYear(),
     now.getMonth(),
@@ -44,7 +44,7 @@ export function getEndOfDayTimestamp(): number {
     23,
     59,
     59,
-    999 // Set to the last millisecond of the day
+    999
   );
   return Math.floor(endOfDay.getTime() / 1000);
 }
@@ -64,34 +64,25 @@ export const random = (
 };
 
 export function convertTimestampToHour(timestampInSeconds: number): string {
-  // Convert seconds to milliseconds for JavaScript Date
   const timestampInMilliseconds = timestampInSeconds * 1000;
   const date = new Date(timestampInMilliseconds);
 
-  // Get local hour from the Date object
   let hour = date.getHours();
 
-  // Determine AM or PM
   const ampm = hour >= 12 ? "PM" : "AM";
 
-  // Convert hour from 24-hour to 12-hour format
   hour = hour % 12;
-  hour = hour || 12; // Convert hour '0' to '12' for 12 AM and 12 PM
+  hour = hour || 12;
 
   return `${hour} ${ampm}`;
 }
 
 export function convertEpochToTime(epoch: number): string {
-  // Create a new Date object using the Epoch timestamp multiplied by 1000 to convert seconds to milliseconds
   const date = new Date(epoch * 1000);
-
-  // Get hours and minutes from the Date object
   const hours = date.getHours();
   const minutes = date.getMinutes();
 
-  // Format minutes to ensure it always has two digits
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes.toString();
 
-  // Return the formatted time string
   return `${hours}:${formattedMinutes}`;
 }

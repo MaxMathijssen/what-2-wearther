@@ -1,7 +1,7 @@
 import { MouseEventHandler, useContext } from "react";
 import { DailyForecast } from "@/typings/types";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 import styles from "./WeatherCard.module.css";
 import classNames from "classnames";

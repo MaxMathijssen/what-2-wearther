@@ -4,13 +4,7 @@
   grid-template-rows: 2fr 7fr;
   width: 100%;
   max-width: 300px;
-  margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:last-of-type {
-  margin-right: 0;
 }
 
 @keyframes pulse {
@@ -25,18 +19,17 @@
 }
 
 .header {
+  align-items: center;
+  height: 30px;
   display: grid;
-  position: relative;
   padding: 20px;
-  z-index: 1;
   background-color: white;
 }
 
 .body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #edf2fb; /* Existing background color */
-  border-radius: 0 0 10px 10px;
+  background-color: #edf2fb;
   padding: 60px 20px 60px 20px;
 }
 
@@ -45,7 +38,6 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: black;
 }
 
 .leftColumn {

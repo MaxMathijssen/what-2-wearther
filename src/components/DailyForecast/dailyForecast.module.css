@@ -1,13 +1,13 @@
 .dailyForecastContainer {
   display: flex;
-  flex-direction: column; /* Stack top and bottom rows vertically */
-  gap: 40px; /* Space between top and bottom rows */
+  flex-direction: column;
+  gap: 40px;
   padding: 0px 15px 15px 15px;
 }
 
 .topRow,
 .bottomRow {
   display: flex;
-  flex-direction: row; /* Align children of each row in a row */
-  gap: 40px; /* Space between items within each row */
+  flex-direction: row;
+  gap: 40px;
 }

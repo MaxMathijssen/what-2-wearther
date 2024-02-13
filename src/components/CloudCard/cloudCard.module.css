@@ -6,11 +6,6 @@
   max-width: 400px;
   margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:last-of-type {
-  margin-right: 0;
 }
 
 @keyframes pulse {
@@ -25,10 +20,10 @@
 }
 
 .header {
+  align-items: center;
+  height: 30px;
   display: grid;
-  position: relative;
   padding: 20px;
-  z-index: 1;
   background-color: white;
 }
 
@@ -56,9 +51,9 @@
 
 .imageOverlayWrapper {
   position: relative;
-  width: 150px; /* Match the Image width */
-  height: 150px; /* Match the Image height */
-  overflow: hidden; /* Ensure the overlay doesn't spill outside the image area */
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
 }
 
 .coverageOverlay {
@@ -66,15 +61,15 @@
   bottom: -18px;
   left: -6px;
   height: 108%;
-  background-color: #02b0e033; /* Your specific color */
-  z-index: 1; /* Ensure it's above the image */
-  -webkit-mask-image: url("/cloudfill.png"); /* For Chrome, Safari */
-  mask-image: url("/cloudfill.png"); /* For Firefox */
+  background-color: #02b0e033;
+  z-index: 1;
+  -webkit-mask-image: url("/cloudfill.png");
+  mask-image: url("/cloudfill.png");
   -webkit-mask-size: cover;
   mask-size: cover;
 }
 
 .cloudImage {
   position: relative;
-  z-index: 0; /* Ensure the image is behind the overlay */
+  z-index: 0;
 }

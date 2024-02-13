@@ -3,7 +3,7 @@ import styles from "./cloudCard.module.css";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
-import Image from "next/image";
+import Image from "next/legacy/image";
 
 interface CloudCardProps {
   isPlaceHolder: boolean;
@@ -48,6 +48,7 @@ function CloudCard({
             style={{ width: `${overlayWidth}%` }}
           ></div>
           <Image
+            priority={true}
             src="/cloud.png"
             layout="fill"
             objectFit="cover"

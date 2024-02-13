@@ -1,7 +1,6 @@
 .siteHeader {
   border-radius: 10px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
   background: rgba(2, 176, 224, 0.5);
@@ -11,8 +10,8 @@
 .siteTitle {
   display: flex;
   color: #ffffff;
-  margin-right: auto; /* Pushes the element to the center */
-  margin-left: auto; /* Pushes the element to the center */
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .siteHeader .logo {
@@ -30,6 +29,6 @@
   align-items: center;
   border-radius: 20%;
   overflow: hidden;
-  width: 100px; /* Match the width of your Image component */
-  height: 100px; /* Match the height of your Image component */
+  width: 100px;
+  height: 100px;
 }

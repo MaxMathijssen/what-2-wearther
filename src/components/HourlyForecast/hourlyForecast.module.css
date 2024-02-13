@@ -8,9 +8,7 @@
   display: grid;
   grid-template-rows: 2fr 7fr;
   width: 100%;
-  margin-right: 12px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hourlyForecastContainer {
@@ -35,21 +33,21 @@
 }
 
 .header {
+  height: 30px;
+  align-items: center;
   display: grid;
-  position: relative;
   padding: 20px;
-  z-index: 1;
   background-color: white;
 }
 
 .body {
   display: flex;
-  flex-direction: row; /* Align children horizontally */
-  align-items: center; /* Vertically center items within the container */
-  justify-content: flex-start; /* Align items to the start of the container */
-  gap: 12px; /* Optional: adds space between items */
-  padding: 20px; /* Adjust padding as needed */
-  background-color: #edf2fb; /* Existing background color */
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 20px;
+  background-color: #edf2fb;
 }
 
 .card .header h1 {

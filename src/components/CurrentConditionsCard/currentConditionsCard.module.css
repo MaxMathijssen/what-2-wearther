@@ -6,11 +6,6 @@
   max-width: 250px;
   margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.card:last-of-type {
-  margin-right: 0;
 }
 
 @keyframes pulse {
@@ -25,11 +20,11 @@
 }
 
 .header {
+  align-items: center;
   display: grid;
-  position: relative;
   padding: 20px;
-  z-index: 1;
   background-color: white;
+  height: 30px;
 }
 
 .body {
@@ -38,7 +33,6 @@
   align-items: center;
   padding: 0px 20px 20px 20px;
   background-color: #edf2fb;
-  z-index: 1;
   flex-direction: column;
 }
 
@@ -69,12 +63,4 @@
   margin-bottom: 15px;
   margin-top: 0px;
   color: grey;
-}
-
-.card .body h3:last-of-type {
-  margin-bottom: 0px;
-}
-
-.card .body p:last-of-type {
-  margin-bottom: 0px;
 }

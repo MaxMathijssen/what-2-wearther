@@ -2,7 +2,7 @@ import styles from "./dailyConditionsCard.module.css";
 import { DailyForecast } from "@/typings/types";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import classNames from "classnames";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import GradualCircularProgress from "../GradualCircularProgress";
 
 interface DailyConditionsCardProps {
