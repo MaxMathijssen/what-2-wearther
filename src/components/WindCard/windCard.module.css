@@ -33,13 +33,11 @@
 }
 
 .body {
-  justify-content: center;
-  display: flex;
-  flex-direction: column; /* Keeps topRow and bottomRow in a vertical stack */
-  align-items: center; /* Aligns children (rows) to the center horizontally */
-  padding: 0px 15px 15px 15px;
-  background-color: #edf2fb;
-  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: #edf2fb; /* Existing background color */
+  border-radius: 0 0 10px 10px;
+  padding: 60px 20px 60px 20px;
 }
 
 .card .header h1 {
@@ -50,31 +48,40 @@
   color: black;
 }
 
-.topRow,
-.middleRow,
-.bottomRow {
+.leftColumn {
   display: flex;
-  width: 100%; /* Ensure the row takes up the full width of its parent */
-  justify-content: space-around; /* Evenly distributes items with equal space around them */
-  padding: 15px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
 }
 
-.topRow h2,
-.middleRow h2,
-.bottomRow h2 {
-  margin: 0px;
-  padding: 0px;
+.middleColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 25px;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 25px;
+}
+
+.leftColumn h2,
+.middleColumn h2,
+.rightColumn h2 {
   font-size: 14px;
   font-weight: 450;
+  margin: 0px;
 }
 
-.topRow h3,
-.middleRow h3,
-.bottomRow h3 {
-  margin-bottom: 5px;
-  margin-top: 0px;
-  padding: 0px;
+.leftColumn h3,
+.middleColumn h3,
+.rightColumn h3 {
   font-size: 14px;
   font-weight: 300;
   color: grey;
+  margin: 0px;
 }
