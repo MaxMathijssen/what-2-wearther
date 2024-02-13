@@ -5,7 +5,6 @@ import Image from "next/image";
 import GradualCircularProgress from "../GradualCircularProgress";
 
 interface DailyConditionsCardProps {
-  header?: string;
   title?: string;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast;

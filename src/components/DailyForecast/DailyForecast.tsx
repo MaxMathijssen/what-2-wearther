@@ -7,6 +7,7 @@ import CurrentConditionsCard from "../CurrentConditionsCard";
 import DailyConditionsCard from "../DailyConditionsCard";
 import HourlyForecast from "../HourlyForecast";
 import WindCard from "../WindCard";
+import CloudCard from "../CloudCard";
 
 function DailyForecast(): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
@@ -31,6 +32,10 @@ function DailyForecast(): React.JSX.Element {
             ></DailyConditionsCard>
             <WindCard
               title="Wind"
+              isPlaceHolder={false}
+              dailyForecast={selectedDailyForecast}
+            />
+            <CloudCard
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />

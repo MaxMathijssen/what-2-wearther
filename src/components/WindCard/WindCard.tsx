@@ -4,7 +4,6 @@ import Image from "next/image";
 import { DailyForecast } from "@/typings/types";
 
 interface WindCardProps {
-  header?: string;
   title?: string;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast;
