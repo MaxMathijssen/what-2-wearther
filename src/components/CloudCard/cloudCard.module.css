@@ -63,9 +63,9 @@
 
 .coverageOverlay {
   position: absolute;
-  bottom: -10px;
-  left: 0;
-  height: 100%;
+  bottom: -18px;
+  left: -6px;
+  height: 108%;
   background-color: #02b0e033; /* Your specific color */
   z-index: 1; /* Ensure it's above the image */
   -webkit-mask-image: url("/cloudfill.png"); /* For Chrome, Safari */

@@ -1,5 +1,6 @@
 import styles from "./dailyConditionsCard.module.css";
 import { DailyForecast } from "@/typings/types";
+import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import classNames from "classnames";
 import Image from "next/image";
 import GradualCircularProgress from "../GradualCircularProgress";
@@ -48,7 +49,7 @@ function DailyConditionsCard({
             <h3>UV Index</h3>
             <GradualCircularProgress
               targetValue={dailyForecast.uvi * 10}
-              duration={500}
+              duration={ANIMATION_DURATION_MS}
               {...{ color: "danger" }}
             >
               {`${dailyForecast.uvi}/10`}
@@ -58,7 +59,7 @@ function DailyConditionsCard({
             <h3>Rain Chance</h3>
             <GradualCircularProgress
               targetValue={dailyForecast.pop}
-              duration={500}
+              duration={ANIMATION_DURATION_MS}
             >
               {`${dailyForecast.pop}%`}
             </GradualCircularProgress>
@@ -67,7 +68,7 @@ function DailyConditionsCard({
             <h3>Humidity</h3>
             <GradualCircularProgress
               targetValue={dailyForecast.humidity}
-              duration={500}
+              duration={ANIMATION_DURATION_MS}
               {...{ color: "neutral" }}
             >
               {`${dailyForecast.humidity}%`}
