@@ -64,6 +64,7 @@ function DailyForecast(): React.JSX.Element {
               dailyForecast={null}
             ></DailyConditionsCard>
             <WindCard title="Wind" isPlaceHolder={true} dailyForecast={null} />
+            <CloudCard isPlaceHolder={true} dailyForecast={null} />
           </div>
         </>
       )}
