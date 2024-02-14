@@ -21,7 +21,10 @@ function DailyForecast(): React.JSX.Element {
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />
-            <HourlyForecast dailyForecast={selectedDailyForecast} />
+            <HourlyForecast
+              isPlaceHolder={false}
+              dailyForecast={selectedDailyForecast}
+            />
           </div>
 
           <div className={styles.bottomRow}>
@@ -39,6 +42,28 @@ function DailyForecast(): React.JSX.Element {
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />
+          </div>
+        </>
+      )}
+
+      {!selectedDailyForecast && (
+        <>
+          <div className={styles.topRow}>
+            <CurrentConditionsCard
+              title="Current Conditions"
+              isPlaceHolder={true}
+              dailyForecast={null}
+            />
+            <HourlyForecast isPlaceHolder={true} dailyForecast={null} />
+          </div>
+
+          <div className={styles.bottomRow}>
+            <DailyConditionsCard
+              title="Mockday"
+              isPlaceHolder={true}
+              dailyForecast={null}
+            ></DailyConditionsCard>
+            <WindCard title="Wind" isPlaceHolder={true} dailyForecast={null} />
           </div>
         </>
       )}

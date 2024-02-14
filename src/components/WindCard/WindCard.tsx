@@ -6,7 +6,7 @@ import { DailyForecast } from "@/typings/types";
 interface WindCardProps {
   title?: string;
   isPlaceHolder: boolean;
-  dailyForecast: DailyForecast;
+  dailyForecast: DailyForecast | null;
 }
 
 function WindCard({
@@ -15,43 +15,68 @@ function WindCard({
   isPlaceHolder,
 }: WindCardProps): React.JSX.Element {
   return (
-    <div className={styles.card}>
-      <div className={classNames(styles.cardSection, styles.header)}>
-        <h1>{title}</h1>
-      </div>
-      <div className={classNames(styles.cardSection, styles.body)}>
-        <div className={styles.leftColumn}>
-          <Image
-            src="/wind_speed.png"
-            width={20}
-            height={20}
-            alt={dailyForecast.weather}
-          />
-          <Image
-            src="/wind_gust.png"
-            width={20}
-            height={20}
-            alt={dailyForecast.weather}
-          />
-          <Image
-            src="/wind_direction.png"
-            width={20}
-            height={20}
-            alt={dailyForecast.weather}
-          />
+    <>
+      {isPlaceHolder && (
+        <div className={classNames(styles.card, styles.placeholder)}>
+          <div className={classNames(styles.cardSection, styles.header)}>
+            <h1>{title}</h1>
+          </div>
+          <div className={classNames(styles.cardSection, styles.body)}>
+            <div className={styles.leftColumn}></div>
+            <div className={styles.middleColumn}>
+              <h2>Speed</h2>
+              <h2>Gust</h2>
+              <h2>Direction</h2>
+            </div>
+            <div className={styles.rightColumn}>
+              <h3>50 km/h</h3>
+              <h3>50 km/h</h3>
+              <h3>NW</h3>
+            </div>
+          </div>
         </div>
-        <div className={styles.middleColumn}>
-          <h2>Speed</h2>
-          <h2>Gust</h2>
-          <h2>Direction</h2>
+      )}
+
+      {dailyForecast && (
+        <div className={styles.card}>
+          <div className={classNames(styles.cardSection, styles.header)}>
+            <h1>{title}</h1>
+          </div>
+          <div className={classNames(styles.cardSection, styles.body)}>
+            <div className={styles.leftColumn}>
+              <Image
+                src="/wind_speed.png"
+                width={20}
+                height={20}
+                alt={dailyForecast.weather}
+              />
+              <Image
+                src="/wind_gust.png"
+                width={20}
+                height={20}
+                alt={dailyForecast.weather}
+              />
+              <Image
+                src="/wind_direction.png"
+                width={20}
+                height={20}
+                alt={dailyForecast.weather}
+              />
+            </div>
+            <div className={styles.middleColumn}>
+              <h2>Speed</h2>
+              <h2>Gust</h2>
+              <h2>Direction</h2>
+            </div>
+            <div className={styles.rightColumn}>
+              <h3>{`${dailyForecast.wind_speed} km/h`}</h3>
+              <h3>{`${dailyForecast.wind_gust} km/h`}</h3>
+              <h3>{dailyForecast.wind_direction}</h3>
+            </div>
+          </div>
         </div>
-        <div className={styles.rightColumn}>
-          <h3>{`${dailyForecast.wind_speed} km/h`}</h3>
-          <h3>{`${dailyForecast.wind_gust} km/h`}</h3>
-          <h3>{dailyForecast.wind_direction}</h3>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

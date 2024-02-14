@@ -22,8 +22,8 @@ html {
 
 main {
   display: grid;
-  grid-template-rows: auto auto; /* Defines three rows; adjust sizing as needed */
-  gap: 20px; /* Adjust the gap between rows as needed */
+  grid-template-rows: auto auto;
+  gap: 20px;
   font-size: 1rem;
   background: #e2eafc;
   border-radius: 10px;

@@ -78,3 +78,20 @@
 .card .body p:last-of-type {
   margin-bottom: 0px;
 }
+
+.imagePlaceholder {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(to right, #eeeeee 25%, #dddddd 50%, #eeeeee 75%);
+  background-size: 200% 100%;
+  animation: loadingShimmer 1.5s infinite linear;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
