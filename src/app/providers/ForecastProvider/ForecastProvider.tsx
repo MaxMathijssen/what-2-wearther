@@ -12,6 +12,7 @@ import {
   getDayNames,
   getCurrentTimestamp,
   getEndOfDayTimestamp,
+  convertTimestampToHour,
   convertEpochToTime,
 } from "@/helpers/utils";
 import { API_KEY, REFRESH_TIME_MIN, SECTORS } from "@/helpers/constants";
@@ -191,7 +192,9 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
     for (let j = startIndex; j < endIndex; j++) {
       const hourlyForecast: HourlyForecast = {
+        hour_index: j,
         dt: data.hourly[j].dt,
+        hour: convertTimestampToHour(data.hourly[j].dt),
         temp: data.hourly[j].temp,
         feels_like: data.hourly[j].feels_like,
         weather: data.hourly[j].weather,

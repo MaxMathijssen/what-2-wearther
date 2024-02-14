@@ -39,3 +39,25 @@
   left: 65%;
   transform: translate(-50%, -50%);
 }
+
+.weatherCardContainer {
+  position: relative;
+  display: inline-block;
+  margin-right: 12px;
+}
+
+.weatherCardContainer:last-of-type {
+  margin-right: 0px;
+}
+
+.selectedBorder {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: -5px;
+  bottom: 0;
+  left: 0;
+  border: 5px solid rgba(1, 136, 193, 0.8);
+  border-radius: 10px;
+  box-sizing: border-box;
+}

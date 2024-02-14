@@ -35,7 +35,9 @@ export interface DailyForecast {
 }
 
 export interface HourlyForecast {
+  hour_index: number;
   dt: number;
+  hour: string;
   temp: number;
   feels_like: number;
   weather: string;

@@ -30,7 +30,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   background-color: #edf2fb;
-  padding: 60px 20px 60px 20px;
+  padding: 60px 40px 60px 40px;
 }
 
 .card .header h1 {
