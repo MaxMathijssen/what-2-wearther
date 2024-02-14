@@ -59,6 +59,5 @@
   left: 0;
   border: 5px solid rgba(1, 136, 193, 0.8);
   border-radius: 10px;
-  /* Remove any specific height/width to allow it to automatically adjust to the container */
-  box-sizing: border-box; /* Ensures the border width is included in the element's total width and height */
+  box-sizing: border-box;
 }
