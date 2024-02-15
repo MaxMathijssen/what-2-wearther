@@ -46,16 +46,16 @@ function WeeklyForecast(): React.JSX.Element {
           );
         })}
       {!weeklyForecast &&
-        range(0, 7).map((index) => {
-          return (
+        range(0, 7).map((index) => (
+          <div key={index} className={styles.weatherCardContainer}>
             <WeatherCard
               key={index}
               isError={false}
               isPlaceHolder={true}
               dailyForecast={null}
             />
-          );
-        })}
+          </div>
+        ))}
     </div>
   );
 }

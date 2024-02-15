@@ -34,6 +34,8 @@
   font-family: var(--font-family-loading);
   animation: pulse 1000ms ease-in-out infinite alternate;
   margin-right: 12px;
+  min-width: 139.3px;
+  box-sizing: border-box;
 }
 
 .cardSection {
