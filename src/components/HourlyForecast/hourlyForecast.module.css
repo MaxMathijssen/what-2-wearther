@@ -106,22 +106,22 @@
 .card .body .noDataContainer h2 {
   font-size: 26px;
   font-weight: 400;
-  margin: 15px 15px; /* Example: Add margin */
-  text-align: center; /* Example: Center text */
+  margin: 15px 15px;
+  text-align: center;
 }
 
 .card .body .noDataContainer h3 {
   font-size: 14px;
   font-weight: 300;
-  color: grey; /* Example: Change text color */
-  margin: 15px 15px; /* Example: Add margin */
-  text-align: center; /* Example: Center text */
+  color: grey;
+  margin: 15px 15px;
+  text-align: center;
 }
 
 .body.centerContent {
-  justify-content: center; /* Centers horizontally for row direction */
-  align-items: center; /* Centers vertically */
-  flex-direction: column; /* Stacks children vertically */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding: 0px;
 }
 
@@ -129,5 +129,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%; /* Ensure .body takes full available height */
+  height: 100%;
+}
+
+.fadeIn {
+  animation: fadeInSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

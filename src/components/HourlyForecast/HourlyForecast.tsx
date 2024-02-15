@@ -81,7 +81,10 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
               })}
             >
               {dailyForecast && dailyForecast.hourly_forecast.length === 0 ? (
-                <div className={styles.noDataContainer}>
+                <div
+                  key={dailyForecast.day}
+                  className={classNames(styles.noDataContainer, styles.fadeIn)}
+                >
                   <h2>Sorry!</h2>
                   <Image
                     src="/man.png"
@@ -101,7 +104,10 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                       return (
                         <div
                           key={hourlyForecast.dt}
-                          className={styles.hourlyForecastContainer}
+                          className={classNames(
+                            styles.hourlyForecastContainer,
+                            styles.fadeIn
+                          )}
                         >
                           <h2>
                             {index === 0 && dailyForecast.day === "Today"
