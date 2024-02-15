@@ -96,3 +96,38 @@
     background-position: 200% 0;
   }
 }
+
+.card .body .noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .body .noDataContainer h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 15px 15px; /* Example: Add margin */
+  text-align: center; /* Example: Center text */
+}
+
+.card .body .noDataContainer h3 {
+  font-size: 14px;
+  font-weight: 300;
+  color: grey; /* Example: Change text color */
+  margin: 15px 15px; /* Example: Add margin */
+  text-align: center; /* Example: Center text */
+}
+
+.body.centerContent {
+  justify-content: center; /* Centers horizontally for row direction */
+  align-items: center; /* Centers vertically */
+  flex-direction: column; /* Stacks children vertically */
+  padding: 0px;
+}
+
+.centerContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Ensure .body takes full available height */
+}

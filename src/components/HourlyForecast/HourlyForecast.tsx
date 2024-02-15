@@ -74,8 +74,27 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
             <div className={classNames(styles.cardSection, styles.header)}>
               <h1>Hourly Forecast</h1>
             </div>
-            <div className={classNames(styles.cardSection, styles.body)}>
-              {dailyForecast.hourly_forecast.length > 0 &&
+            <div
+              className={classNames(styles.cardSection, styles.body, {
+                [styles.centerContent]:
+                  dailyForecast && dailyForecast.hourly_forecast.length === 0,
+              })}
+            >
+              {dailyForecast && dailyForecast.hourly_forecast.length === 0 ? (
+                <div className={styles.noDataContainer}>
+                  <h2>Sorry!</h2>
+                  <Image
+                    src="/man.png"
+                    width={100}
+                    height={100}
+                    alt="No hourly data"
+                  />
+                  <h3>
+                    Hourly forecast data is only available for the next 48 hours
+                  </h3>
+                </div>
+              ) : (
+                dailyForecast.hourly_forecast.length > 0 &&
                 hourlyForecastArr.map(
                   (hourlyForecast: HourlyForecast, index: number) => {
                     if (index < 9) {
@@ -100,7 +119,8 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                       );
                     }
                   }
-                )}
+                )
+              )}
             </div>
           </div>
         </div>
