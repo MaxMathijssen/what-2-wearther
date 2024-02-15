@@ -40,21 +40,21 @@
   font-weight: 400;
 }
 
-.leftColumn {
+.leftColumn .fadeIn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 27px;
 }
 
-.middleColumn {
+.middleColumn .fadeIn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
 }
 
-.rightColumn {
+.rightColumn .fadeIn {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -76,4 +76,19 @@
   font-weight: 300;
   color: grey;
   margin: 0px;
+}
+
+.fadeIn {
+  animation: fadeInSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }

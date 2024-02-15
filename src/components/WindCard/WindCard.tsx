@@ -44,34 +44,49 @@ function WindCard({
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
             <div className={styles.leftColumn}>
-              <Image
-                src="/wind_speed.png"
-                width={20}
-                height={20}
-                alt={dailyForecast.weather}
-              />
-              <Image
-                src="/wind_gust.png"
-                width={20}
-                height={20}
-                alt={dailyForecast.weather}
-              />
-              <Image
-                src="/wind_direction.png"
-                width={20}
-                height={20}
-                alt={dailyForecast.weather}
-              />
+              <div
+                key={dailyForecast.day}
+                className={classNames(styles.fadeIn, styles.fadeColumn)}
+              >
+                <Image
+                  src="/wind_speed.png"
+                  width={20}
+                  height={20}
+                  alt={dailyForecast.weather}
+                />
+                <Image
+                  src="/wind_gust.png"
+                  width={20}
+                  height={20}
+                  alt={dailyForecast.weather}
+                />
+                <Image
+                  src="/wind_direction.png"
+                  width={20}
+                  height={20}
+                  alt={dailyForecast.weather}
+                />
+              </div>
             </div>
             <div className={styles.middleColumn}>
-              <h2>Speed</h2>
-              <h2>Gust</h2>
-              <h2>Direction</h2>
+              <div
+                key={dailyForecast.day}
+                className={classNames(styles.fadeIn, styles.fadeColumn)}
+              >
+                <h2>Speed</h2>
+                <h2>Gust</h2>
+                <h2>Direction</h2>
+              </div>
             </div>
             <div className={styles.rightColumn}>
-              <h3>{`${dailyForecast.wind_speed} km/h`}</h3>
-              <h3>{`${dailyForecast.wind_gust} km/h`}</h3>
-              <h3>{dailyForecast.wind_direction}</h3>
+              <div
+                key={dailyForecast.day}
+                className={classNames(styles.fadeIn, styles.fadeColumn)}
+              >
+                <h3>{`${dailyForecast.wind_speed} km/h`}</h3>
+                <h3>{`${dailyForecast.wind_gust} km/h`}</h3>
+                <h3>{dailyForecast.wind_direction}</h3>
+              </div>
             </div>
           </div>
         </div>

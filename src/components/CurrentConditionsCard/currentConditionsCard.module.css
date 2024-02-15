@@ -30,7 +30,6 @@
 .body {
   display: flex;
   grid-template-columns: 1fr 1fr;
-
   padding: 0px 20px 20px 20px;
   background-color: #edf2fb;
   flex-direction: column;
