@@ -30,6 +30,7 @@
 .body {
   display: flex;
   grid-template-columns: 1fr 1fr;
+  align-items: center;
   padding: 0px 20px 20px 20px;
   background-color: #edf2fb;
   flex-direction: column;
@@ -95,12 +96,4 @@
     opacity: 1;
     transform: translateX(0);
   }
-}
-
-.bodyContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
 }

@@ -36,28 +36,30 @@ function CurrentConditionsCard({
             <h1>{title}</h1>
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
-            <div
+            <Image
               key={dailyForecast.day}
-              className={classNames(styles.bodyContent, styles.fadeIn)}
-            >
-              <Image
-                src={dailyForecast.iconPath}
-                width={100}
-                height={100}
-                alt={dailyForecast.weather}
-              />
-              <h1>{dailyForecast.weather}</h1>
-              <h2>
-                {dailyForecast.temp.current
-                  ? `${dailyForecast.temp.current}°`
-                  : `${dailyForecast.temp.max}°`}
-              </h2>
-              <h3>{`Feels like ${
-                dailyForecast.feels_like.current
-                  ? dailyForecast.feels_like.current
-                  : dailyForecast.feels_like.day
-              }°`}</h3>
-            </div>
+              className={styles.fadeIn}
+              src={dailyForecast.iconPath}
+              width={100}
+              height={100}
+              alt={dailyForecast.weather}
+            />
+            <h1 key={dailyForecast.dt} className={styles.fadeIn}>
+              {dailyForecast.weather}
+            </h1>
+            <h2 key={dailyForecast.day_num} className={styles.fadeIn}>
+              {dailyForecast.temp.current
+                ? `${dailyForecast.temp.current}°`
+                : `${dailyForecast.temp.max}°`}
+            </h2>
+            <h3
+              key={dailyForecast.wind_gust}
+              className={styles.fadeIn}
+            >{`Feels like ${
+              dailyForecast.feels_like.current
+                ? dailyForecast.feels_like.current
+                : dailyForecast.feels_like.day
+            }°`}</h3>
           </div>
         </div>
       )}

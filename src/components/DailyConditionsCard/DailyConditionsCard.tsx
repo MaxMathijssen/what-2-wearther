@@ -60,7 +60,10 @@ function DailyConditionsCard({
             <h1>{title}</h1>
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
-            <div className={styles.topRow}>
+            <div
+              key={dailyForecast.day}
+              className={classNames(styles.topRow, styles.fadeIn)}
+            >
               <div className={styles.topItem}>
                 <h3>Sunrise</h3>
                 <Image
@@ -83,7 +86,10 @@ function DailyConditionsCard({
               </div>
             </div>
             <div className={styles.bottomRow}>
-              <div className={styles.bottomItem}>
+              <div
+                key={dailyForecast.day}
+                className={classNames(styles.bottomItem, styles.fadeIn)}
+              >
                 <h3>UV Index</h3>
                 <GradualCircularProgress
                   targetValue={dailyForecast.uvi * 10}
@@ -93,7 +99,10 @@ function DailyConditionsCard({
                   {`${dailyForecast.uvi}/10`}
                 </GradualCircularProgress>
               </div>
-              <div className={styles.bottomItem}>
+              <div
+                key={dailyForecast.dt}
+                className={classNames(styles.bottomItem, styles.fadeIn)}
+              >
                 <h3>Rain Chance</h3>
                 <GradualCircularProgress
                   targetValue={dailyForecast.pop}
@@ -102,7 +111,10 @@ function DailyConditionsCard({
                   {`${dailyForecast.pop}%`}
                 </GradualCircularProgress>
               </div>
-              <div className={styles.bottomItem}>
+              <div
+                key={dailyForecast.day_num}
+                className={classNames(styles.bottomItem, styles.fadeIn)}
+              >
                 <h3>Humidity</h3>
                 <GradualCircularProgress
                   targetValue={dailyForecast.humidity}

@@ -40,21 +40,21 @@
   font-weight: 400;
 }
 
-.leftColumn .fadeIn {
+.leftColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 27px;
 }
 
-.middleColumn .fadeIn {
+.middleColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 30px;
 }
 
-.rightColumn .fadeIn {
+.rightColumn {
   display: flex;
   flex-direction: column;
   align-items: flex-end;

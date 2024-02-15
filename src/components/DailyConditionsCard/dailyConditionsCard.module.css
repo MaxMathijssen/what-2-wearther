@@ -118,3 +118,18 @@
     transform: rotate(360deg);
   }
 }
+
+.fadeIn {
+  animation: fadeInSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
