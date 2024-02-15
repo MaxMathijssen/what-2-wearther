@@ -64,21 +64,26 @@ function CloudCard({
             <h1>Cloud Cover</h1>
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
-            <div className={styles.imageOverlayWrapper}>
-              <div
-                className={styles.coverageOverlay}
-                style={{ width: `${overlayWidth}%` }}
-              ></div>
-              <Image
-                priority={true}
-                src="/cloud.png"
-                layout="fill"
-                objectFit="cover"
-                alt={dailyForecast.weather}
-                className={styles.cloudImage}
-              />
+            <div
+              key={dailyForecast.day}
+              className={classNames(styles.bodyContent, styles.fadeIn)}
+            >
+              <div className={styles.imageOverlayWrapper}>
+                <div
+                  className={styles.coverageOverlay}
+                  style={{ width: `${overlayWidth}%` }}
+                ></div>
+                <Image
+                  priority={true}
+                  src="/cloud.png"
+                  layout="fill"
+                  objectFit="cover"
+                  alt={dailyForecast.weather}
+                  className={styles.cloudImage}
+                />
+              </div>
+              <h1>{`${dailyForecast.clouds}%`}</h1>
             </div>
-            <h1>{`${dailyForecast.clouds}%`}</h1>
           </div>
         </div>
       )}
