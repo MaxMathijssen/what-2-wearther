@@ -30,7 +30,7 @@
 .body {
   display: flex;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
+
   padding: 0px 20px 20px 20px;
   background-color: #edf2fb;
   flex-direction: column;
@@ -81,4 +81,27 @@
   100% {
     background-position: 200% 0;
   }
+}
+
+.fadeIn {
+  animation: fadeInSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.bodyContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
 }
