@@ -61,7 +61,12 @@
   bottom: -18px;
   left: -6px;
   height: 108%;
-  background-color: #02b0e033;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 85%,
+      rgba(255, 255, 255, 1) 100%
+    ),
+    #02b0e033;
   z-index: 1;
   -webkit-mask-image: url("/cloudfill.png");
   mask-image: url("/cloudfill.png");

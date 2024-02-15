@@ -17,18 +17,24 @@ const GradualCircularProgress: React.FC<GradualCircularProgressProps> = ({
   useEffect(() => {
     const startTime = Date.now();
 
+    const totalChangeNeeded = targetValue - progress;
+    const changePerMs = totalChangeNeeded / (duration * 20);
+
     const timer = setInterval(() => {
-      const elapsedTime = Date.now() - startTime;
-      const progress = Math.min(
-        (elapsedTime / duration) * targetValue,
-        targetValue
-      );
+      setProgress((currentProgress) => {
+        const elapsedTime = Date.now() - startTime;
+        const expectedProgress = elapsedTime * changePerMs + currentProgress;
 
-      setProgress(progress);
+        if (
+          (changePerMs > 0 && expectedProgress >= targetValue) ||
+          (changePerMs < 0 && expectedProgress <= targetValue)
+        ) {
+          clearInterval(timer);
+          return targetValue;
+        }
 
-      if (progress === targetValue) {
-        clearInterval(timer);
-      }
+        return expectedProgress;
+      });
     }, 1000 / 60);
 
     return () => clearInterval(timer);

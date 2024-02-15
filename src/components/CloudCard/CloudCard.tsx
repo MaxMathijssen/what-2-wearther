@@ -20,13 +20,23 @@ function CloudCard({
     if (!dailyForecast) return;
 
     const targetWidth = dailyForecast.clouds;
-    const animationDuration = ANIMATION_DURATION_MS;
-    const incrementPerFrame = targetWidth / (animationDuration / 16.6667);
 
     function animateFill() {
       setOverlayWidth((prevWidth) => {
+        const difference = targetWidth - prevWidth;
+        const direction = difference > 0 ? 1 : -1;
+
+        const incrementPerFrame =
+          (direction * Math.abs(difference)) /
+          (ANIMATION_DURATION_MS / 16.6667);
+
         const newWidth = prevWidth + incrementPerFrame;
-        return newWidth >= targetWidth ? targetWidth : newWidth;
+
+        if (direction === 1) {
+          return newWidth >= targetWidth ? targetWidth : newWidth;
+        } else {
+          return newWidth <= targetWidth ? targetWidth : newWidth;
+        }
       });
     }
 
