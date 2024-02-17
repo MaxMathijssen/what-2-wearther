@@ -1,13 +1,25 @@
 "use client";
 
-import { useEffect, useState, createContext, PropsWithChildren } from "react";
+import {
+  useEffect,
+  useState,
+  createContext,
+  useMemo,
+  PropsWithChildren,
+} from "react";
 
 type Location = {
   longitude: number;
   latitude: number;
 };
 
-export const LocationContext = createContext<Location | null>(null);
+type LocationContextType = {
+  location: Location | null;
+};
+
+export const LocationContext = createContext<LocationContextType>({
+  location: null,
+});
 
 function LocationProvider({ children }: PropsWithChildren) {
   const [location, setLocation] = useState<Location | null>(null);
@@ -61,8 +73,10 @@ function LocationProvider({ children }: PropsWithChildren) {
     }
   }, [location]);
 
+  const value = useMemo(() => ({ location }), [location]);
+
   return (
-    <LocationContext.Provider value={location}>
+    <LocationContext.Provider value={value}>
       {children}
     </LocationContext.Provider>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import styles from "./dailyForecast.module.css";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
@@ -11,6 +11,7 @@ import CloudCard from "../CloudCard";
 
 function DailyForecast(): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
+  console.log("DailyForecast render");
   return (
     <div className={styles.dailyForecastContainer}>
       {selectedDailyForecast && (
@@ -72,4 +73,4 @@ function DailyForecast(): React.JSX.Element {
   );
 }
 
-export default DailyForecast;
+export default memo(DailyForecast);

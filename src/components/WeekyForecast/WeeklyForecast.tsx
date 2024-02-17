@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useId } from "react";
+import { useContext, useId, memo } from "react";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";
@@ -12,6 +12,7 @@ import styles from "./weeklyForecast.module.css";
 function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectedDailyForecast, selectDailyForecast, error } =
     useContext(ForecastContext);
+  console.log("Weeklyforecast render");
 
   const id = useId();
 
@@ -60,4 +61,4 @@ function WeeklyForecast(): React.JSX.Element {
   );
 }
 
-export default WeeklyForecast;
+export default memo(WeeklyForecast);

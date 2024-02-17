@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./currentConditionsCard.module.css";
 import classNames from "classnames";
 import Image from "next/legacy/image";
@@ -14,6 +15,7 @@ function CurrentConditionsCard({
   dailyForecast,
   isPlaceHolder,
 }: CurrentConditionsCardProps): React.JSX.Element {
+  console.log("Current cond render");
   return (
     <>
       {isPlaceHolder && (
@@ -67,4 +69,4 @@ function CurrentConditionsCard({
   );
 }
 
-export default CurrentConditionsCard;
+export default memo(CurrentConditionsCard);

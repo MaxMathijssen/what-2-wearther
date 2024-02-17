@@ -1,3 +1,4 @@
+import { memo } from "react";
 import styles from "./windCard.module.css";
 import classNames from "classnames";
 import Image from "next/legacy/image";
@@ -14,6 +15,7 @@ function WindCard({
   dailyForecast,
   isPlaceHolder,
 }: WindCardProps): React.JSX.Element {
+  console.log("Windcard render");
   return (
     <>
       {isPlaceHolder && (
@@ -89,4 +91,4 @@ function WindCard({
   );
 }
 
-export default WindCard;
+export default memo(WindCard);

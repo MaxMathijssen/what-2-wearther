@@ -5,6 +5,7 @@ import {
   createContext,
   useState,
   useEffect,
+  useMemo,
   PropsWithChildren,
 } from "react";
 import { LocationContext } from "../LocationProvider";
@@ -65,7 +66,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const location = useContext(LocationContext);
+  const { location } = useContext(LocationContext);
 
   let shouldFetch: boolean = false;
   if (
@@ -276,16 +277,26 @@ function ForecastProvider({ children }: PropsWithChildren) {
     console.log("SWR is fetching data...");
   }
 
+  const contextValue = useMemo(
+    () => ({
+      selectedDailyForecast,
+      weeklyForecast,
+      selectDailyForecast: (dailyForecast: DailyForecast) =>
+        setSelectedDailyForecast(dailyForecast),
+      error,
+      isLoading,
+    }),
+    [
+      selectedDailyForecast,
+      weeklyForecast,
+      error,
+      isLoading,
+      setSelectedDailyForecast,
+    ]
+  );
+
   return (
-    <ForecastContext.Provider
-      value={{
-        selectedDailyForecast,
-        weeklyForecast,
-        selectDailyForecast,
-        error,
-        isLoading,
-      }}
-    >
+    <ForecastContext.Provider value={contextValue}>
       {children}
     </ForecastContext.Provider>
   );

@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext } from "react";
+import { PropsWithChildren, useContext, memo } from "react";
 import { convertTimestampToHour } from "@/helpers/utils";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
@@ -15,6 +15,7 @@ interface HourlyForecastProps extends PropsWithChildren {
 
 function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
   const { weeklyForecast } = useContext(ForecastContext);
+  console.log("Hourly render");
 
   let hourlyForecastArr: HourlyForecast[] = [];
 
@@ -135,4 +136,4 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
   );
 }
 
-export default HourlyForecast;
+export default memo(HourlyForecast);

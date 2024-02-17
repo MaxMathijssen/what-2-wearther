@@ -11,6 +11,8 @@ function Header() {
     (_, index) => `bubble${index + 1}`
   );
 
+  console.log("Header render");
+
   return (
     <header className={styles.siteHeader}>
       <Link href="/"></Link>
@@ -21,11 +23,12 @@ function Header() {
           className={styles.bubble}
           style={{
             left: `${Math.random() * 100}%`, // Random horizontal start
-            animationDuration: `${5 + Math.random() * 10}s`, // Duration between 5s and 15s
+            animationDuration: `${8 + Math.random() * 12}s`, // Slightly longer duration for smoothness
             width: `${4 + Math.random() * 8}px`, // Bubble size between 4px and 12px, ensuring roundness
             height: `${4 + Math.random() * 8}px`, // Equal to width to maintain circular shape
-            animationDelay: `-${Math.random() * 5}s`, // Start at different times for continuous effect
-            bottom: `${-10 + Math.random() * 20}%`, // Adjust starting point within the header
+            animationDelay: `-${Math.random() * 8}s`, // Staggered start for a continuous flow
+            bottom: `${-10 + Math.random() * 20}%`, // Adjusted starting point within the header
+            animationTimingFunction: "cubic-bezier(0.23, 1, 0.32, 1)", // Custom Bezier for smoothness
           }}
         ></div>
       ))}
@@ -35,6 +38,7 @@ function Header() {
         height={242}
         alt="Picture of the author"
         className={styles.mainLogo}
+        priority={true}
       />
     </header>
   );

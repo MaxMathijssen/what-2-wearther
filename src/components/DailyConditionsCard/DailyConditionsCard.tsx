@@ -1,4 +1,5 @@
 import styles from "./dailyConditionsCard.module.css";
+import { memo } from "react";
 import { DailyForecast } from "@/typings/types";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import classNames from "classnames";
@@ -16,6 +17,7 @@ function DailyConditionsCard({
   dailyForecast,
   isPlaceHolder,
 }: DailyConditionsCardProps): React.JSX.Element {
+  console.log("Daily cond render");
   return (
     <>
       {isPlaceHolder && (
@@ -132,4 +134,4 @@ function DailyConditionsCard({
   );
 }
 
-export default DailyConditionsCard;
+export default memo(DailyConditionsCard);

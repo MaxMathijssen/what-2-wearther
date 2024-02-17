@@ -1,4 +1,4 @@
-import React, { useState, useEffect, PropsWithChildren } from "react";
+import { useState, useEffect, PropsWithChildren, memo } from "react";
 import CircularProgress from "@mui/joy/CircularProgress";
 
 interface GradualCircularProgressProps extends PropsWithChildren {
@@ -6,13 +6,14 @@ interface GradualCircularProgressProps extends PropsWithChildren {
   duration: number;
 }
 
-const GradualCircularProgress: React.FC<GradualCircularProgressProps> = ({
+function GradualCircularProgress({
   targetValue,
   duration,
   children,
   ...delegatedProps
-}) => {
+}: GradualCircularProgressProps) {
   const [progress, setProgress] = useState(0);
+  console.log("Gradual render");
 
   useEffect(() => {
     const startTime = Date.now();
@@ -50,6 +51,6 @@ const GradualCircularProgress: React.FC<GradualCircularProgressProps> = ({
       {children}
     </CircularProgress>
   );
-};
+}
 
-export default GradualCircularProgress;
+export default memo(GradualCircularProgress);

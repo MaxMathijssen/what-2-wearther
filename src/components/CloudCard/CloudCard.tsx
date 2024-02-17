@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useRef, memo } from "react";
 import styles from "./cloudCard.module.css";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import { DailyForecast } from "@/typings/types";
@@ -15,34 +15,43 @@ function CloudCard({
   isPlaceHolder,
 }: CloudCardProps): React.JSX.Element {
   const [overlayWidth, setOverlayWidth] = useState(0);
+  const requestRef = useRef<number>();
+  const prevCloudsRef = useRef<number>(0);
 
   useEffect(() => {
     if (!dailyForecast) return;
 
     const targetWidth = dailyForecast.clouds;
+    const startWidth = prevCloudsRef.current || 0;
+    let start: DOMHighResTimeStamp | null = null;
 
-    function animateFill() {
-      setOverlayWidth((prevWidth) => {
-        const difference = targetWidth - prevWidth;
-        const direction = difference > 0 ? 1 : -1;
+    const animate = (timestamp: DOMHighResTimeStamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const duration = ANIMATION_DURATION_MS;
+      const step = Math.abs(targetWidth - startWidth) * (progress / duration);
+      const newWidth =
+        startWidth < targetWidth ? startWidth + step : startWidth - step;
 
-        const incrementPerFrame =
-          (direction * Math.abs(difference)) /
-          (ANIMATION_DURATION_MS / 16.6667);
+      if (
+        (startWidth < targetWidth && newWidth < targetWidth) ||
+        (startWidth > targetWidth && newWidth > targetWidth)
+      ) {
+        setOverlayWidth(newWidth);
+        requestRef.current = requestAnimationFrame(animate);
+      } else {
+        setOverlayWidth(targetWidth);
+        prevCloudsRef.current = targetWidth;
+      }
+    };
 
-        const newWidth = prevWidth + incrementPerFrame;
+    requestRef.current = requestAnimationFrame(animate);
 
-        if (direction === 1) {
-          return newWidth >= targetWidth ? targetWidth : newWidth;
-        } else {
-          return newWidth <= targetWidth ? targetWidth : newWidth;
-        }
-      });
-    }
-
-    const intervalId = setInterval(animateFill, 16.6667);
-
-    return () => clearInterval(intervalId);
+    return () => {
+      if (requestRef.current) {
+        cancelAnimationFrame(requestRef.current);
+      }
+    };
   }, [dailyForecast?.clouds]);
 
   return (
@@ -91,4 +100,4 @@ function CloudCard({
   );
 }
 
-export default CloudCard;
+export default memo(CloudCard);

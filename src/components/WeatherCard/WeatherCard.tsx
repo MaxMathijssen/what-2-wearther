@@ -1,4 +1,4 @@
-import { MouseEventHandler, useContext } from "react";
+import { MouseEventHandler, useContext, memo } from "react";
 import { DailyForecast } from "@/typings/types";
 import { ForecastContext } from "../../app/providers/ForecastProvider";
 import Image from "next/legacy/image";
@@ -20,6 +20,7 @@ function WeatherCard({
   selectDailyForecast,
 }: WeatherCardProps): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
+  console.log("Weathercard render");
 
   const handleSelectDailyForecast: MouseEventHandler<HTMLDivElement> = (e) => {
     if (selectDailyForecast && dailyForecast) {
@@ -143,4 +144,4 @@ function WeatherCard({
   );
 }
 
-export default WeatherCard;
+export default memo(WeatherCard);
