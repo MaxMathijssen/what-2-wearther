@@ -3,7 +3,13 @@
   display: flex;
   justify-content: space-between;
   gap: 32px;
-  background: rgba(1, 136, 193, 0.8);
+  background: linear-gradient(
+    to right,
+    #219ebc,
+    #023047
+  ); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur the background behind the header */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
   padding: 24px;
 }
 .siteFooter .logoWrapper {
@@ -22,20 +28,21 @@
   text-decoration: none;
 }
 .siteFooter .disclaimer {
-  color: white;
+  color: #fb8500;
   font-size: 0.875rem;
+  font-weight: 400;
 }
 .siteFooter .linkWrapper {
   display: flex;
   gap: 48px;
 }
 .siteFooter h2 {
-  color: #010f3a;
+  color: white;
   font-size: 1rem;
   margin-bottom: 0.5em;
 }
 .siteFooter ol {
-  color: white;
+  color: #ffb703;
   display: flex;
   flex-direction: column;
   gap: 8px;

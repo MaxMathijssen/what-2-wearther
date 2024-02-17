@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/legacy/image";
 
 import styles from "./footer.module.css";
 
@@ -7,9 +8,13 @@ function Footer() {
   return (
     <header className={styles.siteFooter}>
       <div className={styles.logoWrapper}>
-        <Link href="" className={styles.logo}>
-          What2Wearther
-        </Link>
+        <Image
+          src="/Logo.svg"
+          width={225}
+          height={121}
+          alt="Picture of the author"
+          className={styles.mainLogo}
+        />
         <p className={styles.disclaimer}>
           Copyright © 2099 What2Wearther Inc. All Rights Reserved.
         </p>
