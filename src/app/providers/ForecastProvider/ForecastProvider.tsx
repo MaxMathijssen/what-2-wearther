@@ -271,6 +271,19 @@ function ForecastProvider({ children }: PropsWithChildren) {
       setWeeklyForecast(newWeeklyForecast);
       setSelectedDailyForecast(newWeeklyForecast[0]);
     }
+
+    if (
+      newWeeklyForecast !== null &&
+      JSON.stringify(newWeeklyForecast) !== JSON.stringify(weeklyForecast)
+    ) {
+      console.log("Updating forecast data");
+      setWeeklyForecast(newWeeklyForecast);
+      setSelectedDailyForecast(newWeeklyForecast[0]);
+      window.localStorage.setItem(
+        "weeklyForecast",
+        JSON.stringify(newWeeklyForecast)
+      );
+    }
   }
 
   if (isLoading) {
