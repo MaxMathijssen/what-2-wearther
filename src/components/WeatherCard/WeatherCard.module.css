@@ -95,6 +95,8 @@
   padding: 0px;
   font-size: 35px;
   font-weight: 250;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3),
+    /* Shadow on the right-bottom */ -1px -1px 2px rgba(255, 255, 255, 0.5); /* Soft light from top-left for depth */
 }
 
 .clickableCard .topSection h3 {

@@ -23,13 +23,19 @@
   height: 30px;
   display: grid;
   padding: 20px;
-  background-color: white;
+  background: linear-gradient(
+    to right,
+    #219ebc,
+    /* Start with #219ebc */ #8ecae6 75%
+      /* Start transitioning to #8ecae6 at 75% */
+  );
+  border-radius: 10px 10px 0 0;
 }
 
 .body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #edf2fb;
+  background-color: #ffffff;
   padding: 60px 40px 60px 40px;
 }
 
@@ -38,6 +44,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
+  color: #ffffff;
 }
 
 .leftColumn {

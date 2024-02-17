@@ -1,34 +1,55 @@
 .siteHeader {
-  border-radius: 10px;
   display: flex;
   align-items: center;
+  justify-content: center; /* Center children horizontally */
+  border-radius: 10px;
   border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
-  background: rgba(2, 176, 224, 0.5);
-  padding: 15px 15px 15px 30px;
+  background: linear-gradient(
+    to right,
+    #fdc830,
+    #ffb703
+  ); /* Semi-transparent background */
+  backdrop-filter: blur(10px); /* Blur the background behind the header */
+  -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */
+  padding: 15px;
+  font-family: var(--font-family-header);
+  height: 175px;
+  padding-top: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.18); /* Optional: subtle border for glass effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: soft shadow for depth */
 }
 
-.siteTitle {
-  display: flex;
-  color: #ffffff;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.siteHeader .logo {
-  font-size: 1.5rem;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.5);
+.mainLogo {
+  /* Ensure no conflicting margins */
+  margin: auto; /* This will help center it if justify-content doesn't work as expected */
   padding: 24px;
-  text-decoration: none;
-  margin-bottom: -1px;
-}
-
-.imageContainer {
+  /* Remove if it's not needed for inner content centering */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20%;
-  overflow: hidden;
-  width: 100px;
-  height: 100px;
 }
+
+@keyframes bubbleUp {
+  0% {
+    bottom: -10%;
+    opacity: 0.5;
+  }
+  100% {
+    bottom: 110%;
+    opacity: 0;
+  }
+}
+
+.bubble {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: bubbleUp linear infinite;
+  animation-duration: var(
+    --bubble-duration,
+    10s
+  ); /* Default duration, can be overridden */
+  bottom: 0;
+}
+
+/* You can add base sizes and use JavaScript to adjust as needed */

@@ -23,7 +23,12 @@
   align-items: center;
   display: grid;
   padding: 20px;
-  background-color: white;
+  background: linear-gradient(
+    to right,
+    #219ebc,
+    #8ecae6
+  ); /* Semi-transparent background */
+  border-radius: 10px 10px 0 0;
   height: 30px;
 }
 
@@ -32,7 +37,7 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 0px 20px 20px 20px;
-  background-color: #edf2fb;
+  background-color: #ffffff;
   flex-direction: column;
 }
 
@@ -41,7 +46,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: black;
+  color: #ffffff;
 }
 
 .card .body h1 {

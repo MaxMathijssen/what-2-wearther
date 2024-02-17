@@ -1,6 +1,6 @@
 html {
   background-position: bottom center;
-  background: radial-gradient(circle at 50% 100%, #cdf5fd, #ffffff);
+  background: radial-gradient(circle at 50% 100%, #8ecae6, #ffffff);
 }
 
 .body {
@@ -25,7 +25,7 @@ main {
   grid-template-rows: auto auto;
   gap: 20px;
   font-size: 1rem;
-  background: #e2eafc;
+  background: #f9f7f3;
   border-radius: 10px;
   padding: 20px;
 }

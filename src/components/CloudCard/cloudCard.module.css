@@ -24,7 +24,13 @@
   height: 30px;
   display: grid;
   padding: 20px;
-  background-color: white;
+  background-color: rgba(1, 136, 193, 0.8);
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(
+    to right,
+    #219ebc,
+    #8ecae6
+  ); /* Semi-transparent background */
 }
 
 .body {
@@ -32,7 +38,7 @@
   flex-direction: column;
   align-items: center;
   padding: 10px 15px 15px 15px;
-  background-color: #edf2fb;
+  background-color: #ffffff;
 }
 
 .card .header h1 {
@@ -40,7 +46,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: black;
+  color: #ffffff;
 }
 
 .card .body h1 {
