@@ -1,12 +1,12 @@
-import { MouseEventHandler, useContext, memo } from "react";
+import { useCallback, memo } from "react";
 import { DailyForecast } from "@/typings/types";
-import { ForecastContext } from "../../app/providers/ForecastProvider";
 import Image from "next/legacy/image";
 
 import styles from "./WeatherCard.module.css";
 import classNames from "classnames";
 
 interface WeatherCardProps {
+  isSelected: boolean;
   isError: boolean;
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast | null;
@@ -14,23 +14,21 @@ interface WeatherCardProps {
 }
 
 function WeatherCard({
+  isSelected,
   isError,
   isPlaceHolder,
   dailyForecast,
   selectDailyForecast,
 }: WeatherCardProps): React.JSX.Element {
-  const { selectedDailyForecast } = useContext(ForecastContext);
   console.log("Weathercard render");
 
-  const handleSelectDailyForecast: MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleSelectDailyForecast = useCallback(() => {
     if (selectDailyForecast && dailyForecast) {
       selectDailyForecast(dailyForecast);
     }
-  };
+  }, [selectDailyForecast, dailyForecast]);
 
   const gradient = dailyForecast?.color;
-
-  const isSelected = selectedDailyForecast === dailyForecast;
 
   const cardStyle = isSelected
     ? {
@@ -87,7 +85,7 @@ function WeatherCard({
             [styles.selected]: isSelected,
           })}
           onClick={handleSelectDailyForecast}
-          style={cardStyle as React.CSSProperties} // Apply dynamic styles here
+          style={cardStyle as React.CSSProperties}
         >
           <div
             className={classNames(styles.cardSection, styles.topSection)}

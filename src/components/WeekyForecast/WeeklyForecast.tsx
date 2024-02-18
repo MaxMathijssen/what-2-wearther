@@ -21,24 +21,29 @@ function WeeklyForecast(): React.JSX.Element {
       <div className={styles.circle1}></div>
       <div className={styles.circle2}></div>
       {weeklyForecast &&
-        weeklyForecast.map((dailyForecast: DailyForecast) => (
-          <div key={dailyForecast.dt} className={styles.weatherCardContainer}>
-            {dailyForecast === selectedDailyForecast && (
-              <motion.div layoutId={id} className={styles.selectedBorder} />
-            )}
-            <WeatherCard
-              isError={false}
-              isPlaceHolder={false}
-              dailyForecast={dailyForecast}
-              selectDailyForecast={() => selectDailyForecast(dailyForecast)}
-            />
-          </div>
-        ))}
+        weeklyForecast.map((dailyForecast: DailyForecast) => {
+          const isSelected = dailyForecast.dt === selectedDailyForecast?.dt;
+          return (
+            <div key={dailyForecast.dt} className={styles.weatherCardContainer}>
+              {dailyForecast === selectedDailyForecast && (
+                <motion.div layoutId={id} className={styles.selectedBorder} />
+              )}
+              <WeatherCard
+                isSelected={isSelected}
+                isError={false}
+                isPlaceHolder={false}
+                dailyForecast={dailyForecast}
+                selectDailyForecast={() => selectDailyForecast(dailyForecast)}
+              />
+            </div>
+          );
+        })}
 
       {error &&
         range(0, 7).map((index) => {
           return (
             <WeatherCard
+              isSelected={false}
               key={index}
               isError={true}
               isPlaceHolder={false}
@@ -50,6 +55,7 @@ function WeeklyForecast(): React.JSX.Element {
         range(0, 7).map((index) => (
           <div key={index} className={styles.weatherCardContainer}>
             <WeatherCard
+              isSelected={false}
               key={index}
               isError={false}
               isPlaceHolder={true}
