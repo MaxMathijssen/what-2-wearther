@@ -74,8 +74,8 @@
     ),
     #02b0e033;
   z-index: 1;
-  -webkit-mask-image: url("/cloudfill.png");
-  mask-image: url("/cloudfill.png");
+  -webkit-mask-image: url("/cloudfill.webp");
+  mask-image: url("/cloudfill.webp");
   -webkit-mask-size: cover;
   mask-size: cover;
 }

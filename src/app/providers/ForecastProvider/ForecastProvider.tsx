@@ -89,43 +89,43 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const getIconPath = (icon: string): string => {
     switch (icon) {
       case "01d":
-        return "/01d@2x.png";
+        return "/01d@2x.webp";
       case "01n":
-        return "/01n@2x.png";
+        return "/01n@2x.webp";
       case "02d":
-        return "/02d@2x.png";
+        return "/02d@2x.webp";
       case "02n":
-        return "/02n@2x.png";
+        return "/02n@2x.webp";
       case "03d":
-        return "/03d@2x.png";
+        return "/03d@2x.webp";
       case "03n":
-        return "/03n@2x.png";
+        return "/03n@2x.webp";
       case "04d":
-        return "/04d@2x.png";
+        return "/04d@2x.webp";
       case "04n":
-        return "/04n@2x.png";
+        return "/04n@2x.webp";
       case "09d":
-        return "/09d@2x.png";
+        return "/09d@2x.webp";
       case "09n":
-        return "/09n@2x.png";
+        return "/09n@2x.webp";
       case "10d":
-        return "/10d@2x.png";
+        return "/10d@2x.webp";
       case "10n":
-        return "/10n@2x.png";
+        return "/10n@2x.webp";
       case "11d":
-        return "/11d@2x.png";
+        return "/11d@2x.webp";
       case "11n":
-        return "/11n@2x.png";
+        return "/11n@2x.webp";
       case "13d":
-        return "/13d@2x.png";
+        return "/13d@2x.webp";
       case "13n":
-        return "/13n@2x.png";
+        return "/13n@2x.webp";
       case "50d":
-        return "/50d@2x.png";
+        return "/50d@2x.webp";
       case "50n":
-        return "/50n@2x.png";
+        return "/50n@2x.webp";
       default:
-        return "error.png";
+        return "error.webp";
     }
   };
 
@@ -279,6 +279,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
       console.log("Updating forecast data");
       setWeeklyForecast(newWeeklyForecast);
       setSelectedDailyForecast(newWeeklyForecast[0]);
+      window.localStorage.removeItem("weeklyForecast");
       window.localStorage.setItem(
         "weeklyForecast",
         JSON.stringify(newWeeklyForecast)
@@ -294,8 +295,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     () => ({
       selectedDailyForecast,
       weeklyForecast,
-      selectDailyForecast: (dailyForecast: DailyForecast) =>
-        setSelectedDailyForecast(dailyForecast),
+      selectDailyForecast,
       error,
       isLoading,
     }),

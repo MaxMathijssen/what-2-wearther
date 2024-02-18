@@ -84,7 +84,7 @@ function CloudCard({
                 ></div>
                 <Image
                   priority={true}
-                  src="/cloud.png"
+                  src="/cloud.webp"
                   layout="fill"
                   objectFit="cover"
                   alt={dailyForecast.weather}

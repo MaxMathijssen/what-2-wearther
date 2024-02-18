@@ -50,19 +50,19 @@ function WindCard({
               className={classNames(styles.leftColumn, styles.fadeIn)}
             >
               <Image
-                src="/wind_speed.png"
+                src="/wind_speed.webp"
                 width={20}
                 height={20}
                 alt={dailyForecast.weather}
               />
               <Image
-                src="/wind_gust.png"
+                src="/wind_gust.webp"
                 width={20}
                 height={20}
                 alt={dailyForecast.weather}
               />
               <Image
-                src="/wind_direction.png"
+                src="/wind_direction.webp"
                 width={20}
                 height={20}
                 alt={dailyForecast.weather}

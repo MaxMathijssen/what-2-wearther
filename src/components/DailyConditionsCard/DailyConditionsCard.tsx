@@ -69,7 +69,7 @@ function DailyConditionsCard({
               <div className={styles.topItem}>
                 <h3>Sunrise</h3>
                 <Image
-                  src="/sunrise.png"
+                  src="/sunrise.webp"
                   width={32}
                   height={32}
                   alt={dailyForecast.weather}
@@ -79,7 +79,7 @@ function DailyConditionsCard({
               <div className={styles.topItem}>
                 <h3>Sunset</h3>
                 <Image
-                  src="/sunset.png"
+                  src="/sunset.webp"
                   width={32}
                   height={32}
                   alt={dailyForecast.weather}

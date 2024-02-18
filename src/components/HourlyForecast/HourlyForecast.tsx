@@ -88,7 +88,7 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                 >
                   <h2>Sorry!</h2>
                   <Image
-                    src="/man.png"
+                    src="/man.webp"
                     width={100}
                     height={100}
                     alt="No hourly data"

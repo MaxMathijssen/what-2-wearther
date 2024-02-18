@@ -56,13 +56,11 @@ function LocationProvider({ children }: PropsWithChildren) {
           longitude: position.coords.longitude,
         };
 
-        // Check if the new location is different from the current location
         if (
           location === null ||
           (location.latitude !== newLocation.latitude &&
             location.longitude !== newLocation.longitude)
         ) {
-          // Save the new location to localStorage
           localStorage.setItem("userLocation", JSON.stringify(newLocation));
           setLocation(newLocation);
           console.log("Set new location", newLocation);
