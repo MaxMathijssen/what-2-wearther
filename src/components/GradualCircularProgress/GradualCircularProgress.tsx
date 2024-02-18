@@ -13,7 +13,6 @@ function GradualCircularProgress({
   ...delegatedProps
 }: GradualCircularProgressProps) {
   const [progress, setProgress] = useState(0);
-  console.log("Gradual render");
 
   useEffect(() => {
     const startTime = Date.now();

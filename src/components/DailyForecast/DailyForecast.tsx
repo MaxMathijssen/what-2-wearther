@@ -11,7 +11,7 @@ import CloudCard from "../CloudCard";
 
 function DailyForecast(): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
-  console.log("DailyForecast render");
+
   return (
     <div className={styles.dailyForecastContainer}>
       {selectedDailyForecast && (

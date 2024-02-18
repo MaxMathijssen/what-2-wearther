@@ -10,8 +10,6 @@ function Header() {
     (_, index) => `bubble${index + 1}`
   );
 
-  console.log("Header render");
-
   return (
     <header className={styles.siteHeader}>
       <Link href="/"></Link>

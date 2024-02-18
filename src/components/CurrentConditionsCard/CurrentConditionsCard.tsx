@@ -15,7 +15,6 @@ function CurrentConditionsCard({
   dailyForecast,
   isPlaceHolder,
 }: CurrentConditionsCardProps): React.JSX.Element {
-  console.log("Current cond render");
   return (
     <>
       {isPlaceHolder && (

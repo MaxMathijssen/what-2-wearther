@@ -5,8 +5,8 @@
   gap: 32px;
   background: linear-gradient(
     to right,
-    #219ebc,
-    #023047
+    #023047,
+    #219ebc
   ); /* Semi-transparent background */
   backdrop-filter: blur(10px); /* Blur the background behind the header */
   -webkit-backdrop-filter: blur(10px); /* For Safari compatibility */

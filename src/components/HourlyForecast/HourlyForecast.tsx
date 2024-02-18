@@ -15,7 +15,6 @@ interface HourlyForecastProps extends PropsWithChildren {
 
 function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
   const { weeklyForecast } = useContext(ForecastContext);
-  console.log("Hourly render");
 
   let hourlyForecastArr: HourlyForecast[] = [];
 

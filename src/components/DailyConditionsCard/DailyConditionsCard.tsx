@@ -17,7 +17,6 @@ function DailyConditionsCard({
   dailyForecast,
   isPlaceHolder,
 }: DailyConditionsCardProps): React.JSX.Element {
-  console.log("Daily cond render");
   return (
     <>
       {isPlaceHolder && (

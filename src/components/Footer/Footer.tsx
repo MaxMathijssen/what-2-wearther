@@ -5,7 +5,6 @@ import Image from "next/legacy/image";
 import styles from "./footer.module.css";
 
 function Footer() {
-  console.log("Footer render");
   return (
     <header className={styles.siteFooter}>
       <div className={styles.logoWrapper}>

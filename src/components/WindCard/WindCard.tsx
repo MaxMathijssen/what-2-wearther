@@ -15,7 +15,6 @@ function WindCard({
   dailyForecast,
   isPlaceHolder,
 }: WindCardProps): React.JSX.Element {
-  console.log("Windcard render");
   return (
     <>
       {isPlaceHolder && (
