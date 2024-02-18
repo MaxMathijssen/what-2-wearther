@@ -4,7 +4,7 @@ import { DailyForecast } from "@/typings/types";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import classNames from "classnames";
 import Image from "next/legacy/image";
-import GradualCircularProgress from "../GradualCircularProgress";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 interface DailyConditionsCardProps {
   title?: string;
@@ -93,38 +93,41 @@ function DailyConditionsCard({
                 className={classNames(styles.bottomItem, styles.fadeIn)}
               >
                 <h3>UV Index</h3>
-                <GradualCircularProgress
-                  targetValue={dailyForecast.uvi * 10}
-                  duration={ANIMATION_DURATION_MS}
-                  {...{ color: "danger" }}
+                <CircularProgress
+                  color="danger"
+                  size="lg"
+                  determinate
+                  value={dailyForecast.uvi * 10}
                 >
                   {`${dailyForecast.uvi}/10`}
-                </GradualCircularProgress>
+                </CircularProgress>
               </div>
               <div
                 key={dailyForecast.dt}
                 className={classNames(styles.bottomItem, styles.fadeIn)}
               >
                 <h3>Rain Chance</h3>
-                <GradualCircularProgress
-                  targetValue={dailyForecast.pop}
-                  duration={ANIMATION_DURATION_MS}
+                <CircularProgress
+                  size="lg"
+                  determinate
+                  value={dailyForecast.pop}
                 >
                   {`${dailyForecast.pop}%`}
-                </GradualCircularProgress>
+                </CircularProgress>
               </div>
               <div
                 key={dailyForecast.day_num}
                 className={classNames(styles.bottomItem, styles.fadeIn)}
               >
                 <h3>Humidity</h3>
-                <GradualCircularProgress
-                  targetValue={dailyForecast.humidity}
-                  duration={ANIMATION_DURATION_MS}
-                  {...{ color: "neutral" }}
+                <CircularProgress
+                  color="neutral"
+                  size="lg"
+                  determinate
+                  value={dailyForecast.humidity}
                 >
                   {`${dailyForecast.humidity}%`}
-                </GradualCircularProgress>
+                </CircularProgress>
               </div>
             </div>
           </div>

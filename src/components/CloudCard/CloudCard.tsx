@@ -1,6 +1,5 @@
-import { useState, useEffect, useRef, memo } from "react";
+import { memo } from "react";
 import styles from "./cloudCard.module.css";
-import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
 import Image from "next/legacy/image";
@@ -14,46 +13,6 @@ function CloudCard({
   dailyForecast,
   isPlaceHolder,
 }: CloudCardProps): React.JSX.Element {
-  const [overlayWidth, setOverlayWidth] = useState(0);
-  const requestRef = useRef<number>();
-  const prevCloudsRef = useRef<number>(0);
-
-  useEffect(() => {
-    if (!dailyForecast) return;
-
-    const targetWidth = dailyForecast.clouds;
-    const startWidth = prevCloudsRef.current || 0;
-    let start: DOMHighResTimeStamp | null = null;
-
-    const animate = (timestamp: DOMHighResTimeStamp) => {
-      if (!start) start = timestamp;
-      const progress = timestamp - start;
-      const duration = ANIMATION_DURATION_MS;
-      const step = Math.abs(targetWidth - startWidth) * (progress / duration);
-      const newWidth =
-        startWidth < targetWidth ? startWidth + step : startWidth - step;
-
-      if (
-        (startWidth < targetWidth && newWidth < targetWidth) ||
-        (startWidth > targetWidth && newWidth > targetWidth)
-      ) {
-        setOverlayWidth(newWidth);
-        requestRef.current = requestAnimationFrame(animate);
-      } else {
-        setOverlayWidth(targetWidth);
-        prevCloudsRef.current = targetWidth;
-      }
-    };
-
-    requestRef.current = requestAnimationFrame(animate);
-
-    return () => {
-      if (requestRef.current) {
-        cancelAnimationFrame(requestRef.current);
-      }
-    };
-  }, [dailyForecast?.clouds]);
-
   return (
     <>
       {isPlaceHolder && (
@@ -80,7 +39,7 @@ function CloudCard({
               <div className={styles.imageOverlayWrapper}>
                 <div
                   className={styles.coverageOverlay}
-                  style={{ width: `${overlayWidth}%` }}
+                  style={{ width: `${dailyForecast.clouds}%` }}
                 ></div>
                 <Image
                   priority={true}
