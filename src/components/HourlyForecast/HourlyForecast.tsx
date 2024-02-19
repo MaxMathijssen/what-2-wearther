@@ -5,7 +5,7 @@ import { DailyForecast, HourlyForecast } from "@/typings/types";
 import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
 import { range } from "@/helpers/utils";
 import Image from "next/legacy/image";
-import styles from "./hourlyForecast.module.css";
+import styles from "./hourlyForecast.module.scss";
 import classNames from "classnames";
 
 interface HourlyForecastProps extends PropsWithChildren {

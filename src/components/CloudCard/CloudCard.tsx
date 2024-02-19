@@ -1,5 +1,5 @@
 import { memo } from "react";
-import styles from "./cloudCard.module.css";
+import styles from "./cloudCard.module.scss";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";
 import Image from "next/legacy/image";

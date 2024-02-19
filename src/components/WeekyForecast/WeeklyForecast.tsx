@@ -7,7 +7,7 @@ import { DailyForecast } from "@/typings/types";
 import { range } from "@/helpers/utils";
 import { motion } from "framer-motion";
 
-import styles from "./weeklyForecast.module.css";
+import styles from "./weeklyForecast.module.scss";
 
 function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectedDailyForecast, selectDailyForecast, error } =

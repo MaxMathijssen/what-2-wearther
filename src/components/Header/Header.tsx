@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/legacy/image";
 
-import styles from "./header.module.css";
+import styles from "./header.module.scss";
 
 function Header() {
   const bubbles = Array.from(

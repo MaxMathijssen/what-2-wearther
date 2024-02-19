@@ -1,4 +1,4 @@
-import styles from "./dailyConditionsCard.module.css";
+import styles from "./dailyConditionsCard.module.scss";
 import { memo } from "react";
 import { DailyForecast } from "@/typings/types";
 import { ANIMATION_DURATION_MS } from "@/helpers/constants";
