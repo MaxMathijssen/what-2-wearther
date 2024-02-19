@@ -1,4 +1,11 @@
-import { PropsWithChildren, useContext, memo, useCallback } from "react";
+import {
+  PropsWithChildren,
+  useContext,
+  memo,
+  useCallback,
+  useState,
+  useEffect,
+} from "react";
 import { convertTimestampToHour } from "@/helpers/utils";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
@@ -15,6 +22,15 @@ interface HourlyForecastProps extends PropsWithChildren {
 
 function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
   const { weeklyForecast } = useContext(ForecastContext);
+  const [visibleHourlyForecast, setVisibleHourlyForecast] = useState<
+    HourlyForecast[] | null
+  >(null);
+
+  useEffect(() => {
+    if (dailyForecast !== null && dailyForecast.hourly_forecast.length > 0) {
+      setVisibleHourlyForecast(getVisibleHourlyForecast(dailyForecast));
+    }
+  }, [dailyForecast]);
 
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
@@ -58,6 +74,8 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
     },
     [weeklyForecast, HOURLY_FORECAST_LENGTH]
   );
+
+  function handleNextHours() {}
 
   return (
     <>
@@ -112,7 +130,7 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                 </div>
               ) : (
                 dailyForecast.hourly_forecast.length > 0 &&
-                getVisibleHourlyForecast(dailyForecast).map(
+                visibleHourlyForecast?.map(
                   (hourlyForecast: HourlyForecast, index: number) => {
                     if (index < HOURLY_FORECAST_LENGTH) {
                       return (
@@ -141,7 +159,7 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                   }
                 )
               )}
-              <div className={styles.btnNextHours}>
+              <div className={styles.btnNextHours} onClick={() => {}}>
                 <Image
                   src="/right-arrow.png"
                   width={40}
