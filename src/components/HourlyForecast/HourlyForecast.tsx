@@ -1,4 +1,4 @@
-import { PropsWithChildren, useContext, memo } from "react";
+import { PropsWithChildren, useContext, memo, useCallback } from "react";
 import { convertTimestampToHour } from "@/helpers/utils";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
@@ -16,34 +16,48 @@ interface HourlyForecastProps extends PropsWithChildren {
 function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
   const { weeklyForecast } = useContext(ForecastContext);
 
-  let hourlyForecastArr: HourlyForecast[] = [];
+  const getVisibleHourlyForecast = useCallback(
+    (dailyForecast: DailyForecast) => {
+      let hourlyForecastArr: HourlyForecast[] = [];
 
-  if (dailyForecast) {
-    const nextDailyForecast: DailyForecast =
-      weeklyForecast[dailyForecast.day_num + 1];
-    hourlyForecastArr = dailyForecast.hourly_forecast;
+      if (dailyForecast) {
+        const nextDailyForecastIndex = dailyForecast.day_num + 1;
+        const nextDailyForecast: DailyForecast =
+          weeklyForecast[nextDailyForecastIndex];
+        hourlyForecastArr = dailyForecast.hourly_forecast;
 
-    if (dailyForecast.day_num === 0) {
-      const endIndex = HOURLY_FORECAST_LENGTH - hourlyForecastArr.length;
-      for (let i = 0; i < endIndex; i++) {
-        hourlyForecastArr.push(nextDailyForecast.hourly_forecast[i]);
-      }
-    } else if (dailyForecast.day_num === 1) {
-      hourlyForecastArr = hourlyForecastArr.slice(HOURLY_FORECAST_LENGTH);
-    } else if (dailyForecast.day_num === 2) {
-      if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH * 2)
-        hourlyForecastArr = hourlyForecastArr.slice(HOURLY_FORECAST_LENGTH);
-      else if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH) {
-        for (
-          let i = dailyForecast.hourly_forecast.length;
-          i < HOURLY_FORECAST_LENGTH;
-          i--
-        ) {
-          hourlyForecastArr.pop();
+        if (dailyForecast.day_num === 0) {
+          const endIndex = HOURLY_FORECAST_LENGTH - hourlyForecastArr.length;
+          for (let i = 0; i < endIndex; i++) {
+            hourlyForecastArr.push(nextDailyForecast?.hourly_forecast[i]);
+          }
+        } else if (dailyForecast.day_num === 1) {
+          hourlyForecastArr = hourlyForecastArr.slice(
+            HOURLY_FORECAST_LENGTH + 1
+          );
+        } else if (dailyForecast.day_num === 2) {
+          if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH * 2)
+            hourlyForecastArr = hourlyForecastArr.slice(
+              HOURLY_FORECAST_LENGTH + 1
+            );
+          else if (
+            dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH
+          ) {
+            for (
+              let i =
+                dailyForecast.hourly_forecast.length - HOURLY_FORECAST_LENGTH;
+              i > 0;
+              i--
+            ) {
+              hourlyForecastArr.pop();
+            }
+          }
         }
       }
-    }
-  }
+      return hourlyForecastArr;
+    },
+    [weeklyForecast, HOURLY_FORECAST_LENGTH]
+  );
 
   return (
     <>
@@ -98,9 +112,9 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                 </div>
               ) : (
                 dailyForecast.hourly_forecast.length > 0 &&
-                hourlyForecastArr.map(
+                getVisibleHourlyForecast(dailyForecast).map(
                   (hourlyForecast: HourlyForecast, index: number) => {
-                    if (index < 9) {
+                    if (index < HOURLY_FORECAST_LENGTH) {
                       return (
                         <div
                           key={hourlyForecast.dt}
@@ -127,6 +141,14 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                   }
                 )
               )}
+              <div className={styles.btnNextHours}>
+                <Image
+                  src="/right-arrow.png"
+                  width={40}
+                  height={40}
+                  alt="Next hours"
+                />
+              </div>
             </div>
           </div>
         </div>
