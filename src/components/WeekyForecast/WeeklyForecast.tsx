@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useId, memo } from "react";
-import { ForecastContext } from "../../app/providers/ForecastProvider";
+import { ForecastContext } from "../../providers/ForecastProvider";
 import WeatherCard from "../WeatherCard";
 import { DailyForecast } from "@/typings/types";
 import { range } from "@/helpers/utils";

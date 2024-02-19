@@ -1,6 +1,6 @@
 import { PropsWithChildren, useContext, memo } from "react";
 import { convertTimestampToHour } from "@/helpers/utils";
-import { ForecastContext } from "../../app/providers/ForecastProvider";
+import { ForecastContext } from "../../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
 import { range } from "@/helpers/utils";
