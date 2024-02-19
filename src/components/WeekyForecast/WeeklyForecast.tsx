@@ -12,7 +12,6 @@ import styles from "./weeklyForecast.module.scss";
 function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectedDailyForecast, selectDailyForecast, error } =
     useContext(ForecastContext);
-  console.log("Weeklyforecast render");
 
   const id = useId();
 

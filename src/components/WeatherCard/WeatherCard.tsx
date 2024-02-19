@@ -20,8 +20,6 @@ function WeatherCard({
   dailyForecast,
   selectDailyForecast,
 }: WeatherCardProps): React.JSX.Element {
-  console.log("Weathercard render");
-
   const handleSelectDailyForecast = useCallback(() => {
     if (selectDailyForecast && dailyForecast) {
       selectDailyForecast(dailyForecast);
