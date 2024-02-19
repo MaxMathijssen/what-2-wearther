@@ -255,7 +255,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
         dailyForecast.wind_direction = convertDegreesToDirection(
           data.current.wind_deg
         );
-        dailyForecast.wind_gust = Math.round(data.current.wind_gust * 3.6);
         dailyForecast.iconPath = getIconPath(data.current.weather[0].icon);
         dailyForecast.color = getBackgroundColor(data.current.weather[0].id);
       }

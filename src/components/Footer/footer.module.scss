@@ -1,3 +1,5 @@
+@import "../../styles/custom-variables.scss";
+
 .siteFooter {
   border-radius: 10px;
   display: flex;
@@ -23,7 +25,7 @@
   font-weight: 500;
   margin-bottom: 8px;
   background: #010f3a;
-  color: white;
+  color: $brand-white;
   padding: 16px 24px;
   text-decoration: none;
 }
@@ -37,12 +39,12 @@
   gap: 48px;
 }
 .siteFooter h2 {
-  color: white;
+  color: $brand-white;
   font-size: 1rem;
   margin-bottom: 0.5em;
 }
 .siteFooter ol {
-  color: #ffb703;
+  color: $brand-02;
   display: flex;
   flex-direction: column;
   gap: 8px;

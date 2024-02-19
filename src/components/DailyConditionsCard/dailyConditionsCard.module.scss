@@ -1,3 +1,5 @@
+@import "../../styles/custom-variables.scss";
+
 .card {
   height: auto;
   display: grid;
@@ -8,36 +10,12 @@
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes pulse {
-  from {
-    opacity: 0.5;
-  }
-}
-
-.card.placeholder {
-  font-family: var(--font-family-loading);
-  animation: pulse 1000ms ease-in-out infinite alternate;
-}
-
-.header {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding: 20px;
-  background: linear-gradient(
-    to right,
-    #219ebc,
-    #8ecae6
-  ); /* Semi-transparent background */
-  border-radius: 10px 10px 0 0;
-}
-
 .body {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 0px 15px 15px 15px;
-  background-color: #ffffff;
+  background-color: $brand-white;
 }
 
 .card .header h1 {
@@ -45,7 +23,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: #ffffff;
+  color: $brand-white;
 }
 
 .topRow,
@@ -76,7 +54,7 @@
   padding: 0px;
   font-size: 14px;
   font-weight: 400;
-  color: grey;
+  color: $brand-grey;
 }
 
 .bottomItem h3 {
@@ -85,7 +63,7 @@
   padding: 0px;
   font-size: 14px;
   font-weight: 400;
-  color: grey;
+  color: $brand-grey;
 }
 
 .imagePlaceholder {
@@ -95,15 +73,6 @@
   background-size: 200% 100%;
   animation: loadingShimmer 1.5s infinite linear;
   border-radius: 50%;
-}
-
-@keyframes loadingShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
 }
 
 .spinnerPlaceholder {
@@ -121,20 +90,5 @@
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-.fadeIn {
-  animation: fadeInSlideIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeInSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }

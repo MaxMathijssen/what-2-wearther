@@ -1,3 +1,5 @@
+@import "../../styles/custom-variables.scss";
+
 .card {
   height: auto;
   display: grid;
@@ -7,35 +9,10 @@
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes pulse {
-  from {
-    opacity: 0.5;
-  }
-}
-
-.card.placeholder {
-  font-family: var(--font-family-loading);
-  animation: pulse 1000ms ease-in-out infinite alternate;
-}
-
-.header {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding: 20px;
-  background: linear-gradient(
-    to right,
-    #219ebc,
-    /* Start with #219ebc */ #8ecae6 75%
-      /* Start transitioning to #8ecae6 at 75% */
-  );
-  border-radius: 10px 10px 0 0;
-}
-
 .body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #ffffff;
+  background-color: $brand-white;
   padding: 60px 40px 60px 40px;
 }
 
@@ -44,7 +21,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: #ffffff;
+  color: $brand-white;
 }
 
 .leftColumn {
@@ -81,21 +58,6 @@
 .rightColumn h3 {
   font-size: 14px;
   font-weight: 300;
-  color: grey;
+  color: $brand-grey;
   margin: 0px;
-}
-
-.fadeIn {
-  animation: fadeInSlideIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeInSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }

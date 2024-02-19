@@ -1,3 +1,5 @@
+@import "../../styles/custom-variables.scss";
+
 .card {
   height: auto;
   display: grid;
@@ -8,37 +10,12 @@
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes pulse {
-  from {
-    opacity: 0.5;
-  }
-}
-
-.card.placeholder {
-  font-family: var(--font-family-loading);
-  animation: pulse 1000ms ease-in-out infinite alternate;
-}
-
-.header {
-  align-items: center;
-  height: 30px;
-  display: grid;
-  padding: 20px;
-  background-color: rgba(1, 136, 193, 0.8);
-  border-radius: 10px 10px 0 0;
-  background: linear-gradient(
-    to right,
-    #219ebc,
-    #8ecae6
-  ); /* Semi-transparent background */
-}
-
 .body {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px 15px 15px 15px;
-  background-color: #ffffff;
+  background-color: $brand-white;
 }
 
 .card .header h1 {
@@ -46,7 +23,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: #ffffff;
+  color: $brand-white;
 }
 
 .card .body h1 {
@@ -92,30 +69,6 @@
   background-size: 200% 100%;
   animation: loadingShimmer 1.5s infinite linear;
   border-radius: 50%;
-}
-
-@keyframes loadingShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.fadeIn {
-  animation: fadeInSlideIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeInSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }
 
 .bodyContent {

@@ -1,3 +1,5 @@
+@import "../../styles/custom-variables.scss";
+
 .card {
   height: auto;
   display: grid;
@@ -8,36 +10,12 @@
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
-@keyframes pulse {
-  from {
-    opacity: 0.5;
-  }
-}
-
-.card.placeholder {
-  font-family: var(--font-family-loading);
-  animation: pulse 1000ms ease-in-out infinite alternate;
-}
-
-.header {
-  align-items: center;
-  display: grid;
-  padding: 20px;
-  background: linear-gradient(
-    to right,
-    #219ebc,
-    #8ecae6
-  ); /* Semi-transparent background */
-  border-radius: 10px 10px 0 0;
-  height: 30px;
-}
-
 .body {
   display: flex;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   padding: 0px 20px 20px 20px;
-  background-color: #ffffff;
+  background-color: $brand-white;
   flex-direction: column;
 }
 
@@ -46,7 +24,7 @@
   padding: 0px;
   font-size: 18px;
   font-weight: 400;
-  color: #ffffff;
+  color: $brand-white;
 }
 
 .card .body h1 {
@@ -67,7 +45,7 @@
   font-weight: 350;
   margin-bottom: 15px;
   margin-top: 0px;
-  color: grey;
+  color: $brand-grey;
 }
 
 .imagePlaceholder {
@@ -77,28 +55,4 @@
   background-size: 200% 100%;
   animation: loadingShimmer 1.5s infinite linear;
   border-radius: 50%;
-}
-
-@keyframes loadingShimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.fadeIn {
-  animation: fadeInSlideIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeInSlideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-25px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
 }

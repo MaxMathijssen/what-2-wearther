@@ -4,6 +4,9 @@ $brand-03: #023047;
 $brand-04: #219ebc;
 $brand-05: #8ecae6;
 
+$brand-white: #ffffff;
+$brand-grey: grey;
+
 @font-face {
   font-family: "Mainstay";
   src: url("/fonts/Mainstay-Regular.ttf") format("truetype");
@@ -11,6 +14,47 @@ $brand-05: #8ecae6;
   font-style: normal;
 }
 
-.body {
-  font-family: "Mainstay", sans-serif;
+.header {
+  align-items: center;
+  height: 30px;
+  display: grid;
+  padding: 20px;
+  background-color: rgba(1, 136, 193, 0.8);
+  border-radius: 10px 10px 0 0;
+  background: linear-gradient(to right, $brand-04, $brand-05);
+}
+
+.card.placeholder {
+  font-family: var(--font-family-loading);
+  animation: pulse 1000ms ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+}
+
+@keyframes fadeInSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeInSlideIn 0.5s ease-out forwards;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
