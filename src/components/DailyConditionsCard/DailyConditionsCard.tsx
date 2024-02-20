@@ -1,7 +1,6 @@
 import styles from "./dailyConditionsCard.module.scss";
 import { memo } from "react";
 import { DailyForecast } from "@/typings/types";
-import { ANIMATION_DURATION_MS } from "@/helpers/constants";
 import classNames from "classnames";
 import Image from "next/legacy/image";
 import CircularProgress from "@mui/joy/CircularProgress";

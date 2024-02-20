@@ -32,7 +32,9 @@ function WeeklyForecast(): React.JSX.Element {
                 isError={false}
                 isPlaceHolder={false}
                 dailyForecast={dailyForecast}
-                selectDailyForecast={() => selectDailyForecast(dailyForecast)}
+                selectDailyForecast={() =>
+                  selectDailyForecast(dailyForecast, null)
+                }
               />
             </div>
           );
