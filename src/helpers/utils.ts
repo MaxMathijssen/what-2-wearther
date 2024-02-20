@@ -63,7 +63,7 @@ export const random = (
   }
 };
 
-export function convertTimestampToHour(timestampInSeconds: number): string {
+export function convertTimestampToHourAmPm(timestampInSeconds: number): string {
   const timestampInMilliseconds = timestampInSeconds * 1000;
   const date = new Date(timestampInMilliseconds);
 
@@ -75,6 +75,13 @@ export function convertTimestampToHour(timestampInSeconds: number): string {
   hour = hour || 12;
 
   return `${hour} ${ampm}`;
+}
+
+export function convertTimestampToHour(timestampInSeconds: number): number {
+  const timestampInMilliseconds = timestampInSeconds * 1000;
+  const date = new Date(timestampInMilliseconds);
+
+  return date.getHours();
 }
 
 export function convertEpochToTime(epoch: number): string {

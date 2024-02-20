@@ -38,6 +38,7 @@ export interface HourlyForecast {
   hour_index: number;
   dt: number;
   hour: string;
+  hour_num: number;
   temp: number;
   feels_like: number;
   weather: string;

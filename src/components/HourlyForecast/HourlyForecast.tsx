@@ -6,7 +6,6 @@ import {
   useState,
   useEffect,
 } from "react";
-import { convertTimestampToHour } from "@/helpers/utils";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
@@ -21,10 +20,13 @@ interface HourlyForecastProps extends PropsWithChildren {
 }
 
 function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
-  const { weeklyForecast } = useContext(ForecastContext);
+  const { weeklyForecast, setSelectedDailyForecast } =
+    useContext(ForecastContext);
   const [visibleHourlyForecast, setVisibleHourlyForecast] = useState<
     HourlyForecast[] | null
   >(null);
+
+  console.log(visibleHourlyForecast);
 
   useEffect(() => {
     if (dailyForecast !== null && dailyForecast.hourly_forecast.length > 0) {
@@ -34,13 +36,14 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
 
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
-      let hourlyForecastArr: HourlyForecast[] = [];
+      let hourlyForecastArr: HourlyForecast[] = [
+        ...dailyForecast.hourly_forecast,
+      ];
 
       if (dailyForecast) {
         const nextDailyForecastIndex = dailyForecast.day_num + 1;
         const nextDailyForecast: DailyForecast =
           weeklyForecast[nextDailyForecastIndex];
-        hourlyForecastArr = dailyForecast.hourly_forecast;
 
         if (dailyForecast.day_num === 0) {
           const endIndex = HOURLY_FORECAST_LENGTH - hourlyForecastArr.length;
@@ -75,7 +78,23 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
     [weeklyForecast, HOURLY_FORECAST_LENGTH]
   );
 
-  function handleNextHours() {}
+  function handleNextHours() {
+    if (visibleHourlyForecast != null && dailyForecast) {
+      const visibleHoursLength = visibleHourlyForecast.length;
+      const dailyHoursLength = dailyForecast.hourly_forecast.length;
+      console.log(
+        visibleHourlyForecast[visibleHoursLength - 1].hour_num,
+        dailyForecast.hourly_forecast[dailyHoursLength - 1].hour_num
+      );
+      if (
+        visibleHourlyForecast[visibleHoursLength - 1].hour_num <
+        dailyForecast.hourly_forecast[dailyHoursLength - 1].hour_num
+      ) {
+        console.log(weeklyForecast[dailyForecast.day_num + 1]);
+        setSelectedDailyForecast(weeklyForecast[dailyForecast.day_num + 1]);
+      }
+    }
+  }
 
   return (
     <>
@@ -144,7 +163,7 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                           <h2>
                             {index === 0 && dailyForecast.day === "Today"
                               ? "Now"
-                              : convertTimestampToHour(hourlyForecast.dt)}
+                              : hourlyForecast.hour}
                           </h2>
                           <Image
                             src={hourlyForecast.iconPath}
@@ -159,7 +178,7 @@ function HourlyForecast({ dailyForecast, isPlaceHolder }: HourlyForecastProps) {
                   }
                 )
               )}
-              <div className={styles.btnNextHours} onClick={() => {}}>
+              <div className={styles.btnNextHours} onClick={handleNextHours}>
                 <Image
                   src="/right-arrow.png"
                   width={40}
