@@ -30,8 +30,6 @@ function HourlyForecastCard({
     HourlyForecast[] | null
   >(null);
 
-  console.log(visibleHourlyForecast);
-
   useEffect(() => {
     if (dailyForecast !== null && dailyForecast.hourly_forecast.length > 0) {
       if (initialVisibleHours !== null) {
@@ -41,6 +39,24 @@ function HourlyForecastCard({
       }
     }
   }, [dailyForecast]);
+
+  console.log(visibleHourlyForecast);
+
+  function checkIsNewDay(hourlyForecastArr: HourlyForecast[]) {
+    if (hourlyForecastArr.length <= 1) {
+      return false;
+    }
+
+    for (let i = 1; i < hourlyForecastArr.length; i++) {
+      if (
+        hourlyForecastArr[i].hour_num === 0 &&
+        hourlyForecastArr[i - 1].hour_num === 23
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
@@ -58,18 +74,18 @@ function HourlyForecastCard({
           for (let i = 0; i < endIndex; i++) {
             hourlyForecastArr.push(nextDailyForecast?.hourly_forecast[i]);
           }
-        } else if (dailyForecast.day_num === 1) {
-          hourlyForecastArr = hourlyForecastArr.slice(
-            HOURLY_FORECAST_LENGTH + 1
+          return hourlyForecastArr;
+        }
+        if (dailyForecast.day_num === 1) {
+          return hourlyForecastArr.slice(
+            HOURLY_FORECAST_LENGTH + 1,
+            HOURLY_FORECAST_LENGTH * 2 + 1
           );
-        } else if (dailyForecast.day_num === 2) {
+        }
+        if (dailyForecast.day_num === 2) {
           if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH * 2)
-            hourlyForecastArr = hourlyForecastArr.slice(
-              HOURLY_FORECAST_LENGTH + 1
-            );
-          else if (
-            dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH
-          ) {
+            hourlyForecastArr.slice(HOURLY_FORECAST_LENGTH + 1);
+          if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH) {
             for (
               let i =
                 dailyForecast.hourly_forecast.length - HOURLY_FORECAST_LENGTH;
@@ -78,7 +94,9 @@ function HourlyForecastCard({
             ) {
               hourlyForecastArr.pop();
             }
+            return hourlyForecastArr;
           }
+          return hourlyForecastArr;
         }
       }
       return hourlyForecastArr;
@@ -91,22 +109,14 @@ function HourlyForecastCard({
       const lastVisibleHour =
         visibleHourlyForecast[visibleHourlyForecast.length - 1];
       const dailyHoursLength = dailyForecast.hourly_forecast.length;
-      const isNextDay =
-        lastVisibleHour.hour_num <
-        dailyForecast.hourly_forecast[dailyHoursLength - 1].hour_num;
+      const isNewDay = checkIsNewDay(visibleHourlyForecast);
       const nextDailyForecastIndex = dailyForecast.day_num + 1;
       const nextDailyForecast: DailyForecast =
         weeklyForecast[nextDailyForecastIndex];
 
       let nextVisibleHours: HourlyForecast[] = [];
 
-      for (
-        let i = lastVisibleHour.hour_index + 1;
-        i < lastVisibleHour.hour_index + 9;
-        i++
-      ) {}
-
-      if (isNextDay) {
+      if (isNewDay) {
         const targetHourIndex = lastVisibleHour.hour_index + 1;
         const startHourIndex = nextDailyForecast.hourly_forecast.findIndex(
           (hour: HourlyForecast) => hour.hour_index === targetHourIndex
@@ -117,6 +127,20 @@ function HourlyForecastCard({
           nextVisibleHours.push(nextDailyForecast.hourly_forecast[i]);
         }
         selectDailyForecast(nextDailyForecast, nextVisibleHours);
+      }
+
+      if (!isNewDay) {
+        const startHourIndex = dailyForecast.hourly_forecast.findIndex(
+          (hour: HourlyForecast) =>
+            hour.hour_index === lastVisibleHour.hour_index + 1
+        );
+        const endHourIndex = startHourIndex + HOURLY_FORECAST_LENGTH;
+        console.log(startHourIndex, endHourIndex);
+        for (let i = startHourIndex; i <= endHourIndex; i++) {
+          nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
+        }
+        console.log(nextVisibleHours);
+        setVisibleHourlyForecast(nextVisibleHours);
       }
     }
   }
