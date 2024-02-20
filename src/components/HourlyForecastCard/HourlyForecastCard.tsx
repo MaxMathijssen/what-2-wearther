@@ -50,7 +50,8 @@ function HourlyForecastCard({
     for (let i = 1; i < hourlyForecastArr.length; i++) {
       if (
         hourlyForecastArr[i].hour_num === 0 &&
-        hourlyForecastArr[i - 1].hour_num === 23
+        hourlyForecastArr[i - 1].hour_num === 23 &&
+        dailyForecast?.day_num === 0
       ) {
         return true;
       }
@@ -110,6 +111,7 @@ function HourlyForecastCard({
         visibleHourlyForecast[visibleHourlyForecast.length - 1];
       const dailyHoursLength = dailyForecast.hourly_forecast.length;
       const isNewDay = checkIsNewDay(visibleHourlyForecast);
+      console.log(isNewDay);
       const nextDailyForecastIndex = dailyForecast.day_num + 1;
       const nextDailyForecast: DailyForecast =
         weeklyForecast[nextDailyForecastIndex];
@@ -134,14 +136,32 @@ function HourlyForecastCard({
           (hour: HourlyForecast) =>
             hour.hour_index === lastVisibleHour.hour_index + 1
         );
-        const endHourIndex = startHourIndex + HOURLY_FORECAST_LENGTH;
+        const endHourIndex = startHourIndex + HOURLY_FORECAST_LENGTH - 1;
+        let newDayReached = false;
+        let newDayHourLength = 0;
         console.log(startHourIndex, endHourIndex);
         for (let i = startHourIndex; i <= endHourIndex; i++) {
-          nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
+          if (
+            dailyForecast.hourly_forecast[i] === undefined &&
+            nextDailyForecast.hourly_forecast[0] !== null
+          ) {
+            newDayReached = true;
+            newDayHourLength = endHourIndex - i;
+            break;
+          } else {
+            nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
+          }
         }
-        console.log(nextVisibleHours);
-        setVisibleHourlyForecast(nextVisibleHours);
+
+        if (newDayReached) {
+          for (let i = 0; i <= newDayHourLength; i++) {
+            nextVisibleHours.push(nextDailyForecast.hourly_forecast[i]);
+          }
+          selectDailyForecast(nextDailyForecast, nextVisibleHours);
+        }
       }
+      console.log(nextVisibleHours);
+      setVisibleHourlyForecast(nextVisibleHours);
     }
   }
 
