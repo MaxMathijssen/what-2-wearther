@@ -6,13 +6,11 @@ import { ForecastContext } from "../../providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
 import DailyConditionsCard from "../DailyConditionsCard";
 import HourlyForecastCard from "../HourlyForecastCard";
-import { HourlyForecast } from "@/typings/types";
 import WindCard from "../WindCard";
 import CloudCard from "../CloudCard";
 
 function DailyForecast(): React.JSX.Element {
-  const { selectedDailyForecast, initialVisibleHours } =
-    useContext(ForecastContext);
+  const { selectedDailyForecast } = useContext(ForecastContext);
 
   return (
     <div className={styles.dailyForecastContainer}>
@@ -25,7 +23,6 @@ function DailyForecast(): React.JSX.Element {
               dailyForecast={selectedDailyForecast}
             />
             <HourlyForecastCard
-              initialVisibleHours={initialVisibleHours}
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />
@@ -58,11 +55,7 @@ function DailyForecast(): React.JSX.Element {
               isPlaceHolder={true}
               dailyForecast={null}
             />
-            <HourlyForecastCard
-              initialVisibleHours={null}
-              isPlaceHolder={true}
-              dailyForecast={null}
-            />
+            <HourlyForecastCard isPlaceHolder={true} dailyForecast={null} />
           </div>
 
           <div className={styles.bottomRow}>
