@@ -209,6 +209,16 @@ function HourlyForecastCard({
                   dailyForecast && dailyForecast.hourly_forecast.length === 0,
               })}
             >
+              {dailyForecast.day_num !== 0 && (
+                <div className={styles.btnPrevHours} onClick={handleNextHours}>
+                  <Image
+                    src="/left-arrow.png"
+                    width={40}
+                    height={40}
+                    alt="Next hours"
+                  />
+                </div>
+              )}
               {dailyForecast && dailyForecast.hourly_forecast.length === 0 ? (
                 <div
                   key={dailyForecast.day}

@@ -25,13 +25,13 @@
 
 .body {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
+  flex-direction: row; // Keeps items in a row
+  align-items: center; // Vertically centers items in the container
+  justify-content: center; // Horizontally centers items in the container
+  gap: 10px; // Maintains space between items
   padding: 20px;
   background-color: $brand-white;
-  position: relative; // Add this line
+  position: relative; // No change here
 }
 
 .card .header h1 {
@@ -110,7 +110,15 @@
 .btnNextHours {
   cursor: pointer;
   position: absolute;
-  right: 35px;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.btnPrevHours {
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
   top: 50%;
   transform: translateY(-50%);
 }
