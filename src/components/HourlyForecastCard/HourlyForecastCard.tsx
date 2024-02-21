@@ -91,13 +91,19 @@ function HourlyForecastCard({
     [weeklyForecast, HOURLY_FORECAST_LENGTH]
   );
 
-  function handleNextHours() {
+  function handleNextHours(next: boolean) {
     if (visibleHourlyForecast != null && dailyForecast) {
-      const lastVisibleHour =
-        visibleHourlyForecast[visibleHourlyForecast.length - 1];
+      const lastVisibleHour = next
+        ? visibleHourlyForecast[visibleHourlyForecast.length - 1]
+        : visibleHourlyForecast[0];
       const nextVisibleHours: HourlyForecast[] = [];
       const nextDailyForecast: DailyForecast = retrieveNextDailyForecast(
-        dailyForecast.day_num + 1
+        dailyForecast.day_num + (next ? 1 : -1)
+      );
+
+      let startHourIndex = dailyForecast.hourly_forecast.findIndex(
+        (hour: HourlyForecast) =>
+          hour.hour_index === lastVisibleHour.hour_index + (next ? 1 : -1)
       );
 
       if (dailyForecast.day_num === 5) {
@@ -105,20 +111,18 @@ function HourlyForecastCard({
         return;
       }
 
-      let startHourIndex = dailyForecast.hourly_forecast.findIndex(
-        (hour: HourlyForecast) =>
-          hour.hour_index === lastVisibleHour.hour_index + 1
-      );
-
       if (startHourIndex === -1) {
         startHourIndex = nextDailyForecast.hourly_forecast.findIndex(
           (hour: HourlyForecast) =>
             hour.hour_index === lastVisibleHour.hour_index + 1
         );
         fillVisibleHours(
+          next,
           startHourIndex,
           nextDailyForecast,
-          weeklyForecast[dailyForecast.day_num + 2],
+          weeklyForecast[
+            next ? dailyForecast.day_num + 2 : dailyForecast.day_num - 2
+          ],
           nextVisibleHours
         );
         if (nextVisibleHours.length === 0) {
@@ -131,6 +135,7 @@ function HourlyForecastCard({
         setVisibleHourlyForecast(nextVisibleHours);
       } else {
         fillVisibleHours(
+          next,
           startHourIndex,
           dailyForecast,
           nextDailyForecast,
@@ -146,16 +151,23 @@ function HourlyForecastCard({
   }
 
   function fillVisibleHours(
+    next: boolean,
     startHourIndex: number,
     dailyForecast: DailyForecast,
     nextDailyForecast: DailyForecast,
     nextVisibleHours: HourlyForecast[]
   ) {
-    const endHourIndex = startHourIndex + HOURLY_FORECAST_LENGTH - 1;
+    let endHourIndex;
+    endHourIndex = next
+      ? startHourIndex + HOURLY_FORECAST_LENGTH - 1
+      : startHourIndex - HOURLY_FORECAST_LENGTH + 1;
     let newDayReached = false;
     let newDayHourLength = 0;
 
+    console.log(startHourIndex, endHourIndex);
+
     for (let i = startHourIndex; i <= endHourIndex; i++) {
+      console.log(i);
       if (dailyForecast.hourly_forecast[i] === undefined) {
         newDayReached = true;
         newDayHourLength = endHourIndex - i;
@@ -163,6 +175,7 @@ function HourlyForecastCard({
       } else if (dailyForecast.hourly_forecast[i].hour_num === 47) {
         break;
       } else {
+        console.log(i, dailyForecast.hourly_forecast[i]);
         nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
       }
     }
@@ -210,7 +223,10 @@ function HourlyForecastCard({
               })}
             >
               {dailyForecast.day_num !== 0 && (
-                <div className={styles.btnPrevHours} onClick={handleNextHours}>
+                <div
+                  className={styles.btnPrevHours}
+                  onClick={() => handleNextHours(false)}
+                >
                   <Image
                     src="/left-arrow.png"
                     width={40}
@@ -267,7 +283,10 @@ function HourlyForecastCard({
                 )
               )}
               {dailyForecast.day_num !== 6 && (
-                <div className={styles.btnNextHours} onClick={handleNextHours}>
+                <div
+                  className={styles.btnNextHours}
+                  onClick={() => handleNextHours(true)}
+                >
                   <Image
                     src="/right-arrow.png"
                     width={40}
