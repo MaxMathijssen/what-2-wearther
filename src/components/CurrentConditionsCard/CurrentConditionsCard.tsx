@@ -11,7 +11,6 @@ interface CurrentConditionsCardProps {
 }
 
 function CurrentConditionsCard({
-  title,
   dailyForecast,
   isPlaceHolder,
 }: CurrentConditionsCardProps): React.JSX.Element {
@@ -20,7 +19,7 @@ function CurrentConditionsCard({
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
           <div className={classNames(styles.cardSection, styles.header)}>
-            <h1>{title}</h1>
+            <h1>Current Conditions</h1>
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
             <div className={styles.imagePlaceholder}></div>
@@ -34,7 +33,11 @@ function CurrentConditionsCard({
       {dailyForecast && (
         <div className={styles.card}>
           <div className={classNames(styles.cardSection, styles.header)}>
-            <h1>{title}</h1>
+            <h1>
+              {dailyForecast?.day === "Today"
+                ? "Current Conditions"
+                : "Overall Conditions"}
+            </h1>
           </div>
           <div className={classNames(styles.cardSection, styles.body)}>
             <Image

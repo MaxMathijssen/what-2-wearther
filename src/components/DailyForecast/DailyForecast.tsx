@@ -18,7 +18,6 @@ function DailyForecast(): React.JSX.Element {
         <>
           <div className={styles.topRow}>
             <CurrentConditionsCard
-              title="Current Conditions"
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />

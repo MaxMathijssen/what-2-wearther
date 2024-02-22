@@ -34,16 +34,12 @@ function ForecastProvider({ children }: PropsWithChildren) {
   );
   const [selectedDailyForecast, setSelectedDailyForecast] =
     useState<DailyForecast | null>(null);
-  const [initialVisibleHours, setInitialVisibleHours] = useState<
-    HourlyForecast[] | null
-  >(null);
 
   function selectDailyForecast(
     dailyForecast: DailyForecast,
     visibleHours: HourlyForecast[] | null
   ) {
     setSelectedDailyForecast(dailyForecast);
-    setInitialVisibleHours(visibleHours);
   }
 
   useEffect(() => {
@@ -306,16 +302,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
       selectDailyForecast,
       error,
       isLoading,
-      initialVisibleHours,
-      setInitialVisibleHours,
     }),
-    [
-      selectedDailyForecast,
-      weeklyForecast,
-      error,
-      isLoading,
-      initialVisibleHours,
-    ]
+    [selectedDailyForecast, weeklyForecast, error, isLoading]
   );
 
   return (

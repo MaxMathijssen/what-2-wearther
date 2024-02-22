@@ -30,6 +30,10 @@ function HourlyForecastCard({
   >(null);
   const ignoreEffectRef = useRef(false);
 
+  function retrieveNextDailyForecast(dailyForecastNum: number) {
+    return weeklyForecast[dailyForecastNum];
+  }
+
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
       let hourlyForecastArr: HourlyForecast[] = [];
@@ -78,6 +82,38 @@ function HourlyForecastCard({
       }
     }
   }, [dailyForecast, getVisibleHourlyForecast]);
+
+  function fillVisibleHours(
+    next: boolean,
+    startHourIndex: number,
+    dailyForecast: DailyForecast,
+    nextDailyForecast: DailyForecast,
+    nextVisibleHours: HourlyForecast[]
+  ) {
+    const endHourIndex = next
+      ? startHourIndex + HOURLY_FORECAST_LENGTH - 1
+      : startHourIndex - HOURLY_FORECAST_LENGTH + 1;
+    let newDayReached = false;
+    let newDayHourLength = 0;
+
+    for (let i = startHourIndex; i <= endHourIndex; i++) {
+      if (dailyForecast.hourly_forecast[i] === undefined) {
+        newDayReached = true;
+        newDayHourLength = endHourIndex - i;
+        break;
+      } else if (dailyForecast.hourly_forecast[i].hour_num === 47) {
+        break;
+      } else {
+        nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
+      }
+    }
+
+    if (newDayReached && nextDailyForecast.hourly_forecast[0] !== undefined) {
+      for (let i = 0; i <= newDayHourLength; i++) {
+        nextVisibleHours.push(nextDailyForecast.hourly_forecast[i]);
+      }
+    }
+  }
 
   function handleNextHours(next: boolean) {
     ignoreEffectRef.current = true;
@@ -133,43 +169,6 @@ function HourlyForecastCard({
           );
           setVisibleHourlyForecast(nextVisibleHours);
         }
-      }
-    }
-  }
-
-  function retrieveNextDailyForecast(dailyForecastNum: number) {
-    return weeklyForecast[dailyForecastNum];
-  }
-
-  function fillVisibleHours(
-    next: boolean,
-    startHourIndex: number,
-    dailyForecast: DailyForecast,
-    nextDailyForecast: DailyForecast,
-    nextVisibleHours: HourlyForecast[]
-  ) {
-    let endHourIndex;
-    endHourIndex = next
-      ? startHourIndex + HOURLY_FORECAST_LENGTH - 1
-      : startHourIndex - HOURLY_FORECAST_LENGTH + 1;
-    let newDayReached = false;
-    let newDayHourLength = 0;
-
-    for (let i = startHourIndex; i <= endHourIndex; i++) {
-      if (dailyForecast.hourly_forecast[i] === undefined) {
-        newDayReached = true;
-        newDayHourLength = endHourIndex - i;
-        break;
-      } else if (dailyForecast.hourly_forecast[i].hour_num === 47) {
-        break;
-      } else {
-        nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
-      }
-    }
-
-    if (newDayReached && nextDailyForecast.hourly_forecast[0] !== undefined) {
-      for (let i = 0; i <= newDayHourLength; i++) {
-        nextVisibleHours.push(nextDailyForecast.hourly_forecast[i]);
       }
     }
   }
