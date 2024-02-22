@@ -29,21 +29,9 @@ function HourlyForecastCard({
     HourlyForecast[] | null
   >(null);
 
-  useEffect(() => {
-    if (dailyForecast !== null && dailyForecast.hourly_forecast.length > 0) {
-      if (initialVisibleHours !== null) {
-        setVisibleHourlyForecast(initialVisibleHours);
-      } else {
-        setVisibleHourlyForecast(getVisibleHourlyForecast(dailyForecast));
-      }
-    }
-  }, [dailyForecast]);
-
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
-      let hourlyForecastArr: HourlyForecast[] = [
-        ...dailyForecast.hourly_forecast,
-      ];
+      let hourlyForecastArr: HourlyForecast[] = [];
 
       if (dailyForecast) {
         const nextDailyForecastIndex = dailyForecast.day_num + 1;
@@ -51,45 +39,43 @@ function HourlyForecastCard({
           weeklyForecast[nextDailyForecastIndex];
 
         if (dailyForecast.day_num === 0) {
-          const endIndex = HOURLY_FORECAST_LENGTH - hourlyForecastArr.length;
-          for (let i = 0; i < endIndex; i++) {
-            hourlyForecastArr.push(nextDailyForecast?.hourly_forecast[i]);
-          }
-          return hourlyForecastArr;
-        }
-        if (dailyForecast.day_num === 1) {
-          return hourlyForecastArr.slice(
-            HOURLY_FORECAST_LENGTH + 1,
-            HOURLY_FORECAST_LENGTH * 2 + 1
+          fillVisibleHours(
+            true,
+            0,
+            dailyForecast,
+            nextDailyForecast,
+            hourlyForecastArr
           );
-        }
-        if (dailyForecast.day_num === 2) {
-          if (
-            dailyForecast.hourly_forecast.length >
-            HOURLY_FORECAST_LENGTH * 2 + 1
-          )
-            return hourlyForecastArr.slice(
-              HOURLY_FORECAST_LENGTH + 1,
-              HOURLY_FORECAST_LENGTH * 2 + 1
-            );
-          if (dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH) {
-            for (
-              let i =
-                dailyForecast.hourly_forecast.length - HOURLY_FORECAST_LENGTH;
-              i > 0;
-              i--
-            ) {
-              hourlyForecastArr.pop();
-            }
-            return hourlyForecastArr;
-          }
           return hourlyForecastArr;
-        }
+        } else if (dailyForecast.day_num === 1 || 2) {
+          fillVisibleHours(
+            true,
+            9,
+            dailyForecast,
+            nextDailyForecast,
+            hourlyForecastArr
+          );
+          return hourlyForecastArr;
+        } else return null;
       }
       return null;
     },
     [weeklyForecast, HOURLY_FORECAST_LENGTH]
   );
+
+  useEffect(() => {
+    if (dailyForecast !== null) {
+      if (dailyForecast.day_num >= 3) {
+        setVisibleHourlyForecast(null);
+      } else if (dailyForecast.hourly_forecast.length > 0) {
+        if (initialVisibleHours !== null) {
+          setVisibleHourlyForecast(initialVisibleHours);
+        } else {
+          setVisibleHourlyForecast(getVisibleHourlyForecast(dailyForecast));
+        }
+      }
+    }
+  }, [dailyForecast, initialVisibleHours, getVisibleHourlyForecast]);
 
   function handleNextHours(next: boolean) {
     if (visibleHourlyForecast != null && dailyForecast) {
@@ -164,10 +150,7 @@ function HourlyForecastCard({
     let newDayReached = false;
     let newDayHourLength = 0;
 
-    console.log(startHourIndex, endHourIndex);
-
     for (let i = startHourIndex; i <= endHourIndex; i++) {
-      console.log(i);
       if (dailyForecast.hourly_forecast[i] === undefined) {
         newDayReached = true;
         newDayHourLength = endHourIndex - i;
@@ -175,7 +158,6 @@ function HourlyForecastCard({
       } else if (dailyForecast.hourly_forecast[i].hour_num === 47) {
         break;
       } else {
-        console.log(i, dailyForecast.hourly_forecast[i]);
         nextVisibleHours.push(dailyForecast.hourly_forecast[i]);
       }
     }
