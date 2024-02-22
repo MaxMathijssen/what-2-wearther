@@ -169,6 +169,8 @@ function HourlyForecastCard({
           );
           setVisibleHourlyForecast(nextVisibleHours);
         }
+      } else if (dailyForecast.hourly_forecast.length === 0) {
+        selectDailyForecast(nextDailyForecast, null);
       }
     }
   }
