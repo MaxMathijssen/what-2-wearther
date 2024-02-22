@@ -121,6 +121,7 @@ function HourlyForecastCard({
       const nextDailyForecast: DailyForecast = retrieveNextDailyForecast(
         dailyForecast.day_num + (next ? 1 : -1)
       );
+      console.log(visibleHourlyForecast, nextDailyForecast);
       if (visibleHourlyForecast !== null) {
         const lastVisibleHour = next
           ? visibleHourlyForecast[visibleHourlyForecast.length - 1]
