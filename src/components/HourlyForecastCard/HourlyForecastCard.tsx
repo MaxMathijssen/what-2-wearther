@@ -5,6 +5,7 @@ import {
   useCallback,
   useState,
   useEffect,
+  useRef,
 } from "react";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
@@ -23,11 +24,11 @@ function HourlyForecastCard({
   dailyForecast,
   isPlaceHolder,
 }: HourlyForecastCardProps) {
-  const { weeklyForecast, selectDailyForecast, initialVisibleHours } =
-    useContext(ForecastContext);
+  const { weeklyForecast, selectDailyForecast } = useContext(ForecastContext);
   const [visibleHourlyForecast, setVisibleHourlyForecast] = useState<
     HourlyForecast[] | null
   >(null);
+  const ignoreEffectRef = useRef(false);
 
   const getVisibleHourlyForecast = useCallback(
     (dailyForecast: DailyForecast) => {
@@ -64,70 +65,74 @@ function HourlyForecastCard({
   );
 
   useEffect(() => {
+    if (ignoreEffectRef.current) {
+      ignoreEffectRef.current = false;
+      return;
+    }
+
     if (dailyForecast !== null) {
       if (dailyForecast.day_num >= 3) {
         setVisibleHourlyForecast(null);
       } else if (dailyForecast.hourly_forecast.length > 0) {
-        if (initialVisibleHours !== null) {
-          setVisibleHourlyForecast(initialVisibleHours);
-        } else {
-          setVisibleHourlyForecast(getVisibleHourlyForecast(dailyForecast));
-        }
+        setVisibleHourlyForecast(getVisibleHourlyForecast(dailyForecast));
       }
     }
-  }, [dailyForecast, initialVisibleHours, getVisibleHourlyForecast]);
+  }, [dailyForecast, getVisibleHourlyForecast]);
 
   function handleNextHours(next: boolean) {
-    if (visibleHourlyForecast != null && dailyForecast) {
-      const lastVisibleHour = next
-        ? visibleHourlyForecast[visibleHourlyForecast.length - 1]
-        : visibleHourlyForecast[0];
-      const nextVisibleHours: HourlyForecast[] = [];
+    ignoreEffectRef.current = true;
+    if (dailyForecast) {
       const nextDailyForecast: DailyForecast = retrieveNextDailyForecast(
         dailyForecast.day_num + (next ? 1 : -1)
       );
+      if (visibleHourlyForecast !== null) {
+        const lastVisibleHour = next
+          ? visibleHourlyForecast[visibleHourlyForecast.length - 1]
+          : visibleHourlyForecast[0];
+        const nextVisibleHours: HourlyForecast[] = [];
 
-      let startHourIndex = dailyForecast.hourly_forecast.findIndex(
-        (hour: HourlyForecast) =>
-          hour.hour_index === lastVisibleHour.hour_index + (next ? 1 : -1)
-      );
-
-      if (dailyForecast.day_num === 5) {
-        selectDailyForecast(nextDailyForecast, null);
-        return;
-      }
-
-      if (startHourIndex === -1) {
-        startHourIndex = nextDailyForecast.hourly_forecast.findIndex(
+        let startHourIndex = dailyForecast.hourly_forecast.findIndex(
           (hour: HourlyForecast) =>
-            hour.hour_index === lastVisibleHour.hour_index + 1
+            hour.hour_index === lastVisibleHour.hour_index + (next ? 1 : -1)
         );
-        fillVisibleHours(
-          next,
-          startHourIndex,
-          nextDailyForecast,
-          weeklyForecast[
-            next ? dailyForecast.day_num + 2 : dailyForecast.day_num - 2
-          ],
-          nextVisibleHours
-        );
-        if (nextVisibleHours.length === 0) {
+
+        if (dailyForecast.day_num === weeklyForecast.length - 2) {
           selectDailyForecast(nextDailyForecast, null);
           return;
         }
-        if (nextVisibleHours.length === 8) {
-          selectDailyForecast(nextDailyForecast, nextVisibleHours);
+
+        if (startHourIndex === -1) {
+          startHourIndex = nextDailyForecast.hourly_forecast.findIndex(
+            (hour: HourlyForecast) =>
+              hour.hour_index === lastVisibleHour.hour_index + 1
+          );
+          fillVisibleHours(
+            next,
+            startHourIndex,
+            nextDailyForecast,
+            weeklyForecast[
+              next ? dailyForecast.day_num + 2 : dailyForecast.day_num - 2
+            ],
+            nextVisibleHours
+          );
+          if (nextVisibleHours.length === 0) {
+            selectDailyForecast(nextDailyForecast, null);
+            return;
+          }
+          if (nextVisibleHours.length === 8) {
+            selectDailyForecast(nextDailyForecast, nextVisibleHours);
+          }
+          setVisibleHourlyForecast(nextVisibleHours);
+        } else {
+          fillVisibleHours(
+            next,
+            startHourIndex,
+            dailyForecast,
+            nextDailyForecast,
+            nextVisibleHours
+          );
+          setVisibleHourlyForecast(nextVisibleHours);
         }
-        setVisibleHourlyForecast(nextVisibleHours);
-      } else {
-        fillVisibleHours(
-          next,
-          startHourIndex,
-          dailyForecast,
-          nextDailyForecast,
-          nextVisibleHours
-        );
-        setVisibleHourlyForecast(nextVisibleHours);
       }
     }
   }
