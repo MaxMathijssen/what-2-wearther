@@ -70,18 +70,18 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const { location } = useContext(LocationContext);
+  const { coordinates } = useContext(LocationContext);
 
   let shouldFetch: boolean = false;
   if (
-    (weeklyForecast === null && location !== null) ||
+    (weeklyForecast === null && coordinates !== null) ||
     (weeklyForecast !== null &&
       getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
   ) {
     shouldFetch = true;
   }
 
-  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${location?.latitude}&lon=${location?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
+  const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
     refreshInterval: REFRESH_TIME_MIN * 60 * 1000,
     revalidateOnFocus: false,
@@ -142,7 +142,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return `rgba(2,48,71, ${opacity})`;
+      return `rgba(23,51,168, ${opacity})`;
     }
     // Snow
     else if (/^6/.test(id)) {
@@ -212,7 +212,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     return hourlyForecastArray;
   }
 
-  if (data && location !== null) {
+  if (data && coordinates !== null) {
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,

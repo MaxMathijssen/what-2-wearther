@@ -84,8 +84,6 @@ function HourlyForecastCard({
     }
   }, [dailyForecast, getVisibleHourlyForecast]);
 
-  console.log(visibleHourlyForecast);
-
   function fillVisibleHours(
     next: boolean,
     startHourIndex: number,
