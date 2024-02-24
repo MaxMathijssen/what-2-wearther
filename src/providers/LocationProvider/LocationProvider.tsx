@@ -30,11 +30,11 @@ export const LocationContext = createContext<LocationContextType>({
 
 function LocationProvider({ children }: PropsWithChildren) {
   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+  const [location, setLocation] = useState<Location | null>(null);
+  const [shouldFetch, setShouldFetch] = useState(false);
 
   const fetcher = (...args: Parameters<typeof fetch>) =>
     fetch(...args).then((res) => res.json());
-
-  let shouldFetch: boolean = false;
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -70,14 +70,29 @@ function LocationProvider({ children }: PropsWithChildren) {
     }
   }, [coordinates]);
 
-  shouldFetch = false;
-
   const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&limit=1&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
   });
+
+  if (isLoading) {
+    console.log("Fetching weather forecast data");
+  }
+
+  if (data) {
+    const location = data[0];
+
+    const locationData: Location = {
+      city: location.name,
+      country: location.country,
+    };
+
+    setLocation(locationData);
+  }
+
+  console.log(url, location);
 
   const value = useMemo(() => ({ coordinates }), [coordinates]);
 

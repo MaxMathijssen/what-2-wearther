@@ -35,10 +35,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const [selectedDailyForecast, setSelectedDailyForecast] =
     useState<DailyForecast | null>(null);
 
-  function selectDailyForecast(
-    dailyForecast: DailyForecast,
-    visibleHours: HourlyForecast[] | null
-  ) {
+  function selectDailyForecast(dailyForecast: DailyForecast) {
     setSelectedDailyForecast(dailyForecast);
   }
 
@@ -86,6 +83,10 @@ function ForecastProvider({ children }: PropsWithChildren) {
     refreshInterval: REFRESH_TIME_MIN * 60 * 1000,
     revalidateOnFocus: false,
   });
+
+  if (isLoading) {
+    console.log("Fetching weather forecast data");
+  }
 
   const newWeeklyForecast: DailyForecast[] = [];
   const dayNames = getDayNames();
@@ -289,10 +290,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
         JSON.stringify(newWeeklyForecast)
       );
     }
-  }
-
-  if (isLoading) {
-    console.log("SWR is fetching data...");
   }
 
   const contextValue = useMemo(
