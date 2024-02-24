@@ -139,6 +139,9 @@ function HourlyForecastCard({
           newStartIndex - newDayHourLength <= i;
           i--
         ) {
+          if (nextDailyForecast.hourly_forecast[i] === undefined) {
+            break;
+          }
           nextVisibleHours.unshift(nextDailyForecast.hourly_forecast[i]);
         }
         selectDailyForecast(nextDailyForecast, nextVisibleHours);
@@ -199,9 +202,7 @@ function HourlyForecastCard({
               next,
               nextDailyForecast.hourly_forecast.length - 1,
               nextDailyForecast,
-              weeklyForecast[
-                next ? dailyForecast.day_num + 2 : dailyForecast.day_num - 2
-              ],
+              weeklyForecast[dailyForecast.day_num - 2],
               nextVisibleHours
             );
             setVisibleHourlyForecast(nextVisibleHours);
@@ -228,6 +229,7 @@ function HourlyForecastCard({
             nextDailyForecast,
             nextVisibleHours
           );
+
           setVisibleHourlyForecast(nextVisibleHours.reverse());
           selectDailyForecast(nextDailyForecast, nextVisibleHours);
         }

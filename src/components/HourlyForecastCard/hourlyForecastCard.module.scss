@@ -107,18 +107,32 @@
   height: 100%;
 }
 
-.btnNextHours {
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
+.btnNextHours,
 .btnPrevHours {
   cursor: pointer;
   position: absolute;
-  left: 20px;
   top: 50%;
   transform: translateY(-50%);
+  transition: transform 0.1s ease; /* Smooth transition for the transform */
+}
+
+.btnNextHours {
+  right: 20px;
+}
+
+.btnPrevHours {
+  left: 20px;
+}
+
+/* Animation when pressed */
+.btnNextHours:active,
+.btnPrevHours:active {
+  transform: translateY(-50%) scale(0.9); /* Slightly reduce the button size */
+}
+
+.hourlyForecastLine {
+  width: 100%; /* Static width relative to its container */
+  height: 2px; /* Thickness of the line */
+  background-color: #007bff; /* Color of the line */
+  margin-bottom: 20px; /* Space below the line to separate from the hourly forecasts */
 }
