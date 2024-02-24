@@ -1,4 +1,5 @@
 .cardContainer {
+  position: relative;
   display: flex;
   margin-bottom: 20px;
   background: #cfdef3;
@@ -38,6 +39,18 @@
   top: 30%;
   left: 65%;
   transform: translate(-50%, -50%);
+}
+
+.circle1 {
+  top: 50%; /* Adjust based on design needs */
+  left: 25%; /* Adjust based on design needs */
+  transform: translate(-50%, -50%); /* Centers the circle */
+}
+
+.circle2 {
+  top: 50%; /* Adjust based on design needs */
+  left: 75%; /* Adjust based on design needs */
+  transform: translate(-50%, -50%); /* Centers the circle */
 }
 
 .weatherCardContainer {

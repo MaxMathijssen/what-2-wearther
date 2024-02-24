@@ -26,7 +26,7 @@ const pacificoFont = Pacifico({
 });
 
 export const metadata: Metadata = {
-  title: "What2Wearther",
+  title: "What2Weather",
   description: "Weather clothing recommendation app",
 };
 

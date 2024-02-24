@@ -90,7 +90,7 @@
   font-size: 35px;
   font-weight: 250;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3),
-    /* Shadow on the right-bottom */ -1px -1px 2px rgba(255, 255, 255, 0.5); /* Soft light from top-left for depth */
+    -1px -1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .clickableCard .topSection h3 {
@@ -129,4 +129,15 @@
 
 .clickableCard .bottomSection p:last-of-type {
   margin-bottom: 0px;
+}
+
+@keyframes pulse {
+  from {
+    opacity: 0.5;
+  }
+}
+
+.clickableCard.placeholder {
+  font-family: var(--font-family-loading);
+  animation: pulse 1000ms ease-in-out infinite alternate;
 }
