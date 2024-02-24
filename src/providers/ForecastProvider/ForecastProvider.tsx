@@ -142,7 +142,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return `rgba(23,51,168, ${opacity})`;
+      return `rgba(2,48,71, ${opacity})`;
     }
     // Snow
     else if (/^6/.test(id)) {
