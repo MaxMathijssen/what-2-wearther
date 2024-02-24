@@ -45,21 +45,22 @@ function LocationProvider({ children }: PropsWithChildren) {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
         };
+        const storedCoordinates =
+          window.localStorage.getItem("userCoordinates");
+
+        if (storedCoordinates) {
+          return;
+        }
 
         if (
-          coordinates === undefined ||
-          coordinates === null ||
+          !coordinates ||
           (coordinates.latitude !== newCoordinates.latitude &&
             coordinates.longitude !== newCoordinates.longitude)
         ) {
-          if (
-            coordinates?.latitude !== newCoordinates.latitude ||
-            coordinates?.longitude !== newCoordinates.latitude
-          )
-            localStorage.setItem(
-              "userCoordinates",
-              JSON.stringify(newCoordinates)
-            );
+          localStorage.setItem(
+            "userCoordinates",
+            JSON.stringify(newCoordinates)
+          );
           setCoordinates(newCoordinates);
           console.log("Set coordinates", newCoordinates);
         }
