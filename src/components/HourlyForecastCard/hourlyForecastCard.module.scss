@@ -24,14 +24,15 @@
 }
 
 .body {
+  position: relative;
   display: flex;
-  flex-direction: row; // Keeps items in a row
-  align-items: center; // Vertically centers items in the container
-  justify-content: center; // Horizontally centers items in the container
-  gap: 10px; // Maintains space between items
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
   padding: 20px;
+  padding-bottom: 0px;
   background-color: $brand-white;
-  position: relative; // No change here
 }
 
 .card .header h1 {
@@ -113,7 +114,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform 0.1s ease; /* Smooth transition for the transform */
+  transition: transform 0.1s ease;
 }
 
 .btnNextHours {
@@ -127,12 +128,20 @@
 /* Animation when pressed */
 .btnNextHours:active,
 .btnPrevHours:active {
-  transform: translateY(-50%) scale(0.9); /* Slightly reduce the button size */
+  transform: translateY(-50%) scale(0.9);
 }
 
-.hourlyForecastLine {
-  width: 100%; /* Static width relative to its container */
-  height: 2px; /* Thickness of the line */
-  background-color: #007bff; /* Color of the line */
-  margin-bottom: 20px; /* Space below the line to separate from the hourly forecasts */
+.topRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding-bottom: 20px;
+  padding-top: 10px;
+}
+
+.bottomRow {
+  display: flex;
+  width: 88%;
+  justify-content: center;
+  gap: 20px;
 }
