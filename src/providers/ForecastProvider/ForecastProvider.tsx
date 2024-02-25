@@ -67,7 +67,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const { coordinates } = useContext(LocationContext);
+  const { coordinates, updateSource } = useContext(LocationContext);
 
   let shouldFetch: boolean = false;
   if (

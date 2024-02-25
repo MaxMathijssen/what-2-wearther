@@ -28,13 +28,15 @@ type LocationContextType = {
   setCoordinates: (
     coordinates: Coordinates | null,
     source: "user" | "auto"
-  ) => void; // Updated type
+  ) => void;
+  updateSource: string | null;
 };
 
 export const LocationContext = createContext<LocationContextType>({
   coordinates: null,
   setCoordinates: () => {},
   location: null,
+  updateSource: null,
 });
 
 function LocationProvider({ children }: PropsWithChildren<{}>) {
@@ -87,7 +89,12 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
   }, []);
 
   const value = useMemo(
-    () => ({ coordinates, setCoordinates: setCoordinatesWithSource, location }),
+    () => ({
+      coordinates,
+      setCoordinates: setCoordinatesWithSource,
+      location,
+      updateSource,
+    }),
     [coordinates, location]
   );
 
