@@ -24,8 +24,11 @@ type Location = {
 
 type LocationContextType = {
   coordinates: Coordinates | null;
-  setCoordinates: Dispatch<SetStateAction<Coordinates | null>>;
   location: Location | null;
+  setCoordinates: (
+    coordinates: Coordinates | null,
+    source: "user" | "auto"
+  ) => void; // Updated type
 };
 
 export const LocationContext = createContext<LocationContextType>({
@@ -37,13 +40,22 @@ export const LocationContext = createContext<LocationContextType>({
 function LocationProvider({ children }: PropsWithChildren<{}>) {
   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
   const [location, setLocation] = useState<Location | null>(null);
+  const [updateSource, setUpdateSource] = useState<"user" | "auto">("auto");
   const prevCoordinatesRef = useRef<Coordinates | null>(null);
+
+  const setCoordinatesWithSource = (
+    coordinates: Coordinates | null,
+    source: "user" | "auto" = "auto"
+  ) => {
+    setCoordinates(coordinates);
+    setUpdateSource(source);
+  };
 
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
     const fetchLocationData = async () => {
-      if (!coordinates) return;
+      if (!coordinates || updateSource !== "auto") return;
 
       const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&limit=1&appid=${API_KEY}`;
       const data = await fetcher(url);
@@ -58,11 +70,10 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
       prevCoordinatesRef.current.latitude !== coordinates?.latitude ||
       prevCoordinatesRef.current.longitude !== coordinates?.longitude
     ) {
-      console.log("Going");
       fetchLocationData();
       prevCoordinatesRef.current = coordinates;
     }
-  }, [coordinates]);
+  }, [coordinates, updateSource]);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -76,7 +87,7 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
   }, []);
 
   const value = useMemo(
-    () => ({ coordinates, setCoordinates, location }),
+    () => ({ coordinates, setCoordinates: setCoordinatesWithSource, location }),
     [coordinates, location]
   );
 

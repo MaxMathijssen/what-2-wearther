@@ -49,7 +49,8 @@ function CurrentInformation() {
 
     if (json) {
       setStatus("success");
-      // setCoordinates({ latitude: json.lat, longitude: json.lon });
+      console.log(json[0].lat, json[0].lon);
+      setCoordinates({ latitude: json[0].lat, longitude: json[0].lon }, "user");
       setSearchInput("");
     } else {
       setStatus("error");
