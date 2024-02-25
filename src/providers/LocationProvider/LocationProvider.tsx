@@ -5,9 +5,9 @@ import {
   useState,
   createContext,
   useMemo,
+  useRef,
   PropsWithChildren,
 } from "react";
-import useSWR from "swr";
 import { API_KEY } from "@/helpers/constants";
 
 type Coordinates = {
@@ -16,85 +16,64 @@ type Coordinates = {
 };
 
 type Location = {
-  city: number;
-  country: number;
+  city: string;
+  country: string;
 };
 
 type LocationContextType = {
   coordinates: Coordinates | null;
+  location: Location | null;
 };
 
 export const LocationContext = createContext<LocationContextType>({
   coordinates: null,
+  location: null,
 });
 
-function LocationProvider({ children }: PropsWithChildren) {
+function LocationProvider({ children }: PropsWithChildren<{}>) {
   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
   const [location, setLocation] = useState<Location | null>(null);
-  const [shouldFetch, setShouldFetch] = useState(false);
+  const prevCoordinatesRef = useRef<Coordinates | null>(null);
 
-  const fetcher = (...args: Parameters<typeof fetch>) =>
-    fetch(...args).then((res) => res.json());
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position: {
-        coords: Coordinates;
-      }) {
-        const newCoordinates: Coordinates = {
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        };
-        const storedCoordinates =
-          window.localStorage.getItem("userCoordinates");
+    const fetchLocationData = async () => {
+      if (!coordinates) return;
 
-        if (storedCoordinates) {
-          return;
-        }
-
-        if (
-          !coordinates ||
-          (coordinates.latitude !== newCoordinates.latitude &&
-            coordinates.longitude !== newCoordinates.longitude)
-        ) {
-          localStorage.setItem(
-            "userCoordinates",
-            JSON.stringify(newCoordinates)
-          );
-          setCoordinates(newCoordinates);
-          console.log("Set coordinates", newCoordinates);
-        }
+      const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&limit=1&appid=${API_KEY}`;
+      const data = await fetcher(url);
+      setLocation({
+        city: data[0].name,
+        country: data[0].country,
       });
-    } else {
-      console.log("Geolocation is not available in your browser.");
+    };
+
+    if (
+      !prevCoordinatesRef.current ||
+      prevCoordinatesRef.current.latitude !== coordinates?.latitude ||
+      prevCoordinatesRef.current.longitude !== coordinates?.longitude
+    ) {
+      fetchLocationData();
+      prevCoordinatesRef.current = coordinates;
     }
   }, [coordinates]);
 
-  const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&limit=1&appid=${API_KEY}`;
-  const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
-    revalidateIfStale: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(({ coords }) => {
+        const { latitude, longitude } = coords;
+        setCoordinates({ latitude, longitude });
+      });
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, []);
 
-  if (isLoading) {
-    console.log("Fetching weather forecast data");
-  }
-
-  if (data) {
-    const location = data[0];
-
-    const locationData: Location = {
-      city: location.name,
-      country: location.country,
-    };
-
-    setLocation(locationData);
-  }
-
-  console.log(url, location);
-
-  const value = useMemo(() => ({ coordinates }), [coordinates]);
+  const value = useMemo(
+    () => ({ coordinates, location }),
+    [coordinates, location]
+  );
 
   return (
     <LocationContext.Provider value={value}>
