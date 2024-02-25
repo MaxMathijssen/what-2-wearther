@@ -8,6 +8,7 @@ import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
   const { location } = useContext(LocationContext);
+  const [searchInput, setSearchInput] = useState("");
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
 
   useEffect(() => {
@@ -25,14 +26,34 @@ function CurrentInformation() {
     <div className={styles.currentInformation}>
       {location && (
         <div className={styles.body}>
-          {`${currentDate}, `}
-          <strong>{location.city}</strong>
-          {` • ${currentTime}`}
+          <div className={styles.bodyText}>
+            {`${currentDate}, `}
+            <strong>{location.city}</strong>
+            {` • ${currentTime}`}
+          </div>
+          <div className={styles.formContainer}>
+            <form
+              onSubmit={(event) => {
+                event.preventDefault();
+              }}
+            >
+              <input
+                id="search-input"
+                className={styles.inputField}
+                value={searchInput}
+                onChange={(event) => {
+                  setSearchInput(event.target.value);
+                }}
+                placeholder="Search…"
+              />
+            </form>
+          </div>
+          <div className={styles.spacer}></div>{" "}
         </div>
       )}
       {!location && (
         <div className={classNames(styles.body, styles.placeholder)}>
-          Utrecht
+          Sunday 25 February, Utrecht • 2:59 PM
         </div>
       )}
     </div>
