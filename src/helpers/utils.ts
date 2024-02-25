@@ -44,6 +44,19 @@ export function getCurrentTimestamp(): number {
   return currentTimestampInSeconds;
 }
 
+export function getCurrentTime(): string {
+  const now = new Date();
+  let hours = now.getHours();
+  const minutes = now.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours %= 12;
+  hours = hours || 12;
+  const minutesStr = minutes < 10 ? `0${minutes}` : minutes.toString();
+
+  return `${hours}:${minutesStr} ${ampm}`;
+}
+
 export function getEndOfDayTimestamp(): number {
   const now = new Date();
   const endOfDay = new Date(

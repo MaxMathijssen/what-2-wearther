@@ -372,9 +372,11 @@ function HourlyForecastCard({
                             )}
                           >
                             <h2>
-                              {hourlyForecast.hour_index === 0
-                                ? "Now"
-                                : hourlyForecast.hour}
+                              {hourlyForecast.hour_index === 0 ? (
+                                <strong>Now</strong>
+                              ) : (
+                                hourlyForecast.hour
+                              )}
                             </h2>
                             <Image
                               src={hourlyForecast.iconPath}
