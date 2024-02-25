@@ -30,6 +30,7 @@ type LocationContextType = {
     source: "user" | "auto"
   ) => void;
   updateSource: string | null;
+  setLocation: Dispatch<SetStateAction<Location | null>>;
 };
 
 export const LocationContext = createContext<LocationContextType>({
@@ -37,6 +38,7 @@ export const LocationContext = createContext<LocationContextType>({
   setCoordinates: () => {},
   location: null,
   updateSource: null,
+  setLocation: () => {},
 });
 
 function LocationProvider({ children }: PropsWithChildren<{}>) {
@@ -57,10 +59,11 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
 
   useEffect(() => {
     const fetchLocationData = async () => {
-      if (!coordinates || updateSource !== "auto") return;
+      if (!coordinates) return;
 
       const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&limit=1&appid=${API_KEY}`;
       const data = await fetcher(url);
+      console.log(data[0].name, data[0].country);
       setLocation({
         city: data[0].name,
         country: data[0].country,
@@ -121,6 +124,7 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
       setCoordinates: setCoordinatesWithSource,
       location,
       updateSource,
+      setLocation,
     }),
     [coordinates, location]
   );

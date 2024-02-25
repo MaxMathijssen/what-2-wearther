@@ -9,7 +9,7 @@ import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
-  const { setCoordinates, location } = useContext(LocationContext);
+  const { setCoordinates, location, setLocation } = useContext(LocationContext);
   const { setSearched } = useContext(ForecastContext);
   const [searchInput, setSearchInput] = useState("");
   const [status, setStatus] = useState("idle");
