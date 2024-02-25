@@ -34,6 +34,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
   );
   const [selectedDailyForecast, setSelectedDailyForecast] =
     useState<DailyForecast | null>(null);
+  const [searched, setSearched] = useState<boolean>(false);
+  const [fetchKey, setFetchKey] = useState(null);
 
   function selectDailyForecast(dailyForecast: DailyForecast) {
     setSelectedDailyForecast(dailyForecast);
@@ -299,6 +301,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
       selectDailyForecast,
       error,
       isLoading,
+      setSearched,
     }),
     [selectedDailyForecast, weeklyForecast, error, isLoading]
   );

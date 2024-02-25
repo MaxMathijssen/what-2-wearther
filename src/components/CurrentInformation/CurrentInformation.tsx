@@ -4,11 +4,13 @@ import { useContext, useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { getFormattedDate, getCurrentTime } from "@/helpers/utils";
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../../providers/LocationProvider";
+import { ForecastContext } from "../../providers/ForecastProvider";
 import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
   const { setCoordinates, location } = useContext(LocationContext);
+  const { setSearched } = useContext(ForecastContext);
   const [searchInput, setSearchInput] = useState("");
   const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
@@ -52,6 +54,7 @@ function CurrentInformation() {
       console.log(json[0].lat, json[0].lon);
       setCoordinates({ latitude: json[0].lat, longitude: json[0].lon }, "user");
       setSearchInput("");
+      setSearched(true);
     } else {
       setStatus("error");
     }
