@@ -7,6 +7,8 @@ import {
   useMemo,
   useRef,
   PropsWithChildren,
+  SetStateAction,
+  Dispatch,
 } from "react";
 import { API_KEY } from "@/helpers/constants";
 
@@ -22,11 +24,13 @@ type Location = {
 
 type LocationContextType = {
   coordinates: Coordinates | null;
+  setCoordinates: Dispatch<SetStateAction<Coordinates | null>>;
   location: Location | null;
 };
 
 export const LocationContext = createContext<LocationContextType>({
   coordinates: null,
+  setCoordinates: () => {},
   location: null,
 });
 
@@ -54,6 +58,7 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
       prevCoordinatesRef.current.latitude !== coordinates?.latitude ||
       prevCoordinatesRef.current.longitude !== coordinates?.longitude
     ) {
+      console.log("Going");
       fetchLocationData();
       prevCoordinatesRef.current = coordinates;
     }
@@ -71,7 +76,7 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
   }, []);
 
   const value = useMemo(
-    () => ({ coordinates, location }),
+    () => ({ coordinates, setCoordinates, location }),
     [coordinates, location]
   );
 

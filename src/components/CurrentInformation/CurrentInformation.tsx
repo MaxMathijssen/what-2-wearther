@@ -2,15 +2,19 @@
 
 import { useContext, useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { getFormattedDate, getCurrentTime } from "@/helpers/utils";
+import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../../providers/LocationProvider";
 import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
-  const { location } = useContext(LocationContext);
+  const { setCoordinates, location } = useContext(LocationContext);
   const [searchInput, setSearchInput] = useState("");
+  const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
+
+  const endPoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=1&appid=${API_KEY}`;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -23,7 +27,7 @@ function CurrentInformation() {
   }, []);
   const currentDate = getFormattedDate();
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setValidationMessage("");
 
@@ -38,7 +42,18 @@ function CurrentInformation() {
       return;
     }
 
-    setSearchInput("");
+    setStatus("loading");
+
+    const response = await fetch(endPoint);
+    const json = await response.json();
+
+    if (json) {
+      setStatus("success");
+      // setCoordinates({ latitude: json.lat, longitude: json.lon });
+      setSearchInput("");
+    } else {
+      setStatus("error");
+    }
   }
 
   function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
@@ -62,10 +77,13 @@ function CurrentInformation() {
               <div className={styles.inputContainer}>
                 <input
                   id="search-input"
+                  disabled={status === "loading"}
                   className={styles.inputField}
                   value={searchInput}
                   onChange={handleOnChange}
-                  placeholder="Search…"
+                  placeholder={
+                    status === "loading" ? "Submitting…" : "Search..."
+                  }
                 />
                 {validationMessage && (
                   <div
