@@ -35,7 +35,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const [selectedDailyForecast, setSelectedDailyForecast] =
     useState<DailyForecast | null>(null);
   const [searched, setSearched] = useState<boolean>(false);
-  const [fetchKey, setFetchKey] = useState(null);
 
   function selectDailyForecast(dailyForecast: DailyForecast) {
     setSelectedDailyForecast(dailyForecast);
@@ -73,10 +72,17 @@ function ForecastProvider({ children }: PropsWithChildren) {
 
   let shouldFetch: boolean = false;
   if (
-    (weeklyForecast === null && coordinates !== null) ||
-    (weeklyForecast !== null &&
+    (updateSource === "auto" &&
+      weeklyForecast === null &&
+      coordinates !== null) ||
+    (updateSource === "auto" &&
+      weeklyForecast !== null &&
       getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
   ) {
+    shouldFetch = true;
+  }
+
+  if (updateSource === "user" && searched) {
     shouldFetch = true;
   }
 
@@ -216,6 +222,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   }
 
   if (data && coordinates !== null) {
+    setSearched(false);
     for (let i = 0; i < 7; i++) {
       const dailyForecast: DailyForecast = {
         dt: data.daily[i].dt,
