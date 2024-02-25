@@ -53,7 +53,7 @@ function HourlyForecastCard({
             hourlyForecastArr
           );
           return hourlyForecastArr;
-        } else if (dailyForecast.day_num === 1 || 2) {
+        } else if (dailyForecast.day_num === 1) {
           fillVisibleHours(
             true,
             9,
@@ -62,6 +62,42 @@ function HourlyForecastCard({
             hourlyForecastArr
           );
           return hourlyForecastArr;
+        } else if (dailyForecast.day_num === 2) {
+          if (
+            dailyForecast.hourly_forecast.length >
+            HOURLY_FORECAST_LENGTH * 2
+          ) {
+            fillVisibleHours(
+              true,
+              9,
+              dailyForecast,
+              nextDailyForecast,
+              hourlyForecastArr
+            );
+            return hourlyForecastArr;
+          } else if (
+            dailyForecast.hourly_forecast.length < HOURLY_FORECAST_LENGTH
+          ) {
+            fillVisibleHours(
+              true,
+              0,
+              dailyForecast,
+              nextDailyForecast,
+              hourlyForecastArr
+            );
+            return hourlyForecastArr;
+          } else if (
+            dailyForecast.hourly_forecast.length > HOURLY_FORECAST_LENGTH
+          ) {
+            fillVisibleHours(
+              false,
+              dailyForecast.hourly_forecast.length - 1,
+              dailyForecast,
+              nextDailyForecast,
+              hourlyForecastArr
+            );
+            return hourlyForecastArr;
+          }
         } else return null;
       }
       return null;
@@ -83,6 +119,8 @@ function HourlyForecastCard({
       }
     }
   }, [dailyForecast, getVisibleHourlyForecast]);
+
+  console.log(visibleHourlyForecast);
 
   function fillVisibleHours(
     next: boolean,

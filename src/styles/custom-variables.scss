@@ -29,6 +29,11 @@ $brand-grey: grey;
   animation: pulse 1000ms ease-in-out infinite alternate;
 }
 
+.placeholder {
+  font-family: var(--font-family-loading);
+  animation: pulse 1000ms ease-in-out infinite alternate;
+}
+
 @keyframes pulse {
   from {
     opacity: 0.5;

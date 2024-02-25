@@ -1,4 +1,4 @@
-import { DAYS_OF_WEEK } from "./constants";
+import { DAYS_OF_WEEK, MONTHS_OF_YEAR } from "./constants";
 
 export function range(start: number, end?: number, step: number = 1): number[] {
   let output: number[] = [];
@@ -27,6 +27,15 @@ export function getDayNames(): string[] {
     }
   }
   return days;
+}
+
+export function getFormattedDate(): string {
+  const currentDate = new Date();
+  const dayName = DAYS_OF_WEEK[currentDate.getDay()];
+  const date = currentDate.getDate();
+  const monthName = MONTHS_OF_YEAR[currentDate.getMonth()];
+
+  return `${dayName} ${date} ${monthName}`;
 }
 
 export function getCurrentTimestamp(): number {
