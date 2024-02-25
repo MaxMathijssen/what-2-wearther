@@ -10,7 +10,6 @@ function HourlyForecastIndicator({
   valueStart,
   valueEnd,
 }: HourlyForecastIndicatorProps) {
-  console.log(valueStart, valueEnd);
   const totalRange = 47;
   const highlightStartPercentage =
     ((valueStart === valueEnd ? valueStart - 1 : valueStart) / totalRange) *

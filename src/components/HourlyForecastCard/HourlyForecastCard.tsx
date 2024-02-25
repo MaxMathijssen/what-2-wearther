@@ -120,8 +120,6 @@ function HourlyForecastCard({
     }
   }, [dailyForecast, getVisibleHourlyForecast]);
 
-  console.log(visibleHourlyForecast);
-
   function fillVisibleHours(
     next: boolean,
     startHourIndex: number,
@@ -170,6 +168,9 @@ function HourlyForecastCard({
         }
       }
       if (next === false) {
+        if (nextDailyForecast === undefined) {
+          return;
+        }
         const newStartIndex = nextDailyForecast.hourly_forecast.length - 1;
         for (
           let i = newStartIndex;
@@ -225,6 +226,7 @@ function HourlyForecastCard({
               nextVisibleHours
             );
             if (nextVisibleHours.length === 0) {
+              setVisibleHourlyForecast(null);
               selectDailyForecast(nextDailyForecast, null);
               return;
             }
@@ -267,7 +269,7 @@ function HourlyForecastCard({
             nextVisibleHours
           );
 
-          setVisibleHourlyForecast(nextVisibleHours.reverse());
+          setVisibleHourlyForecast(nextVisibleHours);
           selectDailyForecast(nextDailyForecast, nextVisibleHours);
         }
       } else if (dailyForecast.hourly_forecast.length === 0) {
@@ -275,6 +277,21 @@ function HourlyForecastCard({
       }
     }
   }
+
+  function checkPrevButtonVisibility() {
+    if (visibleHourlyForecast === null) {
+      return true;
+    }
+    if (visibleHourlyForecast[0]?.hour_index === 0) {
+      return false;
+    }
+    if (dailyForecast !== null) {
+      return true;
+    }
+    return false;
+  }
+
+  const prevButtonVisible = checkPrevButtonVisibility();
 
   return (
     <>
@@ -325,7 +342,7 @@ function HourlyForecastCard({
                   </div>
                 )}
               <div className={styles.bottomRow}>
-                {dailyForecast.day_num !== 0 && (
+                {prevButtonVisible && (
                   <div
                     className={styles.btnPrevHours}
                     onClick={() => handleNextHours(false)}

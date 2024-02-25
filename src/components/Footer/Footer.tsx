@@ -16,7 +16,7 @@ function Footer() {
           className={styles.mainLogo}
         />
         <p className={styles.disclaimer}>
-          Copyright © 2099 What2Wearther Inc. All Rights Reserved.
+          Copyright © 2024 What2Weather Inc. All Rights Reserved.
         </p>
       </div>
 
