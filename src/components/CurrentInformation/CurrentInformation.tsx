@@ -38,9 +38,9 @@ function CurrentInformation() {
       return;
     }
 
-    const lettersOnly = /^[A-Za-z]+$/;
-    if (!searchInput.match(lettersOnly)) {
-      setValidationMessage("Please enter only letters");
+    const lettersAndSpacesOnly = /^[A-Za-z\s]+$/;
+    if (!searchInput.match(lettersAndSpacesOnly)) {
+      setValidationMessage("Please enter only letters and spaces");
       return;
     }
 
@@ -49,15 +49,15 @@ function CurrentInformation() {
     const response = await fetch(endPoint);
     const json = await response.json();
 
-    if (json) {
+    if (json && json.length > 0) {
       setStatus("success");
       console.log(json[0].lat, json[0].lon);
       setCoordinates({ latitude: json[0].lat, longitude: json[0].lon }, "user");
-      prevLocation.current = location;
       setSearchInput("");
       setSearched(true);
     } else {
       setStatus("error");
+      setValidationMessage("Location not found");
     }
   }
 
