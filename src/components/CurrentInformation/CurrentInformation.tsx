@@ -9,8 +9,8 @@ import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
-  const { setCoordinates, location, setLocation } = useContext(LocationContext);
-  const { setSearched } = useContext(ForecastContext);
+  const { setCoordinates, location } = useContext(LocationContext);
+  const { setSearched, prevLocation } = useContext(ForecastContext);
   const [searchInput, setSearchInput] = useState("");
   const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
@@ -53,6 +53,7 @@ function CurrentInformation() {
       setStatus("success");
       console.log(json[0].lat, json[0].lon);
       setCoordinates({ latitude: json[0].lat, longitude: json[0].lon }, "user");
+      prevLocation.current = location;
       setSearchInput("");
       setSearched(true);
     } else {

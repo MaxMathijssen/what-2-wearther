@@ -6,6 +6,7 @@ import {
   useState,
   useEffect,
   useMemo,
+  useRef,
   PropsWithChildren,
 } from "react";
 import { LocationContext } from "../LocationProvider";
@@ -25,6 +26,11 @@ export const ForecastContext = createContext<number | any | boolean | null>(
   null
 );
 
+type Location = {
+  city: string;
+  country: string;
+};
+
 const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
@@ -39,6 +45,8 @@ function ForecastProvider({ children }: PropsWithChildren) {
   function selectDailyForecast(dailyForecast: DailyForecast) {
     setSelectedDailyForecast(dailyForecast);
   }
+  const prevLocation = useRef<Location | null>(null);
+  const { coordinates, updateSource, location } = useContext(LocationContext);
 
   useEffect(() => {
     const storedWeeklyForecast = window.localStorage.getItem("weeklyForecast");
@@ -68,10 +76,13 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const { coordinates, updateSource } = useContext(LocationContext);
+  console.log(prevLocation, location);
 
   let shouldFetch: boolean = false;
   if (
+    (prevLocation.current !== null &&
+      location !== null &&
+      prevLocation.current.city !== location.city) ||
     (updateSource === "auto" &&
       weeklyForecast === null &&
       coordinates !== null) ||
@@ -80,6 +91,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
       getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
   ) {
     shouldFetch = true;
+    prevLocation.current = null;
   }
 
   if (updateSource === "user" && searched) {
@@ -309,6 +321,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
       error,
       isLoading,
       setSearched,
+      prevLocation,
     }),
     [selectedDailyForecast, weeklyForecast, error, isLoading]
   );
