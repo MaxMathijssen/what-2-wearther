@@ -81,7 +81,34 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(({ coords }) => {
         const { latitude, longitude } = coords;
+
+        const newCoordinates: Coordinates = {
+          latitude: latitude,
+          longitude: longitude,
+        };
+
+        const storedCoordinates =
+          window.localStorage.getItem("userCoordinates");
+
+        if (storedCoordinates) {
+          const parsedStoredCoordinates: Coordinates =
+            JSON.parse(storedCoordinates);
+
+          if (
+            parsedStoredCoordinates.latitude !== newCoordinates.latitude &&
+            parsedStoredCoordinates.longitude !== newCoordinates.longitude
+          ) {
+            localStorage.setItem(
+              "userCoordinates",
+              JSON.stringify(newCoordinates)
+            );
+            setCoordinates({ latitude, longitude });
+            console.log("Updating coordinates", newCoordinates);
+            return;
+          }
+        }
         setCoordinates({ latitude, longitude });
+        console.log("Set new coordinates", newCoordinates);
       });
     } else {
       console.error("Geolocation is not supported by this browser.");
