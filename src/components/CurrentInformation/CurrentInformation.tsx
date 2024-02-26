@@ -10,7 +10,7 @@ import styles from "./CurrentInformation.module.scss";
 
 function CurrentInformation() {
   const { setCoordinates, location } = useContext(LocationContext);
-  const { setSearched, prevLocation } = useContext(ForecastContext);
+  const { setSearched } = useContext(ForecastContext);
   const [searchInput, setSearchInput] = useState("");
   const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
@@ -27,6 +27,7 @@ function CurrentInformation() {
       clearInterval(timer);
     };
   }, []);
+
   const currentDate = getFormattedDate();
 
   async function handleSubmit(event: FormEvent) {
@@ -52,7 +53,8 @@ function CurrentInformation() {
     if (json && json.length > 0) {
       setStatus("success");
       console.log(json[0].lat, json[0].lon);
-      setCoordinates({ latitude: json[0].lat, longitude: json[0].lon }, "user");
+      const newCoordinates = { latitude: json[0].lat, longitude: json[0].lon };
+      setCoordinates(newCoordinates, "user");
       setSearchInput("");
       setSearched(true);
     } else {

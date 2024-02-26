@@ -76,13 +76,10 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  console.log(prevLocation, location);
+  console.log(prevLocation.current?.city, location?.city);
 
   let shouldFetch: boolean = false;
   if (
-    (prevLocation.current !== null &&
-      location !== null &&
-      prevLocation.current.city !== location.city) ||
     (updateSource === "auto" &&
       weeklyForecast === null &&
       coordinates !== null) ||
@@ -91,7 +88,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
       getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
   ) {
     shouldFetch = true;
-    prevLocation.current = null;
   }
 
   if (updateSource === "user" && searched) {

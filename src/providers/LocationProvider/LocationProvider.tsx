@@ -63,7 +63,6 @@ function LocationProvider({ children }: PropsWithChildren<{}>) {
 
       const url = `http://api.openweathermap.org/geo/1.0/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&limit=1&appid=${API_KEY}`;
       const data = await fetcher(url);
-      console.log(data[0].name, data[0].country);
       setLocation({
         city: data[0].name,
         country: data[0].country,
