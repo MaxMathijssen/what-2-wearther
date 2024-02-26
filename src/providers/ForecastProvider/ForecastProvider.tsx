@@ -26,11 +26,6 @@ export const ForecastContext = createContext<number | any | boolean | null>(
   null
 );
 
-type Location = {
-  city: string;
-  country: string;
-};
-
 const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
@@ -45,7 +40,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   function selectDailyForecast(dailyForecast: DailyForecast) {
     setSelectedDailyForecast(dailyForecast);
   }
-  const prevLocation = useRef<Location | null>(null);
+
   const { coordinates, updateSource, location } = useContext(LocationContext);
 
   useEffect(() => {
@@ -76,8 +71,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  console.log(prevLocation.current?.city, location?.city);
-
   let shouldFetch: boolean = false;
   if (
     (updateSource === "auto" &&
@@ -93,6 +86,32 @@ function ForecastProvider({ children }: PropsWithChildren) {
   if (updateSource === "user" && searched) {
     shouldFetch = true;
   }
+
+  useEffect(() => {
+    const storedSearchLocation = window.localStorage.getItem("searchLocation");
+    if (storedSearchLocation) {
+      const parsedSearchLocation: string = JSON.parse(storedSearchLocation);
+      console.log(
+        location,
+        parsedSearchLocation,
+        location !== undefined &&
+          location !== null &&
+          parsedSearchLocation !== null
+      );
+      if (
+        location !== undefined &&
+        location !== null &&
+        parsedSearchLocation !== null
+      ) {
+        if (location.city !== parsedSearchLocation) {
+          console.log("Fetchn");
+          shouldFetch = true;
+        }
+      }
+    }
+  }, [location]);
+
+  console.log(shouldFetch);
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
@@ -317,7 +336,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
       error,
       isLoading,
       setSearched,
-      prevLocation,
     }),
     [selectedDailyForecast, weeklyForecast, error, isLoading]
   );
