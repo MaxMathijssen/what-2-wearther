@@ -55,7 +55,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
   }, []);
 
-  const checkFetchConditions = () => {
+  const shouldFetch = useMemo(() => {
     if (
       (updateSource === "auto" &&
         weeklyForecast === null &&
@@ -81,9 +81,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
     } else {
       return false;
     }
-  };
-
-  const shouldFetch = checkFetchConditions();
+  }, [weeklyForecast, updateSource, location]);
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
@@ -105,32 +103,22 @@ function ForecastProvider({ children }: PropsWithChildren) {
         location: location?.city,
         forecast: mappedForecast,
       };
-      console.log("Stored weeklyForecast", weeklyForecastToStore);
-      window.localStorage.setItem(
-        "weeklyForecast",
-        JSON.stringify(weeklyForecastToStore)
-      );
-      setWeeklyForecast(weeklyForecastToStore);
-      setSelectedDailyForecast(mappedForecast[0]);
-    }
 
-    if (
-      mappedForecast !== null &&
-      JSON.stringify(mappedForecast) !==
-        JSON.stringify(weeklyForecast?.forecast)
-    ) {
-      console.log("Updating forecast data");
-      const weeklyForecastToStore = {
-        location: location?.city,
-        forecast: mappedForecast,
-      };
-      setWeeklyForecast(weeklyForecastToStore);
-      setSelectedDailyForecast(mappedForecast[0]);
-      window.localStorage.removeItem("weeklyForecast");
-      window.localStorage.setItem(
-        "weeklyForecast",
-        JSON.stringify(weeklyForecastToStore)
-      );
+      const isForecastDifferent =
+        JSON.stringify(mappedForecast) !==
+        JSON.stringify(weeklyForecast?.forecast);
+
+      if (isForecastDifferent) {
+        console.log("Updating forecast data");
+
+        setWeeklyForecast(weeklyForecastToStore);
+        setSelectedDailyForecast(mappedForecast[0]);
+
+        window.localStorage.setItem(
+          "weeklyForecast",
+          JSON.stringify(weeklyForecastToStore)
+        );
+      }
     }
   }
 
