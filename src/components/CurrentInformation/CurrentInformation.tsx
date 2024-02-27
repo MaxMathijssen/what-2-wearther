@@ -107,8 +107,27 @@ function CurrentInformation() {
         </div>
       )}
       {!location && (
-        <div className={classNames(styles.body, styles.placeholder)}>
-          Sunday 25 February, Utrecht • 2:59 PM
+        <div className={styles.body}>
+          <div className={styles.body}>
+            <div className={classNames(styles.bodyText, styles.placeholder)}>
+              Sunday 25 February, Utrecht • 2:59 PM
+            </div>
+            <div className={styles.formContainer}>
+              <form>
+                <div className={styles.inputContainer}>
+                  <input
+                    disabled={true}
+                    className={classNames(
+                      styles.inputFieldPlaceholder,
+                      styles.placeholder
+                    )}
+                    placeholder={"Search..."}
+                  />
+                </div>
+              </form>
+            </div>
+            <div className={styles.spacer}></div>{" "}
+          </div>
         </div>
       )}
     </div>

@@ -6,16 +6,16 @@
   justify-content: left;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(142, 202, 230, 0.5); // Semi-transparent background
-  backdrop-filter: blur(10px); // Blur effect for the background
-  -webkit-backdrop-filter: blur(10px); // For Safari
+  background: rgba(142, 202, 230, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 20px;
   padding-left: 40px;
   font-family: var(--font-family-header);
   height: 60px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: white;
-  border-bottom: 1px solid hsl(260deg 50% 50% / 0.1); // Optional, adjust as needed
+  border-bottom: 1px solid hsl(260deg 50% 50% / 0.1);
 }
 
 .body {
@@ -25,11 +25,12 @@
 }
 
 .bodyText {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   flex: 1;
   white-space: nowrap;
   text-align: left;
+  max-width: 275px;
 }
 
 .formContainer {
@@ -69,6 +70,7 @@
   background-repeat: no-repeat;
   background-size: 20px;
   margin-bottom: 5px;
+  width: 80%;
 
   &:focus {
     border: 1px solid $brand-01;
@@ -77,6 +79,11 @@
 
   &::placeholder {
     color: brand-grey;
+    font-style: italic;
+  }
+
+  &:focus::placeholder {
+    color: transparent;
   }
 }
 
@@ -91,4 +98,26 @@
 
 .validationMessage.show {
   overflow: visible;
+}
+
+.inputFieldPlaceholder {
+  height: 20px;
+  font-family: var(--font-family-header);
+  font-size: 1rem;
+  padding: 10px 25px;
+  border: 0.5px solid $brand-grey;
+  border-radius: 30px;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+  margin-bottom: 5px;
+  width: 80%;
+  animation: pulse 1000ms ease-in-out infinite alternate;
+  background: linear-gradient(to right, #eeeeee 25%, #dddddd 50%, #eeeeee 75%);
+
+  &::placeholder {
+    color: brand-grey;
+    font-style: italic;
+    font-family: var(--font-family-loading);
+  }
 }
