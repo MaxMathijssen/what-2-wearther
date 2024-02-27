@@ -1,4 +1,4 @@
-import { useCallback, memo } from "react";
+import { useCallback, memo, useEffect, useState } from "react";
 import { DailyForecast } from "@/typings/types";
 import Image from "next/legacy/image";
 
@@ -31,9 +31,6 @@ function WeatherCard({
   const cardStyle = isSelected
     ? {
         background: gradient,
-        opacity: 1,
-        zIndex: 1,
-        boxShadow: "0px 0px 6px 6px rgba(2, 176, 224, 0.5)",
       }
     : {};
 
