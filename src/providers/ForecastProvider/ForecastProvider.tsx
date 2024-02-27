@@ -6,7 +6,6 @@ import {
   useState,
   useEffect,
   useMemo,
-  useRef,
   PropsWithChildren,
 } from "react";
 import { LocationContext } from "../LocationProvider";
@@ -30,9 +29,10 @@ const fetcher = (...args: Parameters<typeof fetch>) =>
   fetch(...args).then((res) => res.json());
 
 function ForecastProvider({ children }: PropsWithChildren) {
-  const [weeklyForecast, setWeeklyForecast] = useState<DailyForecast[] | null>(
-    null
-  );
+  const [weeklyForecast, setWeeklyForecast] = useState<{
+    location: string | undefined;
+    forecast: DailyForecast[];
+  } | null>(null);
   const [selectedDailyForecast, setSelectedDailyForecast] =
     useState<DailyForecast | null>(null);
   const [searched, setSearched] = useState<boolean>(false);
@@ -50,20 +50,10 @@ function ForecastProvider({ children }: PropsWithChildren) {
       try {
         const parsedWeeklyForecast = JSON.parse(storedWeeklyForecast);
 
-        if (
-          parsedWeeklyForecast &&
-          Array.isArray(parsedWeeklyForecast) &&
-          parsedWeeklyForecast.every(
-            (item) =>
-              typeof item === "object" &&
-              "day" in item &&
-              "temp" in item &&
-              "weather" in item
-          )
-        ) {
+        if (parsedWeeklyForecast) {
           console.log("Parsed weeklyForecast", parsedWeeklyForecast);
           setWeeklyForecast(parsedWeeklyForecast);
-          setSelectedDailyForecast(parsedWeeklyForecast[0]);
+          setSelectedDailyForecast(parsedWeeklyForecast.forecast[0]);
         }
       } catch (error) {
         console.error("Error parsing stored weekly forecast:", error);
@@ -72,13 +62,23 @@ function ForecastProvider({ children }: PropsWithChildren) {
   }, []);
 
   let shouldFetch: boolean = false;
+
   if (
     (updateSource === "auto" &&
       weeklyForecast === null &&
       coordinates !== null) ||
     (updateSource === "auto" &&
       weeklyForecast !== null &&
-      getCurrentTimestamp() - weeklyForecast[0].dt > REFRESH_TIME_MIN * 60)
+      getCurrentTimestamp() - weeklyForecast.forecast[0].dt >
+        REFRESH_TIME_MIN * 60)
+  ) {
+    shouldFetch = true;
+  }
+
+  if (
+    location !== null &&
+    weeklyForecast !== null &&
+    location.city !== weeklyForecast.location
   ) {
     shouldFetch = true;
   }
@@ -86,32 +86,6 @@ function ForecastProvider({ children }: PropsWithChildren) {
   if (updateSource === "user" && searched) {
     shouldFetch = true;
   }
-
-  useEffect(() => {
-    const storedSearchLocation = window.localStorage.getItem("searchLocation");
-    if (storedSearchLocation) {
-      const parsedSearchLocation: string = JSON.parse(storedSearchLocation);
-      console.log(
-        location,
-        parsedSearchLocation,
-        location !== undefined &&
-          location !== null &&
-          parsedSearchLocation !== null
-      );
-      if (
-        location !== undefined &&
-        location !== null &&
-        parsedSearchLocation !== null
-      ) {
-        if (location.city !== parsedSearchLocation) {
-          console.log("Fetchn");
-          shouldFetch = true;
-        }
-      }
-    }
-  }, [location]);
-
-  console.log(shouldFetch);
 
   const url = `https://api.openweathermap.org/data/3.0/onecall?lat=${coordinates?.latitude}&lon=${coordinates?.longitude}&exclude=minutely,alerts&units=metric&appid=${API_KEY}`;
   const { data, error, isLoading } = useSWR(shouldFetch ? url : null, fetcher, {
@@ -304,26 +278,35 @@ function ForecastProvider({ children }: PropsWithChildren) {
     }
 
     if (newWeeklyForecast !== null) {
-      console.log("Stored weeklyForecast", newWeeklyForecast);
+      const weeklyForecastToStore = {
+        location: location?.city,
+        forecast: newWeeklyForecast,
+      };
+      console.log("Stored weeklyForecast", weeklyForecastToStore);
       window.localStorage.setItem(
         "weeklyForecast",
-        JSON.stringify(newWeeklyForecast)
+        JSON.stringify(weeklyForecastToStore)
       );
-      setWeeklyForecast(newWeeklyForecast);
+      setWeeklyForecast(weeklyForecastToStore);
       setSelectedDailyForecast(newWeeklyForecast[0]);
     }
 
     if (
       newWeeklyForecast !== null &&
-      JSON.stringify(newWeeklyForecast) !== JSON.stringify(weeklyForecast)
+      JSON.stringify(newWeeklyForecast) !==
+        JSON.stringify(weeklyForecast?.forecast)
     ) {
       console.log("Updating forecast data");
-      setWeeklyForecast(newWeeklyForecast);
+      const weeklyForecastToStore = {
+        location: location?.city,
+        forecast: newWeeklyForecast,
+      };
+      setWeeklyForecast(weeklyForecastToStore);
       setSelectedDailyForecast(newWeeklyForecast[0]);
       window.localStorage.removeItem("weeklyForecast");
       window.localStorage.setItem(
         "weeklyForecast",
-        JSON.stringify(newWeeklyForecast)
+        JSON.stringify(weeklyForecastToStore)
       );
     }
   }
@@ -331,7 +314,7 @@ function ForecastProvider({ children }: PropsWithChildren) {
   const contextValue = useMemo(
     () => ({
       selectedDailyForecast,
-      weeklyForecast,
+      weeklyForecast: weeklyForecast?.forecast ?? [],
       selectDailyForecast,
       error,
       isLoading,

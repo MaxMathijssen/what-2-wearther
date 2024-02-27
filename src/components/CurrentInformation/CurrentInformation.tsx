@@ -52,7 +52,6 @@ function CurrentInformation() {
 
     if (json && json.length > 0) {
       setStatus("success");
-      localStorage.setItem("searchLocation", JSON.stringify(searchInput));
       const newCoordinates = { latitude: json[0].lat, longitude: json[0].lon };
       setCoordinates(newCoordinates, "user");
       setSearchInput("");
