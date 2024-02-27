@@ -52,18 +52,19 @@ function WeeklyForecast(): React.JSX.Element {
             />
           );
         })}
-      {!weeklyForecast &&
-        range(0, 7).map((index) => (
-          <div key={index} className={styles.weatherCardContainer}>
-            <WeatherCard
-              isSelected={false}
-              key={index}
-              isError={false}
-              isPlaceHolder={true}
-              dailyForecast={null}
-            />
-          </div>
-        ))}
+      {!weeklyForecast ||
+        (weeklyForecast.length === 0 &&
+          range(0, 7).map((index) => (
+            <div key={index} className={styles.weatherCardContainer}>
+              <WeatherCard
+                isSelected={false}
+                key={index}
+                isError={false}
+                isPlaceHolder={true}
+                dailyForecast={null}
+              />
+            </div>
+          )))}
     </div>
   );
 }
