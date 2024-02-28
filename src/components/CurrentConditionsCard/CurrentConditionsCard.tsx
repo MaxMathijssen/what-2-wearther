@@ -18,10 +18,10 @@ function CurrentConditionsCard({
     <>
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>Current Conditions</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div className={styles.imagePlaceholder}></div>
             <h1>Rain</h1>
             <h2>15°`</h2>
@@ -32,14 +32,14 @@ function CurrentConditionsCard({
 
       {dailyForecast && (
         <div className={styles.card}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>
               {dailyForecast?.day === "Today"
                 ? "Current Conditions"
                 : "Overall Conditions"}
             </h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <Image
               key={dailyForecast.day}
               className={styles.fadeIn}

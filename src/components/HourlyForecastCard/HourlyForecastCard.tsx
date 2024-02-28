@@ -298,10 +298,10 @@ function HourlyForecastCard({
       {isPlaceHolder && (
         <div className={styles.cardContainer}>
           <div className={classNames(styles.card, styles.placeholder)}>
-            <div className={classNames(styles.cardSection, styles.header)}>
+            <div className={styles.header}>
               <h1>Hourly Forecast</h1>
             </div>
-            <div className={classNames(styles.cardSection, styles.body)}>
+            <div className={styles.body}>
               <div className={styles.topRow}></div>
               <div className={styles.bottomRow}>
                 {range(HOURLY_FORECAST_LENGTH).map((index) => (
@@ -320,11 +320,11 @@ function HourlyForecastCard({
       {dailyForecast && (
         <div className={styles.cardContainer}>
           <div className={styles.card}>
-            <div className={classNames(styles.cardSection, styles.header)}>
+            <div className={styles.header}>
               <h1>Hourly Forecast</h1>
             </div>
             <div
-              className={classNames(styles.cardSection, styles.body, {
+              className={classNames(styles.body, {
                 [styles.centerContent]:
                   dailyForecast && dailyForecast.hourly_forecast.length === 0,
               })}

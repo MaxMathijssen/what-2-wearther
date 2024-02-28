@@ -20,10 +20,10 @@ function DailyConditionsCard({
     <>
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>{title}</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div className={styles.topRow}>
               <div className={styles.topItem}>
                 <h3>Sunrise</h3>
@@ -56,10 +56,10 @@ function DailyConditionsCard({
 
       {dailyForecast && (
         <div className={styles.card}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>{title}</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div
               key={dailyForecast.day}
               className={classNames(styles.topRow, styles.fadeIn)}

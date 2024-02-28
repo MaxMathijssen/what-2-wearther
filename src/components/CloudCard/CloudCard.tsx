@@ -17,10 +17,10 @@ function CloudCard({
     <>
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>Cloud Cover</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div className={styles.imagePlaceholder}></div>
             <h1>50%</h1>
           </div>
@@ -28,10 +28,10 @@ function CloudCard({
       )}
       {dailyForecast && (
         <div className={styles.card}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>Cloud Cover</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div
               key={dailyForecast.day}
               className={classNames(styles.bodyContent, styles.fadeIn)}

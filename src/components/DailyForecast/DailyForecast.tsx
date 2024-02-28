@@ -57,6 +57,8 @@ function DailyForecast(): React.JSX.Element {
             <HourlyForecastCard isPlaceHolder={true} dailyForecast={null} />
           </div>
 
+          <div className={styles.middleRow}></div>
+
           <div className={styles.bottomRow}>
             <DailyConditionsCard
               title="Mockday"

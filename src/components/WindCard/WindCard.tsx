@@ -19,10 +19,10 @@ function WindCard({
     <>
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>{title}</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div className={styles.leftColumn}></div>
             <div className={styles.middleColumn}>
               <h2>Speed</h2>
@@ -40,10 +40,10 @@ function WindCard({
 
       {dailyForecast && (
         <div className={styles.card}>
-          <div className={classNames(styles.cardSection, styles.header)}>
+          <div className={styles.header}>
             <h1>{title}</h1>
           </div>
-          <div className={classNames(styles.cardSection, styles.body)}>
+          <div className={styles.body}>
             <div
               key={dailyForecast.day}
               className={classNames(styles.leftColumn, styles.fadeIn)}
