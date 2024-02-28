@@ -3,7 +3,6 @@
 .card {
   height: auto;
   display: grid;
-  grid-template-rows: 2fr 7fr;
   width: 100%;
   max-width: 250px;
   margin-right: 0px;
@@ -13,12 +12,11 @@
 
 .body {
   display: flex;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  padding: 0px 20px 20px 20px;
+  align-items: center; // This centers horizontally, good for when flex-direction is row
+  justify-content: center; // This centers vertically in the current column setup
+  padding: 20px; // Adjusted padding, assuming you want it on all sides
   background-color: $brand-white;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: column; // Keeps your items stacked vertically
 }
 
 .card .header h1 {
