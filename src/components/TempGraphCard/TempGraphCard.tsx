@@ -13,7 +13,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
     dailyForecast && (
       <div className={styles.card}>
         <div className={styles.header}>
-          <h1></h1>
+          <h1>Temperature</h1>
         </div>
         <div className={styles.body}></div>
       </div>

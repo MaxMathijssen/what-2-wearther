@@ -5,6 +5,7 @@ import styles from "./dailyForecast.module.scss";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
 import DailyConditionsCard from "../DailyConditionsCard";
+import TempGraphCard from "../TempGraphCard";
 import HourlyForecastCard from "../HourlyForecastCard";
 import WindCard from "../WindCard";
 import CloudCard from "../CloudCard";
@@ -22,6 +23,13 @@ function DailyForecast(): React.JSX.Element {
               dailyForecast={selectedDailyForecast}
             />
             <HourlyForecastCard
+              isPlaceHolder={false}
+              dailyForecast={selectedDailyForecast}
+            />
+          </div>
+
+          <div className={styles.middleRow}>
+            <TempGraphCard
               isPlaceHolder={false}
               dailyForecast={selectedDailyForecast}
             />
@@ -57,7 +65,9 @@ function DailyForecast(): React.JSX.Element {
             <HourlyForecastCard isPlaceHolder={true} dailyForecast={null} />
           </div>
 
-          <div className={styles.middleRow}></div>
+          <div className={styles.middleRow}>
+            <TempGraphCard isPlaceHolder={true} dailyForecast={null} />
+          </div>
 
           <div className={styles.bottomRow}>
             <DailyConditionsCard
