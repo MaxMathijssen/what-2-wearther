@@ -1,19 +1,15 @@
 @import "../../styles/custom-variables.scss";
 
 .card {
-  height: auto;
-  display: grid;
   width: 100%;
-  max-width: 250px;
   margin-right: 0px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
   max-width: none; // Remove the max-width constraint
 }
 
 .body {
+  height: 250px;
   display: flex;
-  align-items: center; // This centers horizontally, good for when flex-direction is row
-  justify-content: center; // This centers vertically in the current column setup
   padding: 20px; // Adjusted padding, assuming you want it on all sides
   background-color: $brand-white;
   flex-direction: column; // Keeps your items stacked vertically
