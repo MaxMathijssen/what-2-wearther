@@ -65,7 +65,7 @@ function mapForecast(data: any): DailyForecast[] {
     }
     // Drizzle & Rain
     else if (/^3/.test(id) || /^5/.test(id)) {
-      return `rgba(23,51,168, ${opacity})`;
+      return `rgba(103, 152, 192, ${opacity})`;
     }
     // Snow
     else if (/^6/.test(id)) {
@@ -77,7 +77,7 @@ function mapForecast(data: any): DailyForecast[] {
     }
     // Sun
     else if (/^800$/.test(id)) {
-      return `rgba(2, 204, 254, ${opacity})`;
+      return `rgba(153, 214, 234, ${opacity})`;
     }
     // Clouds
     else if (/^80/.test(id)) {

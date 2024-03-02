@@ -76,8 +76,8 @@ function HourlyForecastCard({
                   >
                     <Image
                       src="/left-arrow.png"
-                      width={40}
-                      height={40}
+                      width={30}
+                      height={30}
                       alt="Next hours"
                     />
                   </div>
@@ -142,8 +142,8 @@ function HourlyForecastCard({
                   >
                     <Image
                       src="/right-arrow.png"
-                      width={40}
-                      height={40}
+                      width={30}
+                      height={30}
                       alt="Next hours"
                     />
                   </div>
