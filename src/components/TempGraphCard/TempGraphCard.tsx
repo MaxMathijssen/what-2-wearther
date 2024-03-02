@@ -6,7 +6,7 @@ import styles from "./tempGraphCard.module.scss";
 
 interface DataPoint {
   x: string; // Represents time
-  y: string; // Represents temperature
+  y: number; // Represents temperature as a number
 }
 
 interface DataSet {
@@ -26,17 +26,40 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
   console.log(visibleHourlyForecast);
 
   const [graphData, setGraphData] = useState<GraphData>([]);
+  const [yAxisTicks, setYAxisTicks] = useState<number[]>([]);
+  const [maxYAxisValue, setMaxYAxisValue] = useState<number | "auto">("auto");
+  const [minYValueAxisValue, setMinYValueAxisValue] = useState<number | "auto">(
+    "auto"
+  );
 
   useEffect(() => {
-    if (visibleHourlyForecast) {
+    // Assuming `visibleHourlyForecast` processing and `transformedData` setup
+    // Calculate yAxisTicks based on your dataset
+    if (visibleHourlyForecast && visibleHourlyForecast.length > 0) {
+      // Dummy transformation and yAxisTicks calculation for example
+      // Ensure this logic matches your actual data processing needs
       const transformedData: DataSet = {
         id: "temps",
         data: visibleHourlyForecast.map((item) => ({
           x: item.hour,
-          y: `${item.temp}°`,
+          y: item.temp, // Ensure this is just a numeric value
         })),
       };
-      setGraphData([transformedData]); // This ensures graphData is always an array
+      setGraphData([transformedData]);
+
+      // Example calculation for yAxisTicks, adjust as needed
+      const allYValues = visibleHourlyForecast.map((item) => item.temp);
+      const minYValue = Math.floor(Math.min(...allYValues));
+      const maxYValue = Math.ceil(Math.max(...allYValues));
+      const wholeNumberTicks = Array.from(
+        { length: maxYValue - minYValue + 1 },
+        (_, i) => minYValue + i
+      );
+      const buffer = 1; // Adjust the buffer as needed
+      setMaxYAxisValue(maxYValue + buffer);
+      setMinYValueAxisValue(minYValue - buffer);
+
+      setYAxisTicks(wholeNumberTicks);
     }
   }, [visibleHourlyForecast]);
 
@@ -49,16 +72,16 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
         <div className={styles.body}>
           <ResponsiveLine
             data={graphData}
-            margin={{ top: 50, right: 20, bottom: 25, left: 75 }}
+            margin={{ top: 30, right: 20, bottom: 0, left: 50 }}
             xScale={{ type: "point" }} // If `x` represents categories like hours.
             yScale={{
               type: "linear",
-              min: "auto",
-              max: "auto",
+              min: minYValueAxisValue,
+              max: maxYAxisValue, // Use the dynamically adjusted max value
               stacked: false,
               reverse: false,
             }}
-            yFormat="time:%Hh"
+            yFormat={(value) => `${value}°`}
             curve="natural"
             axisTop={{
               tickSize: 0,
@@ -71,13 +94,11 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
             axisRight={null}
             axisBottom={null}
             axisLeft={{
-              tickSize: 10,
-              tickPadding: 10,
+              tickSize: 5,
+              tickPadding: 5,
               tickRotation: 0,
-              legend: "",
-              legendOffset: 0,
-              legendPosition: "middle",
-              truncateTickAt: 0,
+              format: (value) => `${value}°`,
+              tickValues: yAxisTicks, // Directly use the calculated whole number ticks
             }}
             enableGridY={false}
             colors={{ scheme: "category10" }}
