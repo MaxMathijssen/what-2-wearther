@@ -124,8 +124,8 @@ function mapForecast(data: any): DailyForecast[] {
         dt: data.hourly[j].dt,
         hour: convertTimestampToHourAmPm(data.hourly[j].dt),
         hour_num: convertTimestampToHour(data.hourly[j].dt),
-        temp: data.hourly[j].temp,
-        feels_like: data.hourly[j].feels_like,
+        temp: Math.round(data.hourly[j].temp),
+        feels_like: Math.round(data.hourly[j].feels_like),
         weather: data.hourly[j].weather,
         iconPath: getIconPath(data.hourly[j].weather[0].icon),
       };

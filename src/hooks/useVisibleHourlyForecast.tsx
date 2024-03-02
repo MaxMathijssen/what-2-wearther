@@ -1,11 +1,9 @@
 import { useState, useCallback, useRef, useContext, useEffect } from "react";
+import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
 import { ForecastContext } from "../providers/ForecastProvider";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 
-function useVisibleHourlyForecast(
-  dailyForecast: DailyForecast | null,
-  HOURLY_FORECAST_LENGTH: number
-) {
+function useVisibleHourlyForecast(dailyForecast: DailyForecast | null) {
   const { weeklyForecast, selectDailyForecast } = useContext(ForecastContext);
   const [visibleHourlyForecast, setVisibleHourlyForecast] = useState<
     HourlyForecast[] | null

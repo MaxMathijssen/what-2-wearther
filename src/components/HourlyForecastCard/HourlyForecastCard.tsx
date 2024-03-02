@@ -18,7 +18,7 @@ function HourlyForecastCard({
   isPlaceHolder,
 }: HourlyForecastCardProps) {
   const { visibleHourlyForecast, handleNextHours, prevButtonVisible } =
-    useVisibleHourlyForecast(dailyForecast, HOURLY_FORECAST_LENGTH);
+    useVisibleHourlyForecast(dailyForecast);
 
   return (
     <>
@@ -128,7 +128,7 @@ function HourlyForecastCard({
                               height={80}
                               alt={hourlyForecast.weather}
                             />
-                            <h3>{`${Math.round(hourlyForecast.temp)}°`}</h3>
+                            <h3>{`${hourlyForecast.temp}°`}</h3>
                           </div>
                         );
                       }

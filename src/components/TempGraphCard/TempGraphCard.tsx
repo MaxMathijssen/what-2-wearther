@@ -1,7 +1,20 @@
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
+import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import styles from "./tempGraphCard.module.scss";
+
+interface DataPoint {
+  x: string; // Represents time
+  y: string; // Represents temperature
+}
+
+interface DataSet {
+  id: string;
+  data: DataPoint[];
+}
+
+type GraphData = DataSet[];
 
 interface TempGraphCardProps extends PropsWithChildren {
   dailyForecast: DailyForecast | null;
@@ -9,17 +22,23 @@ interface TempGraphCardProps extends PropsWithChildren {
 }
 
 function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
-  const data = [
-    {
-      id: "hours",
-      data: [
-        { x: "A", y: "2019-05-29 04:00" },
-        { x: "B", y: "2019-05-29 02:00" },
-        { x: "C", y: "2019-05-29 07:00" },
-        { x: "D", y: "2019-05-30 04:00" },
-      ],
-    },
-  ];
+  const { visibleHourlyForecast } = useVisibleHourlyForecast(dailyForecast);
+  console.log(visibleHourlyForecast);
+
+  const [graphData, setGraphData] = useState<GraphData>([]);
+
+  useEffect(() => {
+    if (visibleHourlyForecast) {
+      const transformedData: DataSet = {
+        id: "temps",
+        data: visibleHourlyForecast.map((item) => ({
+          x: item.hour,
+          y: `${item.temp}°`,
+        })),
+      };
+      setGraphData([transformedData]); // This ensures graphData is always an array
+    }
+  }, [visibleHourlyForecast]);
 
   return (
     dailyForecast && (
@@ -29,14 +48,15 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
         </div>
         <div className={styles.body}>
           <ResponsiveLine
-            data={data}
+            data={graphData}
             margin={{ top: 50, right: 20, bottom: 25, left: 75 }}
-            xScale={{ type: "linear" }}
-            xFormat=" >-"
+            xScale={{ type: "point" }} // If `x` represents categories like hours.
             yScale={{
-              type: "time",
-              format: "%Y-%m-%d %H:%M",
-              precision: "hour",
+              type: "linear",
+              min: "auto",
+              max: "auto",
+              stacked: false,
+              reverse: false,
             }}
             yFormat="time:%Hh"
             curve="natural"
