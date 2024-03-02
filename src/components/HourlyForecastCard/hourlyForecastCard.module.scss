@@ -135,17 +135,28 @@
   left: 20px;
 }
 
-/* Animation when pressed */
+.btnNextHours:hover,
+.btnPrevHours:hover,
 .btnNextHours:active,
 .btnPrevHours:active {
-  transform: translateY(-40) scale();
+  transform: translateY(-50%) scale(1.2); /* Enlarge on hover */
 }
 
-/* Hover effect */
-.btnNextHours:hover,
-.btnPrevHours:hover {
-  /* Slightly larger scale */
-  transform: translateY(-40%) scale(1.3);
+.btnNextHours:active,
+.btnPrevHours:active {
+  animation: pressEffect 0.2s ease forwards; /* Define press effect animation */
+}
+
+@keyframes pressEffect {
+  0% {
+    transform: translateY(-50%) scale(1.2);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.9);
+  }
+  100% {
+    transform: translateY(-50%) scale(1.1);
+  }
 }
 
 .topRow {

@@ -52,15 +52,28 @@
   left: 20px; // Move to the left of the graph
 }
 
-/* Animation and hover effect */
+.btnNextHours:hover,
+.btnPrevHours:hover,
 .btnNextHours:active,
 .btnPrevHours:active {
-  transform: translateY(-50%) scale(0.9); // Press effect
+  transform: translateY(-50%) scale(1.2); /* Enlarge on hover */
 }
 
-.btnNextHours:hover,
-.btnPrevHours:hover {
-  transform: translateY(-50%) scale(1.1); // Hover effect, enlarge slightly
+.btnNextHours:active,
+.btnPrevHours:active {
+  animation: pressEffect 0.2s ease forwards; /* Define press effect animation */
+}
+
+@keyframes pressEffect {
+  0% {
+    transform: translateY(-50%) scale(1.2);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.9);
+  }
+  100% {
+    transform: translateY(-50%) scale(1.1);
+  }
 }
 
 .card .body .noDataContainer {
