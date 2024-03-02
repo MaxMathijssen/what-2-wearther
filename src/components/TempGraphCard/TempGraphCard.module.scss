@@ -8,6 +8,7 @@
 }
 
 .body {
+  position: relative;
   height: 250px;
   display: flex;
   align-items: center; // This centers horizontally, good for when flex-direction is row
@@ -23,4 +24,35 @@
   font-size: 18px;
   font-weight: 400;
   color: $brand-white;
+}
+
+.btnNextHours,
+.btnPrevHours {
+  cursor: pointer;
+  position: absolute;
+  top: 50%; // Keep this to center vertically
+  transform: translateY(
+    -50%
+  ); // Center vertically with respect to the container
+  transition: transform 0.2s ease; // Smooth transition for hover effect
+  z-index: 10; // Ensure buttons are above other elements
+}
+
+.btnNextHours {
+  right: 20px; // Move to the right of the graph
+}
+
+.btnPrevHours {
+  left: 20px; // Move to the left of the graph
+}
+
+/* Animation and hover effect */
+.btnNextHours:active,
+.btnPrevHours:active {
+  transform: translateY(-50%) scale(0.9); // Press effect
+}
+
+.btnNextHours:hover,
+.btnPrevHours:hover {
+  transform: translateY(-50%) scale(1.1); // Hover effect, enlarge slightly
 }

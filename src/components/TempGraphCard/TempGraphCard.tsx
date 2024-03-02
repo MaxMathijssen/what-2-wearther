@@ -2,7 +2,8 @@ import { PropsWithChildren, useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
-import styles from "./tempGraphCard.module.scss";
+import Image from "next/legacy/image";
+import styles from "./TempGraphCard.module.scss";
 
 interface DataPoint {
   x: string;
@@ -22,7 +23,8 @@ interface TempGraphCardProps extends PropsWithChildren {
 }
 
 function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
-  const { visibleHourlyForecast } = useVisibleHourlyForecast(dailyForecast);
+  const { visibleHourlyForecast, handleNextHours, prevButtonVisible } =
+    useVisibleHourlyForecast(dailyForecast);
   const [graphData, setGraphData] = useState<GraphData>([]);
   const [xAxisTicks, setXAxisTicks] = useState<string[]>([]);
   const [yAxisTicks, setYAxisTicks] = useState<number[]>([]);
@@ -74,9 +76,22 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
           <h1>Temperature</h1>
         </div>
         <div className={styles.body}>
+          {prevButtonVisible && (
+            <div
+              className={styles.btnPrevHours}
+              onClick={() => handleNextHours(false)}
+            >
+              <Image
+                src="/left-arrow.png"
+                width={30}
+                height={30}
+                alt="Next hours"
+              />
+            </div>
+          )}
           <ResponsiveLine
             data={graphData}
-            margin={{ top: 40, right: 20, bottom: 20, left: 45 }}
+            margin={{ top: 50, right: 50, bottom: 30, left: 75 }}
             xScale={{ type: "point" }}
             yScale={{
               type: "linear",
@@ -178,6 +193,19 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               );
             }}
           />
+          {dailyForecast.day_num !== 6 && (
+            <div
+              className={styles.btnNextHours}
+              onClick={() => handleNextHours(true)}
+            >
+              <Image
+                src="/right-arrow.png"
+                width={30}
+                height={30}
+                alt="Next hours"
+              />
+            </div>
+          )}
         </div>
       </div>
     )
