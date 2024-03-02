@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { DailyForecast, HourlyForecast } from "@/typings/types";
+import { DailyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import styles from "./tempGraphCard.module.scss";
 
@@ -23,9 +23,8 @@ interface TempGraphCardProps extends PropsWithChildren {
 
 function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
   const { visibleHourlyForecast } = useVisibleHourlyForecast(dailyForecast);
-  console.log(visibleHourlyForecast);
-
   const [graphData, setGraphData] = useState<GraphData>([]);
+  const [xAxisTicks, setXAxisTicks] = useState<string[]>([]);
   const [yAxisTicks, setYAxisTicks] = useState<number[]>([]);
   const [maxYAxisValue, setMaxYAxisValue] = useState<number | "auto">("auto");
   const [minYValueAxisValue, setMinYValueAxisValue] = useState<number | "auto">(
@@ -60,6 +59,13 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
       setMinYValueAxisValue(minYValue - buffer);
 
       setYAxisTicks(wholeNumberTicks);
+
+      if (graphData && graphData.length > 0) {
+        const tickValuesAxisTop = transformedData.data
+          .map((d) => d.x)
+          .slice(0, -1);
+        setXAxisTicks(tickValuesAxisTop);
+      }
     }
   }, [visibleHourlyForecast]);
 
@@ -73,20 +79,21 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
           <ResponsiveLine
             data={graphData}
             margin={{ top: 30, right: 20, bottom: 0, left: 50 }}
-            xScale={{ type: "point" }} // If `x` represents categories like hours.
+            xScale={{ type: "point" }}
             yScale={{
               type: "linear",
               min: minYValueAxisValue,
-              max: maxYAxisValue, // Use the dynamically adjusted max value
+              max: maxYAxisValue,
               stacked: false,
               reverse: false,
             }}
             yFormat={(value) => `${value}°`}
             curve="natural"
             axisTop={{
+              tickValues: xAxisTicks,
               tickSize: 0,
               tickPadding: 15,
-              tickRotation: 1,
+              tickRotation: -0.001,
               legend: "",
               legendOffset: 0,
               truncateTickAt: 0,
@@ -98,7 +105,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               tickPadding: 5,
               tickRotation: 0,
               format: (value) => `${value}°`,
-              tickValues: yAxisTicks, // Directly use the calculated whole number ticks
+              tickValues: yAxisTicks,
             }}
             enableGridY={false}
             colors={{ scheme: "category10" }}
@@ -108,10 +115,27 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
             pointLabel="y"
             pointLabelYOffset={-12}
             enableArea={true}
-            areaOpacity={0.05}
+            areaOpacity={0.1}
+            areaBaselineValue={0} // Specify the baseline value for the area fill if needed
             enableCrosshair={false}
             useMesh={true}
             legends={[]}
+            defs={[
+              {
+                id: "gradient",
+                type: "linearGradient",
+                // Set the gradient to be vertical
+                x1: "0%",
+                y1: "0%",
+                x2: "0%",
+                y2: "40%",
+                colors: [
+                  { offset: 0, color: "#219ebc", opacity: 1 },
+                  { offset: 100, color: "white", opacity: 1 },
+                ],
+              },
+            ]}
+            fill={[{ match: "*", id: "gradient" }]}
           />
         </div>
       </div>
