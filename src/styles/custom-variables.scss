@@ -8,8 +8,8 @@ $brand-white: #ffffff;
 $brand-grey: #808080;
 
 @font-face {
-  font-family: "Mainstay";
-  src: url("/fonts/Mainstay-Regular.ttf") format("truetype");
+  font-family: "Arista";
+  src: url("/fonts/Arista Trial.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
@@ -19,9 +19,8 @@ $brand-grey: #808080;
   height: 30px;
   display: grid;
   padding: 20px;
-  background-color: rgba(1, 136, 193, 0.8);
+  background-color: rgba(142, 202, 230, 0.8);
   border-radius: 10px 10px 0 0;
-  background: linear-gradient(to right, $brand-04, $brand-05);
 }
 
 .card.placeholder {

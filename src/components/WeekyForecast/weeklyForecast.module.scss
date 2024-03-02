@@ -2,9 +2,9 @@
   position: relative;
   display: flex;
   margin-bottom: 20px;
-  background: #cfdef3;
-  background: -webkit-linear-gradient(to right, #e0eafc, #cfdef3);
-  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  background: rgba(142, 202, 230, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 15px;
   border-radius: 15px;
 }
