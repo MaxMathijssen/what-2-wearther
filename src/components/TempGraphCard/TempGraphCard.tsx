@@ -32,40 +32,34 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
   );
 
   useEffect(() => {
-    // Assuming `visibleHourlyForecast` processing and `transformedData` setup
-    // Calculate yAxisTicks based on your dataset
     if (visibleHourlyForecast && visibleHourlyForecast.length > 0) {
-      // Dummy transformation and yAxisTicks calculation for example
-      // Ensure this logic matches your actual data processing needs
-      const transformedData: DataSet = {
-        id: "temps",
-        data: visibleHourlyForecast.map((item) => ({
-          x: item.hour,
-          y: item.temp, // Ensure this is just a numeric value
-        })),
-      };
-      setGraphData([transformedData]);
+      const transformedData = visibleHourlyForecast.map((item) => ({
+        x: item.hour,
+        y: item.temp,
+      }));
 
-      // Example calculation for yAxisTicks, adjust as needed
-      const allYValues = visibleHourlyForecast.map((item) => item.temp);
+      const dataSet: DataSet = {
+        id: "temps",
+        data: transformedData,
+      };
+
+      setGraphData([dataSet]);
+
+      const tickValuesAxisTop = transformedData.map((d) => d.x).slice(0, -1);
+      setXAxisTicks(tickValuesAxisTop);
+
+      const allYValues = transformedData.map((item) => item.y);
       const minYValue = Math.floor(Math.min(...allYValues));
       const maxYValue = Math.ceil(Math.max(...allYValues));
+      const buffer = 1;
+      setMaxYAxisValue(maxYValue + buffer);
+      setMinYValueAxisValue(minYValue - buffer);
+
       const wholeNumberTicks = Array.from(
         { length: maxYValue - minYValue + 1 },
         (_, i) => minYValue + i
       );
-      const buffer = 1; // Adjust the buffer as needed
-      setMaxYAxisValue(maxYValue + buffer);
-      setMinYValueAxisValue(minYValue - buffer);
-
       setYAxisTicks(wholeNumberTicks);
-
-      if (graphData && graphData.length > 0) {
-        const tickValuesAxisTop = transformedData.data
-          .map((d) => d.x)
-          .slice(0, -1);
-        setXAxisTicks(tickValuesAxisTop);
-      }
     }
   }, [visibleHourlyForecast]);
 
