@@ -1,8 +1,8 @@
-import { useCallback, memo, useEffect, useState } from "react";
+import { useCallback, memo } from "react";
 import { DailyForecast } from "@/typings/types";
 import Image from "next/legacy/image";
 
-import styles from "./WeatherCard.module.scss";
+import styles from "./weatherCard.module.scss";
 import classNames from "classnames";
 
 interface WeatherCardProps {
