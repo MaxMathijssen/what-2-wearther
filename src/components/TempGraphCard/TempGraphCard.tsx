@@ -34,8 +34,6 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
     "auto"
   );
 
-  console.log(visibleHourlyForecast);
-
   useEffect(() => {
     if (visibleHourlyForecast && visibleHourlyForecast.length > 0) {
       const transformedData = visibleHourlyForecast.map(
@@ -75,9 +73,11 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
       {isPlaceHolder && (
         <div className={classNames(styles.card, styles.placeholder)}>
           <div className={styles.header}>
-            <h1>Hourly Forecast</h1>
+            <h1>Temperature</h1>
           </div>
-          <div className={styles.body}></div>
+          <div className={styles.body}>
+            <div className={styles.graphPlaceholder}></div>
+          </div>
         </div>
       )}
 
