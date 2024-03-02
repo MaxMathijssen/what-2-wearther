@@ -1,12 +1,12 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { DailyForecast } from "@/typings/types";
+import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import styles from "./tempGraphCard.module.scss";
 
 interface DataPoint {
-  x: string; // Represents time
-  y: number; // Represents temperature as a number
+  x: string;
+  y: number;
 }
 
 interface DataSet {
@@ -31,12 +31,16 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
     "auto"
   );
 
+  console.log(visibleHourlyForecast);
+
   useEffect(() => {
     if (visibleHourlyForecast && visibleHourlyForecast.length > 0) {
-      const transformedData = visibleHourlyForecast.map((item) => ({
-        x: item.hour,
-        y: item.temp,
-      }));
+      const transformedData = visibleHourlyForecast.map(
+        (hourlyForecast: HourlyForecast) => ({
+          x: hourlyForecast.hour_index === 0 ? "Now" : hourlyForecast.hour,
+          y: hourlyForecast.temp,
+        })
+      );
 
       const dataSet: DataSet = {
         id: "temps",
@@ -72,7 +76,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
         <div className={styles.body}>
           <ResponsiveLine
             data={graphData}
-            margin={{ top: 30, right: 20, bottom: 0, left: 50 }}
+            margin={{ top: 40, right: 20, bottom: 20, left: 45 }}
             xScale={{ type: "point" }}
             yScale={{
               type: "linear",
@@ -86,7 +90,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
             axisTop={{
               tickValues: xAxisTicks,
               tickSize: 0,
-              tickPadding: 15,
+              tickPadding: 20,
               tickRotation: -0.001,
               legend: "",
               legendOffset: 0,
@@ -96,7 +100,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
             axisBottom={null}
             axisLeft={{
               tickSize: 5,
-              tickPadding: 5,
+              tickPadding: 10,
               tickRotation: 0,
               format: (value) => `${value}°`,
               tickValues: yAxisTicks,
@@ -110,7 +114,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
             pointLabelYOffset={-12}
             enableArea={true}
             areaOpacity={0.1}
-            areaBaselineValue={0} // Specify the baseline value for the area fill if needed
+            areaBaselineValue={0}
             enableCrosshair={false}
             useMesh={true}
             legends={[]}
@@ -118,7 +122,6 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               {
                 id: "gradient",
                 type: "linearGradient",
-                // Set the gradient to be vertical
                 x1: "0%",
                 y1: "0%",
                 x2: "0%",
@@ -130,6 +133,50 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               },
             ]}
             fill={[{ match: "*", id: "gradient" }]}
+            tooltip={({ point }) => {
+              return (
+                <div
+                  style={{
+                    position: "relative",
+                    background: "white",
+                    padding: "9px 12px 8px 12px",
+                    border: "1px solid #ccc",
+                    borderRadius: "3px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "-10px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "0",
+                      height: "0",
+                      borderLeft: "10px solid transparent",
+                      borderRight: "10px solid transparent",
+                      borderTop: "10px solid #ccc",
+                      zIndex: 2,
+                    }}
+                  />
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "-9px",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "0",
+                      height: "0",
+                      borderLeft: "10px solid transparent",
+                      borderRight: "10px solid transparent",
+                      borderTop: "10px solid white",
+                      zIndex: 3,
+                    }}
+                  />
+                  {point.data.yFormatted}
+                </div>
+              );
+            }}
           />
         </div>
       </div>

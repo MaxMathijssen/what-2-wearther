@@ -88,7 +88,7 @@ function CurrentInformation() {
                   value={searchInput}
                   onChange={handleOnChange}
                   placeholder={
-                    status === "loading" ? "Submitting…" : "Search..."
+                    status === "loading" ? "Submitting…" : "Search location..."
                   }
                 />
                 {validationMessage && (
