@@ -5,6 +5,7 @@ import { getFormattedDate, getCurrentTime } from "@/helpers/utils";
 import { API_KEY } from "@/helpers/constants";
 import { LocationContext } from "../../providers/LocationProvider";
 import { ForecastContext } from "../../providers/ForecastProvider";
+import Toggle from "@/components/Toggle";
 import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
 
@@ -15,6 +16,7 @@ function CurrentInformation() {
   const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
+  const [isEnabled, setIsEnabled] = useState(false);
 
   const endPoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=1&appid=${API_KEY}`;
 
@@ -130,6 +132,9 @@ function CurrentInformation() {
           </div>
         </div>
       )}
+      <div>
+        <Toggle value={isEnabled} onChange={setIsEnabled} />
+      </div>
     </div>
   );
 }
