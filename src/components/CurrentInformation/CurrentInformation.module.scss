@@ -54,6 +54,7 @@
   position: relative;
   min-height: 70px;
   padding-top: 25px;
+  margin-left: 175px;
 }
 
 .inputField {
@@ -126,8 +127,10 @@
 /* Assuming this is in toggle.module.css or a similar CSS module file */
 .toggleContainer {
   display: flex;
+  flex: 1; /* Adjust as needed to align to the right */
   align-items: center;
   gap: 10px; /* Adjust the gap as needed */
+  justify-content: flex-end;
 }
 
 .dimmed {
@@ -136,5 +139,5 @@
 
 .toggleContainer p {
   font-weight: 500; /* Adjust the font-weight as needed, 400 is normal, 700 is bold */
-  transition: opacity 0.3s ease; /* Add transition for opacity */
+  font-size: 16px;
 }
