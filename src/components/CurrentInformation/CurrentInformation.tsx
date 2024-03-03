@@ -106,6 +106,11 @@ function CurrentInformation() {
             </form>
           </div>
           <div className={styles.spacer}></div>{" "}
+          <div className={styles.toggleContainer}>
+            <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
+            <Toggle value={isEnabled} onChange={setIsEnabled} />
+            <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
+          </div>
         </div>
       )}
       {!location && (
@@ -129,14 +134,16 @@ function CurrentInformation() {
               </form>
             </div>
             <div className={styles.spacer}></div>{" "}
+            <div
+              className={classNames(styles.toggleContainer, styles.placeHolder)}
+            >
+              <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
+              <div className={styles.togglePlaceholder}></div>
+              <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
+            </div>
           </div>
         </div>
       )}
-      <div className={styles.toggleContainer}>
-        <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
-        <Toggle value={isEnabled} onChange={setIsEnabled} />
-        <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
-      </div>
     </div>
   );
 }
