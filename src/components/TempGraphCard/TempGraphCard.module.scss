@@ -40,3 +40,24 @@
   animation: loadingShimmer 1.5s infinite linear;
   border-radius: 8px; /* Optional, for slightly rounded corners */
 }
+
+.card .body .noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .body .noDataContainer h2 {
+  font-size: 26px;
+  font-weight: 400;
+  margin: 15px 15px;
+  text-align: center;
+}
+
+.card .body .noDataContainer h3 {
+  font-size: 14px;
+  font-weight: 300;
+  color: $brand-grey;
+  margin: 15px 15px;
+  text-align: center;
+}
