@@ -1,6 +1,7 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import LineChart from "../LineChart/LineChart";
 import HoursButton, { Direction } from "../HoursButton";
+import HourlyForecastIndicator from "../HourlyForecastIndicator";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import Image from "next/legacy/image";
@@ -115,6 +116,19 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
                 <div
                   className={classNames(styles.graphContainer, styles.fadeIn)}
                 >
+                  {visibleHourlyForecast !== null &&
+                    dailyForecast.hourly_forecast.length > 0 && (
+                      <div className={classNames(styles.indicatorContainer)}>
+                        <HourlyForecastIndicator
+                          valueStart={visibleHourlyForecast[0].hour_index}
+                          valueEnd={
+                            visibleHourlyForecast[
+                              visibleHourlyForecast.length - 1
+                            ].hour_index
+                          }
+                        />
+                      </div>
+                    )}
                   <LineChart
                     graphData={graphData}
                     xAxisTicks={xAxisTicks}

@@ -33,6 +33,13 @@
   border-radius: 8px; /* Optional, for slightly rounded corners */
 }
 
+.indicatorContainer {
+  justify-content: center;
+  padding-left: 75px;
+  width: 100%;
+  padding-top: 8px;
+}
+
 .card .body .noDataContainer {
   display: flex;
   flex-direction: column;
