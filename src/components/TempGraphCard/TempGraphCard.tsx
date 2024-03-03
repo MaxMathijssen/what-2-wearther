@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import LineChart from "../LineChart/LineChart";
+import HoursButton, { Direction } from "../HoursButton";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import Image from "next/legacy/image";
@@ -88,17 +89,10 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
           </div>
           <div className={styles.body}>
             {prevButtonVisible && (
-              <div
-                className={styles.btnPrevHours}
+              <HoursButton
                 onClick={() => handleNextHours(false)}
-              >
-                <Image
-                  src="/left-arrow.png"
-                  width={30}
-                  height={30}
-                  alt="Next hours"
-                />
-              </div>
+                direction={Direction.LEFT}
+              />
             )}
             {dailyForecast && dailyForecast.hourly_forecast.length === 0 ? (
               <div
@@ -132,17 +126,10 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               )
             )}
             {dailyForecast.day_num !== 6 && (
-              <div
-                className={styles.btnNextHours}
+              <HoursButton
                 onClick={() => handleNextHours(true)}
-              >
-                <Image
-                  src="/right-arrow.png"
-                  width={30}
-                  height={30}
-                  alt="Next hours"
-                />
-              </div>
+                direction={Direction.RIGHT}
+              />
             )}
           </div>
         </div>

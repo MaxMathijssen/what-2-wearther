@@ -108,57 +108,6 @@
   height: 100%;
 }
 
-.btnNextHours,
-.btnPrevHours {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.1s ease;
-}
-
-.btnNextHours,
-.btnPrevHours {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.2s ease; /* Adjusted for smoother transition */
-  /* No initial background or shadow */
-}
-
-.btnNextHours {
-  right: 20px;
-}
-
-.btnPrevHours {
-  left: 20px;
-}
-
-.btnNextHours:hover,
-.btnPrevHours:hover,
-.btnNextHours:active,
-.btnPrevHours:active {
-  transform: translateY(-50%) scale(1.2); /* Enlarge on hover */
-}
-
-.btnNextHours:active,
-.btnPrevHours:active {
-  animation: pressEffect 0.2s ease forwards; /* Define press effect animation */
-}
-
-@keyframes pressEffect {
-  0% {
-    transform: translateY(-50%) scale(1.2);
-  }
-  50% {
-    transform: translateY(-50%) scale(0.9);
-  }
-  100% {
-    transform: translateY(-50%) scale(1.1);
-  }
-}
-
 .topRow {
   display: flex;
   width: 100%;

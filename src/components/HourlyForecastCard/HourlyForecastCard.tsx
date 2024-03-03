@@ -2,6 +2,7 @@ import { PropsWithChildren, memo } from "react";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import { HOURLY_FORECAST_LENGTH } from "@/helpers/constants";
+import HoursButton, { Direction } from "../HoursButton";
 import { range } from "@/helpers/utils";
 import HourlyForecastIndicator from "../HourlyForecastIndicator/HourlyForecastIndicator";
 import Image from "next/legacy/image";
@@ -70,17 +71,10 @@ function HourlyForecastCard({
                 )}
               <div className={styles.bottomRow}>
                 {prevButtonVisible && (
-                  <div
-                    className={styles.btnPrevHours}
+                  <HoursButton
                     onClick={() => handleNextHours(false)}
-                  >
-                    <Image
-                      src="/left-arrow.png"
-                      width={30}
-                      height={30}
-                      alt="Next hours"
-                    />
-                  </div>
+                    direction={Direction.LEFT}
+                  />
                 )}
                 {dailyForecast && dailyForecast.hourly_forecast.length === 0 ? (
                   <div
@@ -136,17 +130,10 @@ function HourlyForecastCard({
                   )
                 )}
                 {dailyForecast.day_num !== 6 && (
-                  <div
-                    className={styles.btnNextHours}
+                  <HoursButton
                     onClick={() => handleNextHours(true)}
-                  >
-                    <Image
-                      src="/right-arrow.png"
-                      width={30}
-                      height={30}
-                      alt="Next hours"
-                    />
-                  </div>
+                    direction={Direction.RIGHT}
+                  />
                 )}
               </div>
             </div>
