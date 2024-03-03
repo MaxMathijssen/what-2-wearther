@@ -19,8 +19,17 @@ $brand-grey: #808080;
   height: 30px;
   display: grid;
   padding: 20px;
-  background-color: rgba(142, 202, 230, 0.8);
+  padding-left: 30px;
+  background-color: rgba(142, 202, 230, 1);
   border-radius: 10px 10px 0 0;
+}
+
+.card .header h1 {
+  margin: 0px;
+  padding: 0px;
+  font-size: 18px;
+  font-weight: 550;
+  color: $brand-white;
 }
 
 .card.placeholder {

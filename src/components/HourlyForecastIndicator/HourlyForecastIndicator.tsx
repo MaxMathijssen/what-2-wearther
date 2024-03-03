@@ -32,8 +32,8 @@ function HourlyForecastIndicator({
       style={{
         position: "relative",
         width: "88%",
-        height: "15px",
-        backgroundColor: "#8ecae6",
+        height: "12px",
+        backgroundColor: "#f9f7f3",
         borderRadius: "20px",
       }}
     >
