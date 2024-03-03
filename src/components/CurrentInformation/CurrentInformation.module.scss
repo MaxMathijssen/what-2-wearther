@@ -124,12 +124,11 @@
   }
 }
 
-/* Assuming this is in toggle.module.css or a similar CSS module file */
 .toggleContainer {
   display: flex;
-  flex: 1; /* Adjust as needed to align to the right */
+  flex: 1;
   align-items: center;
-  gap: 10px; /* Adjust the gap as needed */
+  gap: 10px;
   justify-content: flex-end;
 
   &.placeHolder {
@@ -156,6 +155,6 @@
 }
 
 .toggleContainer p {
-  font-weight: 500; /* Adjust the font-weight as needed, 400 is normal, 700 is bold */
+  font-weight: 500;
   font-size: 16px;
 }

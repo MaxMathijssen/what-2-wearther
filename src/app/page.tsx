@@ -3,6 +3,7 @@ import ForecastProvider from "@/providers/ForecastProvider";
 import WeeklyForecast from "@/components/WeekyForecast";
 import DailyForecast from "@/components/DailyForecast";
 import CurrentInformation from "@/components/CurrentInformation";
+import Umbrelly from "@/components/Umbrelly";
 
 function HomePage() {
   return (
@@ -13,6 +14,7 @@ function HomePage() {
           <WeeklyForecast />
           <DailyForecast />
         </main>
+        <Umbrelly />
       </ForecastProvider>
     </LocationProvider>
   );
