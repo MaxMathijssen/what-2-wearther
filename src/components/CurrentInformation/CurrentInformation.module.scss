@@ -122,3 +122,19 @@
     font-family: var(--font-family-loading);
   }
 }
+
+/* Assuming this is in toggle.module.css or a similar CSS module file */
+.toggleContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Adjust the gap as needed */
+}
+
+.dimmed {
+  opacity: 0.5;
+}
+
+.toggleContainer p {
+  font-weight: 500; /* Adjust the font-weight as needed, 400 is normal, 700 is bold */
+  transition: opacity 0.3s ease; /* Add transition for opacity */
+}

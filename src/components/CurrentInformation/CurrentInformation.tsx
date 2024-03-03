@@ -132,8 +132,10 @@ function CurrentInformation() {
           </div>
         </div>
       )}
-      <div>
+      <div className={styles.toggleContainer}>
+        <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
         <Toggle value={isEnabled} onChange={setIsEnabled} />
+        <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
       </div>
     </div>
   );
