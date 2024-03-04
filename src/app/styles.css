@@ -1,6 +1,7 @@
 html {
   background-position: bottom center;
   background: radial-gradient(circle at 50% 100%, #8ecae6, #ffffff);
+  overflow-x: hidden;
 }
 
 .body {
@@ -18,14 +19,4 @@ html {
   margin: 0 auto;
   font-weight: 300;
   font-family: var(--font-family-primary), sans-serif;
-}
-
-main {
-  display: grid;
-  grid-template-rows: auto auto;
-  gap: 20px;
-  font-size: 1rem;
-  background: #f9f7f3;
-  border-radius: 10px;
-  padding: 20px;
 }

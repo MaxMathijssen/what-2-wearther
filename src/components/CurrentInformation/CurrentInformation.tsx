@@ -3,8 +3,9 @@
 import { useContext, useState, useEffect, FormEvent, ChangeEvent } from "react";
 import { getFormattedDate, getCurrentTime } from "@/helpers/utils";
 import { API_KEY } from "@/helpers/constants";
-import { LocationContext } from "../../providers/LocationProvider";
-import { ForecastContext } from "../../providers/ForecastProvider";
+import { LocationContext } from "@/providers/LocationProvider";
+import { ForecastContext } from "@/providers/ForecastProvider";
+import { WardrobeContext } from "@/providers/WardrobeProvider";
 import Toggle from "@/components/Toggle";
 import classNames from "classnames";
 import styles from "./CurrentInformation.module.scss";
@@ -12,11 +13,11 @@ import styles from "./CurrentInformation.module.scss";
 function CurrentInformation() {
   const { setCoordinates, location } = useContext(LocationContext);
   const { setSearched } = useContext(ForecastContext);
+  const { setWardrobeEnabled, wardrobeEnabled } = useContext(WardrobeContext);
   const [searchInput, setSearchInput] = useState("");
   const [status, setStatus] = useState("idle");
   const [validationMessage, setValidationMessage] = useState("");
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
-  const [isEnabled, setIsEnabled] = useState(false);
 
   const endPoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=1&appid=${API_KEY}`;
 
@@ -107,9 +108,9 @@ function CurrentInformation() {
           </div>
           <div className={styles.spacer}></div>{" "}
           <div className={styles.toggleContainer}>
-            <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
-            <Toggle value={isEnabled} onChange={setIsEnabled} />
-            <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
+            <p className={wardrobeEnabled ? styles.dimmed : ""}>Forecast</p>
+            <Toggle value={wardrobeEnabled} onChange={setWardrobeEnabled} />
+            <p className={!wardrobeEnabled ? styles.dimmed : ""}>Wardrobe</p>
           </div>
         </div>
       )}
@@ -137,9 +138,9 @@ function CurrentInformation() {
             <div
               className={classNames(styles.toggleContainer, styles.placeHolder)}
             >
-              <p className={isEnabled ? styles.dimmed : ""}>Forecast</p>
+              <p className={wardrobeEnabled ? styles.dimmed : ""}>Forecast</p>
               <div className={styles.togglePlaceholder}></div>
-              <p className={!isEnabled ? styles.dimmed : ""}>Wardrobe</p>
+              <p className={!wardrobeEnabled ? styles.dimmed : ""}>Wardrobe</p>
             </div>
           </div>
         </div>
