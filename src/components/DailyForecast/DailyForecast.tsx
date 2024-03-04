@@ -9,6 +9,7 @@ import TempGraphCard from "../TempGraphCard";
 import HourlyForecastCard from "../HourlyForecastCard";
 import WindCard from "../WindCard";
 import CloudCard from "../CloudCard";
+import Umbrelly from "@/components/Umbrelly";
 
 function DailyForecast(): React.JSX.Element {
   const { selectedDailyForecast } = useContext(ForecastContext);
@@ -51,6 +52,7 @@ function DailyForecast(): React.JSX.Element {
               dailyForecast={selectedDailyForecast}
             />
           </div>
+          <Umbrelly />
         </>
       )}
 

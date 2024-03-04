@@ -1,23 +1,18 @@
 "use client";
 
 import { useContext } from "react";
-import WeeklyForecast from "@/components/WeeklyForecast";
-import DailyForecast from "@/components/DailyForecast";
+import Forecast from "../Forecast";
+import Wardrobe from "../Wardrobe";
 import styles from "./main.module.scss";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 
 function Main() {
-  const { setWardrobeEnabled, wardrobeEnabled } = useContext(WardrobeContext);
+  const { wardrobeEnabled } = useContext(WardrobeContext);
 
   return (
     <>
-      {!wardrobeEnabled && (
-        <main className={styles.main}>
-          <WeeklyForecast />
-          <DailyForecast />
-        </main>
-      )}
-      {wardrobeEnabled && <main className={styles.main}></main>}
+      {!wardrobeEnabled && <Forecast />}
+      {wardrobeEnabled && <Wardrobe />}
     </>
   );
 }
