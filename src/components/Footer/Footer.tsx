@@ -9,7 +9,7 @@ function Footer() {
     <header className={styles.siteFooter}>
       <div className={styles.logoWrapper}>
         <Image
-          src="/Logo.svg"
+          src="/logo.svg"
           width={225}
           height={121}
           alt="Picture of the author"

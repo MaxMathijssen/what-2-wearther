@@ -30,7 +30,7 @@ function Header() {
         ></div>
       ))}
       <Image
-        src="/Logo.svg"
+        src="/logo.svg"
         width={450}
         height={242}
         alt="Picture of the author"
