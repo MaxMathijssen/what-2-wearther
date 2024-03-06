@@ -1,11 +1,11 @@
 .main {
   display: grid;
   grid-template-rows: auto auto;
-  gap: 20px;
   font-size: 1rem;
   background: #f9f7f3;
   border-radius: 10px;
   padding: 20px;
   padding-bottom: 0px;
   height: 1475px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }

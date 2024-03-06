@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext, useEffect, useState, useRef } from "react";
+import { WardrobeContext } from "@/providers/WardrobeProvider";
 import Forecast from "../Forecast";
 import Wardrobe from "../Wardrobe";
 import styles from "./main.module.scss";
-import { WardrobeContext } from "@/providers/WardrobeProvider";
 
 function Main() {
   const { wardrobeEnabled } = useContext(WardrobeContext);
@@ -17,13 +17,12 @@ function Main() {
     if (wardrobeEnabled) {
       setTransitionState("wardrobeEntering");
     } else if (transitionState !== "initial") {
-      // Prevent transitions on initial load
       setTransitionState("forecastEntering");
     }
   }, [wardrobeEnabled]);
 
   return (
-    <div style={{ height: 1495 }} className={styles.outerContainer}>
+    <div className={styles.outerContainer}>
       <div ref={containerRef} className={styles.container}>
         <div
           ref={forecastRef}
@@ -31,8 +30,8 @@ function Main() {
             transitionState === "initial"
               ? ""
               : transitionState === "forecastEntering"
-              ? styles.fadeInSlideInFromLeft
-              : styles.fadeOutSlideOutToLeft
+              ? styles.fadeInSlideInFromRight
+              : styles.fadeOutSlideOutToRight
           }`}
         >
           <Forecast />
@@ -41,10 +40,10 @@ function Main() {
           ref={wardrobeRef}
           className={`${styles.component} ${
             transitionState === "wardrobeEntering"
-              ? styles.fadeInSlideInFromRight
+              ? styles.fadeInSlideInFromLeft
               : transitionState === "initial"
               ? styles.hidden
-              : styles.fadeOutSlideOutToRight
+              : styles.fadeOutSlideOutToLeft
           }`}
         >
           <Wardrobe />

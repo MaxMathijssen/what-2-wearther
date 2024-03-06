@@ -1,5 +1,3 @@
-// main.module.scss
-
 @keyframes slideInFromRight {
   from {
     transform: translateX(100%);
@@ -61,14 +59,11 @@
 }
 
 .outerContainer {
-  // This wrapper maintains the layout flow. Adjust the initial height as needed.
-  height: 1000px;
+  height: 1495px;
 }
 
 .container {
   position: relative;
-  // Removed the height: 100%; to avoid forcing the container to match the parent's height.
-  // The height will be dynamically adjusted by the component.
 }
 
 .component {
@@ -76,7 +71,6 @@
   top: 0;
   left: 0;
   width: 100%;
-  // No explicit height setting; it should expand to fit its content.
 }
 
 .hidden {
