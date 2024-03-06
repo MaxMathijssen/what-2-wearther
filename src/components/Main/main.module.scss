@@ -1,0 +1,85 @@
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.fadeInSlideInFromRight {
+  animation: slideInFromRight 0.5s forwards;
+}
+
+.fadeOutSlideOutToLeft {
+  animation: slideOutToLeft 0.5s forwards;
+}
+
+.fadeInSlideInFromLeft {
+  animation: slideInFromLeft 0.5s forwards;
+}
+
+.fadeOutSlideOutToRight {
+  animation: slideOutToRight 0.5s forwards;
+}
+
+.outerContainer {
+  height: 1495px;
+}
+
+.container {
+  position: relative;
+}
+
+.component {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.hidden {
+  visibility: hidden;
+  position: absolute;
+  width: 100%;
+}
+
+.visible {
+  visibility: visible;
+  position: relative;
+}
