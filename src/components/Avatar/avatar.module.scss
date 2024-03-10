@@ -1,0 +1,10 @@
+.avatarContainer {
+  position: relative;
+  display: flex;
+  margin-bottom: 20px;
+  background: rgba(142, 202, 230, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 15px;
+  border-radius: 15px;
+}

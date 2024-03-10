@@ -1,0 +1,21 @@
+.gridContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // Adjust the space between the rows
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); // Creates 7 columns in each row
+  gap: 10px; // Adjust the space between the grid items within a row
+}
+
+.gridItem {
+  background-color: #f0f0f0; // Light grey background for visibility
+  border: 1px solid #ddd; // Light grey border
+  padding: 20px; // Padding inside the grid items
+  text-align: center; // Center the text inside the grid items
+  display: flex; // Use flexbox for alignment
+  align-items: center; // Vertically align items in the center
+  justify-content: center; // Horizontally align items in the center
+}
