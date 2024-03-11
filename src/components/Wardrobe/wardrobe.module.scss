@@ -6,4 +6,23 @@
   padding-bottom: 0px;
   height: 1475px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-rows: auto 1fr; /* Adjust if you need specific sizing */
+  grid-template-columns: 1fr 1fr; /* Two columns of equal size */
+  grid-template-areas:
+    "avatar avatar"
+    "dresser wardrobeContainer";
+  gap: 20px; /* Adjust the space between grid items if needed */
+}
+
+.avatar {
+  grid-area: avatar;
+}
+
+.dresser {
+  grid-area: dresser;
+}
+
+.wardrobeContainer {
+  grid-area: wardrobeContainer;
 }

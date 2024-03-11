@@ -1,25 +1,104 @@
 .gridContainer {
   display: flex;
   flex-direction: column;
-  gap: 0px; /* Adjust the space between the rows */
-  align-items: center; /* Center the sliders */
+  gap: 0px;
+  align-items: center;
 }
 
 .sliderContainer {
-  width: 60%; /* Adjust based on your preference */
-  max-width: 600px; /* Prevents the slider from stretching too wide */
-  margin: 0 auto; /* Centers the slider */
-}
-
-.slick-slide {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  width: 100%; /* Ensure each slide takes full width */
+  width: 50%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .slideItemWrapper {
-  width: 50px; // Set this to your desired width
-  margin: 0 auto; // Center the content within the slide if desired
-  text-align: center; /* This centers the text or inline elements within the block */
+  position: relative;
+  width: 90px; /* Set the size of the square */
+  height: 90px; /* Equal to width to maintain the square shape */
+  margin: 0 auto !important; /* Center the tile within the slide if necessary */
+  display: flex !important; /* Enables flexbox layout */
+  justify-content: center !important; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+  background-color: #fff; /* Background color of the square */
+  border-radius: 10px; /* Rounded corners for the square */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
+  overflow: hidden; /* Ensures the content does not overflow the square's boundaries */
+  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+}
+
+/* Adjust image size within the tile if necessary */
+
+/* Hover state */
+.slideItemWrapper:hover {
+  background-color: #ececec; /* Change color on hover */
+}
+
+.selectedIndicator {
+  position: absolute;
+  top: -5px; /* Adjust these values as needed */
+  right: -5px; /* Adjust to position the circle at the top right corner */
+  width: 20px; /* Circle size */
+  height: 20px; /* Circle size */
+  border-radius: 50%; /* Make it round */
+  background-color: #fff; /* Circle background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px; /* Adjust based on the size of your circle */
+  color: green; /* Checkmark color */
+}
+
+.selectedIndicator::before {
+  content: "\2713"; /* Unicode for checkmark, you can replace this with an icon */
+}
+
+.btnNext,
+.btnPrev {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.1s ease;
+}
+
+.btnNext,
+.btnPrev {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s ease;
+  z-index: 3;
+}
+
+.btnNext {
+  right: -40px;
+}
+
+.btnPrev {
+  left: -40px;
+}
+
+.btnNext:hover,
+.btnPrev:hover,
+.btnNext:active,
+.btnPrev:active {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.btnNext:active,
+.btnPrev:active {
+  animation: pressEffect 0.2s ease forwards;
+}
+
+@keyframes pressEffect {
+  0% {
+    transform: translateY(-50%) scale(1.2);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.9);
+  }
+  100% {
+    transform: translateY(-50%) scale(1.1);
+  }
 }
