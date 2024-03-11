@@ -1,14 +1,31 @@
 .gridContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 0px;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Adjust the ratio according to your needs */
+  gap: 20px; /* Space between columns */
+  align-items: start; /* Align items to the start of the container */
+  padding: 20px; /* Optional: Adds some padding around the grid */
+}
+
+.rightColumnContainer {
+  border: 2px solid #ccc; /* Example border: solid, 2 pixels wide, light gray */
+  border-radius: 8px; /* Optional: adds rounded corners to the container */
+  /* Add any other styles needed for the container, such as a background color or padding */
+}
+
+.leftColumn {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr; /* Creates three rows of equal size */
+  /* Add any additional styling here */
+}
+
+/* Optional: If you want to style each row within the left column */
+.leftRow {
+  /* Styles for each row, e.g., padding or borders for visual separation */
 }
 
 .sliderContainer {
   width: 50%;
   max-width: 600px;
-  margin: 0 auto;
 }
 
 .slideItemWrapper {
