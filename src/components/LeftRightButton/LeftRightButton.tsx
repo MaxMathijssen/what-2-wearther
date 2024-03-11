@@ -1,24 +1,30 @@
 import { memo } from "react";
 import Image from "next/image";
-import styles from "./hoursButton.module.scss";
+import styles from "./leftRightButton.module.scss";
 
 export enum Direction {
   LEFT,
   RIGHT,
 }
 
-interface HoursButtonProps {
+interface LeftRightButtonProps {
   direction: Direction;
-  onClick: () => void;
+  onClick: (() => void) | null;
 }
 
-function HoursButton({ direction, onClick }: HoursButtonProps) {
+function LeftRightButton({ direction, onClick }: LeftRightButtonProps) {
   const isLeft = direction === Direction.LEFT;
   const imgSrc = isLeft ? "/left-arrow.png" : "/right-arrow.png";
   const btnClass = isLeft ? styles.btnPrevHours : styles.btnNextHours;
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
-    <div className={btnClass} onClick={onClick}>
+    <div className={btnClass} onClick={handleClick}>
       <Image
         src={imgSrc}
         width={30}
@@ -29,4 +35,4 @@ function HoursButton({ direction, onClick }: HoursButtonProps) {
   );
 }
 
-export default memo(HoursButton);
+export default memo(LeftRightButton);

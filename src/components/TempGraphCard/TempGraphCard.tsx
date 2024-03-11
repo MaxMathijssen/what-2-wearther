@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import LineChart from "../LineChart/LineChart";
-import HoursButton, { Direction } from "../HoursButton";
+import LeftRightButton, { Direction } from "../LeftRightButton";
 import HourlyForecastIndicator from "../HourlyForecastIndicator";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
@@ -90,7 +90,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
           </div>
           <div className={styles.body}>
             {prevButtonVisible && (
-              <HoursButton
+              <LeftRightButton
                 onClick={() => handleNextHours(false)}
                 direction={Direction.LEFT}
               />
@@ -140,7 +140,7 @@ function TempGraphCard({ dailyForecast, isPlaceHolder }: TempGraphCardProps) {
               )
             )}
             {dailyForecast.day_num !== 6 && (
-              <HoursButton
+              <LeftRightButton
                 onClick={() => handleNextHours(true)}
                 direction={Direction.RIGHT}
               />
