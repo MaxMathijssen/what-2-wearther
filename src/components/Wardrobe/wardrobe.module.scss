@@ -8,7 +8,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-rows: auto 1fr; /* Adjust if you need specific sizing */
-  grid-template-columns: 1fr 1fr; /* Two columns of equal size */
+  grid-template-columns: 5fr 6fr; /* Two columns of equal size */
   grid-template-areas:
     "avatar avatar"
     "dresser wardrobeContainer";

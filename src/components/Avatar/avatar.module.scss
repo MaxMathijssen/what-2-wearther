@@ -1,10 +1,62 @@
+@import "../../styles/custom-variables.scss";
+
 .avatarContainer {
   position: relative;
   display: flex;
-  margin-bottom: 20px;
+  justify-content: center; // Center horizontally
+  align-items: center; // Center vertically
+  margin-bottom: 15px;
   background: rgba(142, 202, 230, 0.4);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 15px;
+  padding: 30px 15px;
   border-radius: 15px;
+  height: 300px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; // Ensures content is centered vertically
+  padding: 10px 20px 20px 20px;
+  height: 270px; // Adjust height as needed to fit within avatarContainer
+  position: relative; // Added for potential z-index layering
+  background-color: #fef9e7;
+  width: 400px;
+  border-radius: 30px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+}
+
+.topRow,
+.middleRow,
+.bottomRow {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative; // Ensure stacking context for z-index
+}
+
+.topRow {
+  z-index: 3;
+  margin-bottom: -2px;
+}
+
+.middleRow {
+  margin-top: -5px; // Negative margin to pull up closer to the topRow
+  margin-bottom: -13px; // Negative margin to pull bottomRow closer
+  z-index: 2; // Stack middleRow above bottomRow
+}
+
+.bottomRow {
+  z-index: 1; // Ensure bottomRow stays at the bottom of the stacking context
+}
+
+.topItem,
+.middleItem,
+.bottomItem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
