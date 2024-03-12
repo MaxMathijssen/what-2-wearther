@@ -1,0 +1,40 @@
+@import "../../styles/custom-variables.scss";
+
+.card {
+  height: auto;
+  display: grid;
+  grid-template-rows: 2fr 9fr;
+  width: 100%;
+  margin-right: 15x;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 15px 15px 15px;
+  background-color: $brand-white;
+  height: 270px;
+  justify-content: space-around; // Ensures even spacing around items
+  padding: 20px 20px 30px 20px;
+}
+
+.topRow,
+.middleRow,
+.bottomRow {
+  flex: 1; // Makes each row take equal height
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  padding: 15px;
+  box-sizing: border-box; // Ensures padding is included in the height calculation
+}
+
+.topItem,
+.middleItem,
+.bottomItem {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
