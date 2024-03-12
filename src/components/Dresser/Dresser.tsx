@@ -79,20 +79,6 @@ function Dresser() {
 
   return (
     <div className={styles.gridContainer}>
-      {/* Left column now divided into 3 rows */}
-      <div className={styles.leftColumn}>
-        <div className={styles.leftRow}>
-          <p>This is some filler text</p>
-        </div>
-        <div className={styles.leftRow}>
-          <p>Additional content.</p>
-        </div>
-        <div className={styles.leftRow}>
-          <p>More content .</p>
-        </div>
-      </div>
-
-      {/* Right column for sliders */}
       <div className={styles.rightColumnContainer}>
         <div className={styles.gridRow}>
           <div

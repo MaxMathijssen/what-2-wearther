@@ -1,31 +1,20 @@
 .gridContainer {
-  display: grid;
-  grid-template-columns: 1fr 2fr; /* Adjust the ratio according to your needs */
+  display: flex; /* Changed from grid to flex */
   gap: 20px; /* Space between columns */
-  align-items: start; /* Align items to the start of the container */
-  padding: 20px; /* Optional: Adds some padding around the grid */
+  align-items: flex-start; /* Align items to the start of the container */
+  padding: 0px; /* Adjusted padding around the grid */
 }
 
 .rightColumnContainer {
-  border: 2px solid #ccc; /* Example border: solid, 2 pixels wide, light gray */
-  border-radius: 8px; /* Optional: adds rounded corners to the container */
-  /* Add any other styles needed for the container, such as a background color or padding */
-}
-
-.leftColumn {
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr; /* Creates three rows of equal size */
-  /* Add any additional styling here */
-}
-
-/* Optional: If you want to style each row within the left column */
-.leftRow {
-  /* Styles for each row, e.g., padding or borders for visual separation */
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 0px 50px; /* Increased padding on the sides to accommodate arrows */
 }
 
 .sliderContainer {
-  width: 50%;
-  max-width: 600px;
+  width: 100%; /* Use 100% of the parent container's width */
+  max-width: 340px; /* Reduce the maximum width to limit the space it takes */
+  margin: 0 auto; /* Center the slider within its parent container */
 }
 
 .slideItemWrapper {
@@ -75,16 +64,6 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  transition: transform 0.1s ease;
-}
-
-.btnNext,
-.btnPrev {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: transform 0.2s ease;
   z-index: 3;
 }
 
