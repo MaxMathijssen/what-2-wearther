@@ -124,9 +124,9 @@ function WeatherCard({
               <h3>Humidity</h3>
             </div>
             <div className={styles.rightColumn}>
-              <p>{`${dailyForecast.wind_direction}${` `}${
-                dailyForecast.wind_speed
-              }${` km/h`}`}</p>
+              <p style={{ whiteSpace: "nowrap" }}>{`${
+                dailyForecast.wind_direction
+              }${` `}${dailyForecast.wind_speed}${` km/h`}`}</p>
               <p>{`${dailyForecast.clouds}%`}</p>
               <p>{`${dailyForecast.humidity}%`}</p>
             </div>

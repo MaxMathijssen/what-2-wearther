@@ -78,52 +78,68 @@ function Dresser() {
   }
 
   return (
-    <div className={styles.gridContainer}>
-      <div className={styles.rightColumnContainer}>
-        <div className={styles.gridRow}>
-          <div
-            className={classNames(styles.sliderContainer, styles.sliderWrapper)}
-          >
-            <Slider {...settings}>
-              {headItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={styles.slideItemWrapper}
-                  onClick={() => handleSlideClick(index)}
-                >
-                  {item}
-                  {selectedSlide === index && (
-                    <div className={styles.selectedIndicator}></div>
-                  )}
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-        <div className={styles.gridRow}>
-          <div
-            className={classNames(styles.sliderContainer, styles.sliderWrapper)}
-          >
-            <Slider {...settings}>
-              {bodyItems.map((item, index) => (
-                <div key={index} className={styles.slideItemWrapper}>
-                  {item}
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-        <div className={styles.gridRow}>
-          <div
-            className={classNames(styles.sliderContainer, styles.sliderWrapper)}
-          >
-            <Slider {...settings}>
-              {legItems.map((item, index) => (
-                <div key={index} className={styles.slideItemWrapper}>
-                  {item}
-                </div>
-              ))}
-            </Slider>
+    <div className={styles.card}>
+      <div className={styles.header}>
+        <h1>Dresser</h1>
+      </div>
+      <div className={styles.body}>
+        <div className={styles.gridContainer}>
+          <div className={styles.rightColumnContainer}>
+            <div className={styles.gridRow}>
+              <div
+                className={classNames(
+                  styles.sliderContainer,
+                  styles.sliderWrapper
+                )}
+              >
+                <Slider {...settings}>
+                  {headItems.map((item, index) => (
+                    <div
+                      key={index}
+                      className={styles.slideItemWrapper}
+                      onClick={() => handleSlideClick(index)}
+                    >
+                      {item}
+                      {selectedSlide === index && (
+                        <div className={styles.selectedIndicator}></div>
+                      )}
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
+            <div className={styles.gridRow}>
+              <div
+                className={classNames(
+                  styles.sliderContainer,
+                  styles.sliderWrapper
+                )}
+              >
+                <Slider {...settings}>
+                  {bodyItems.map((item, index) => (
+                    <div key={index} className={styles.slideItemWrapper}>
+                      {item}
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
+            <div className={styles.gridRow}>
+              <div
+                className={classNames(
+                  styles.sliderContainer,
+                  styles.sliderWrapper
+                )}
+              >
+                <Slider {...settings}>
+                  {legItems.map((item, index) => (
+                    <div key={index} className={styles.slideItemWrapper}>
+                      {item}
+                    </div>
+                  ))}
+                </Slider>
+              </div>
+            </div>
           </div>
         </div>
       </div>

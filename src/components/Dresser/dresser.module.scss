@@ -1,61 +1,59 @@
-.gridContainer {
-  display: flex; /* Changed from grid to flex */
-  gap: 20px; /* Space between columns */
-  align-items: flex-start; /* Align items to the start of the container */
-  padding: 0px; /* Adjusted padding around the grid */
+@import "../../styles/custom-variables.scss";
+
+.card {
+  display: grid;
+  max-width: 340px;
+  padding: 15px;
+}
+
+.body {
+  background-color: $brand-white;
+  padding: 20px 20px 30px 20px;
+  box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .rightColumnContainer {
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  padding: 0px 50px; /* Increased padding on the sides to accommodate arrows */
+  padding: 0px 50px;
 }
 
 .sliderContainer {
-  width: 100%; /* Use 100% of the parent container's width */
-  max-width: 340px; /* Reduce the maximum width to limit the space it takes */
-  margin: 0 auto; /* Center the slider within its parent container */
+  width: 100%;
+  max-width: 340px;
 }
 
 .slideItemWrapper {
   position: relative;
-  width: 90px; /* Set the size of the square */
-  height: 90px; /* Equal to width to maintain the square shape */
-  margin: 0 auto !important; /* Center the tile within the slide if necessary */
-  display: flex !important; /* Enables flexbox layout */
-  justify-content: center !important; /* Centers content horizontally */
-  align-items: center; /* Centers content vertically */
-  background-color: #fff; /* Background color of the square */
-  border-radius: 10px; /* Rounded corners for the square */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: adds subtle shadow for depth */
-  overflow: hidden; /* Ensures the content does not overflow the square's boundaries */
-  transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for transform and background color */
+  width: 90px;
+  height: 90px;
+  margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center;
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-/* Adjust image size within the tile if necessary */
-
-/* Hover state */
 .slideItemWrapper:hover {
-  background-color: #ececec; /* Change color on hover */
+  background-color: rgba(142, 202, 230, 0.2);
 }
 
 .selectedIndicator {
   position: absolute;
-  top: -5px; /* Adjust these values as needed */
-  right: -5px; /* Adjust to position the circle at the top right corner */
-  width: 20px; /* Circle size */
-  height: 20px; /* Circle size */
-  border-radius: 50%; /* Make it round */
-  background-color: #fff; /* Circle background */
+  top: -5px;
+  right: -5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 14px; /* Adjust based on the size of your circle */
-  color: green; /* Checkmark color */
+  font-size: 14px;
+  color: green;
 }
 
 .selectedIndicator::before {
-  content: "\2713"; /* Unicode for checkmark, you can replace this with an icon */
+  content: "\2713";
 }
 
 .btnNext,
@@ -68,11 +66,11 @@
 }
 
 .btnNext {
-  right: -40px;
+  right: -45px;
 }
 
 .btnPrev {
-  left: -40px;
+  left: -45px;
 }
 
 .btnNext:hover,
