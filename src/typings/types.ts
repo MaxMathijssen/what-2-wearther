@@ -44,3 +44,29 @@ export interface HourlyForecast {
   weather: string;
   iconPath: string;
 }
+
+export enum Status {
+  Dresser = "dresser",
+  Wardrobe = "wardrobe",
+  Avatar = "avatar",
+}
+
+export enum BodyPart {
+  Head = "head",
+  Body = "body",
+  Legs = "legs",
+}
+
+interface WardrobeItem {
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
+  id: number;
+  status: Status;
+  bodyPart: BodyPart;
+}
+
+export type WardrobeItems = WardrobeItem[];

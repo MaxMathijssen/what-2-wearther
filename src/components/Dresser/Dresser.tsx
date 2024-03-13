@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/legacy/image";
 import styles from "./dresser.module.scss";
 import { CustomArrowProps } from "react-slick";
+import { WardrobeContext } from "@/providers/WardrobeProvider";
+import { Status, BodyPart, WardrobeItems } from "@/typings/types";
 import classNames from "classnames";
 
 const headItems = [
@@ -34,20 +36,21 @@ const legItems = [
 
 function Dresser() {
   const [selectedSlide, setSelectedSlide] = useState<null | number>(null);
+  const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
 
   const handleSlideClick = (index: number | null) => {
     setSelectedSlide(index);
   };
 
   const settings = {
-    dots: false, // Show dot indicators at the bottom
-    infinite: true, // Infinite looping
-    speed: 500, // Transition speed
-    slidesToShow: 3, // Number of slides to show at a time
-    slidesToScroll: 1, // Number of slides to scroll on next/prev
-    swipeToSlide: true, // Allow dragging to slide
-    centerMode: true, // Enable center mode
-    centerPadding: "0px", // Adjust padding as needed
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    centerMode: true,
+    centerPadding: "0px",
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
   };
