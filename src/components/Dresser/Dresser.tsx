@@ -9,34 +9,67 @@ import { WardrobeContext } from "@/providers/WardrobeProvider";
 import { Status, BodyPart, WardrobeItems } from "@/typings/types";
 import classNames from "classnames";
 
-const headItems = [
-  <Image src="/head_bald.png" width={50} height={50} alt="Head bald" />,
-  <Image src="/head_ginger.png" width={49} height={50} alt="Head ginger" />,
-  <Image src="/head_blonde.png" width={50} height={50} alt="Head blonde" />,
-  <Image src="/head_black.png" width={50} height={60} alt="Head black" />,
-  <Image src="/head_beard.png" width={50} height={50} alt="Head beard" />,
-  <Image src="/head_orange.png" width={50} height={55} alt="Head orange" />,
-];
-const bodyItems = [
-  <Image src="/body_tanktop.png" width={50} height={68} alt="Body tanktop" />,
-  <Image src="/body_hoodie.png" width={50} height={73} alt="Body hoodie" />,
-  <Image src="/body_suit.png" width={50} height={67} alt="Body suit" />,
-  <Image src="/body_tshirt.png" width={50} height={68} alt="Body t-shirt" />,
-  <Image src="/body_jacket.png" width={50} height={67} alt="Body jacket" />,
-  <Image src="/body_sweater.png" width={50} height={63} alt="Body sweater" />,
-];
-const legItems = [
-  <Image src="/legs_yellow.png" width={40} height={80} alt="Legs yellow" />,
-  <Image src="/legs_black.png" width={40} height={80} alt="Legs black" />,
-  <Image src="/legs_shorts.png" width={40} height={80} alt="Legs shorts" />,
-  <Image src="/legs_ripped.png" width={40} height={80} alt="Legs ripped" />,
-  <Image src="/legs_suit.png" width={40} height={80} alt="Legs suit" />,
-  <Image src="/legs_jeans.png" width={40} height={80} alt="Legs jeans" />,
-];
-
 function Dresser() {
   const [selectedSlide, setSelectedSlide] = useState<null | number>(null);
   const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
+
+  const headImages = wardrobeItems
+    .filter(
+      (wardrobeItem) =>
+        wardrobeItem.status === Status.Dresser &&
+        wardrobeItem.bodyPart === BodyPart.Head
+    )
+    .map((headItem, index) => (
+      <div
+        key={index}
+        className={styles.slideItemWrapper}
+        onClick={() => handleSlideClick(index)}
+      >
+        <Image
+          src={headItem.image.src}
+          width={headItem.image.width}
+          height={headItem.image.height}
+          alt={headItem.image.alt}
+        />
+        {selectedSlide === index && (
+          <div className={styles.selectedIndicator}></div>
+        )}
+      </div>
+    ));
+
+  const bodyImages = wardrobeItems
+    .filter(
+      (wardrobeItem) =>
+        wardrobeItem.status === Status.Dresser &&
+        wardrobeItem.bodyPart === BodyPart.Body
+    )
+    .map((bodyItem, index) => (
+      <div key={index} className={styles.slideItemWrapper}>
+        <Image
+          src={bodyItem.image.src}
+          width={bodyItem.image.width}
+          height={bodyItem.image.height}
+          alt={bodyItem.image.alt}
+        />
+      </div>
+    ));
+
+  const legsImages = wardrobeItems
+    .filter(
+      (wardrobeItem) =>
+        wardrobeItem.status === Status.Dresser &&
+        wardrobeItem.bodyPart === BodyPart.Legs
+    )
+    .map((legsItem, index) => (
+      <div key={index} className={styles.slideItemWrapper}>
+        <Image
+          src={legsItem.image.src}
+          width={legsItem.image.width}
+          height={legsItem.image.height}
+          alt={legsItem.image.alt}
+        />
+      </div>
+    ));
 
   const handleSlideClick = (index: number | null) => {
     setSelectedSlide(index);
@@ -95,20 +128,7 @@ function Dresser() {
                   styles.sliderWrapper
                 )}
               >
-                <Slider {...settings}>
-                  {headItems.map((item, index) => (
-                    <div
-                      key={index}
-                      className={styles.slideItemWrapper}
-                      onClick={() => handleSlideClick(index)}
-                    >
-                      {item}
-                      {selectedSlide === index && (
-                        <div className={styles.selectedIndicator}></div>
-                      )}
-                    </div>
-                  ))}
-                </Slider>
+                <Slider {...settings}>{headImages}</Slider>
               </div>
             </div>
             <div className={styles.gridRow}>
@@ -118,13 +138,7 @@ function Dresser() {
                   styles.sliderWrapper
                 )}
               >
-                <Slider {...settings}>
-                  {bodyItems.map((item, index) => (
-                    <div key={index} className={styles.slideItemWrapper}>
-                      {item}
-                    </div>
-                  ))}
-                </Slider>
+                <Slider {...settings}>{bodyImages}</Slider>
               </div>
             </div>
             <div className={styles.gridRow}>
@@ -134,13 +148,7 @@ function Dresser() {
                   styles.sliderWrapper
                 )}
               >
-                <Slider {...settings}>
-                  {legItems.map((item, index) => (
-                    <div key={index} className={styles.slideItemWrapper}>
-                      {item}
-                    </div>
-                  ))}
-                </Slider>
+                <Slider {...settings}>{legsImages}</Slider>
               </div>
             </div>
           </div>
