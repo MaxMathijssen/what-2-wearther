@@ -57,7 +57,7 @@ export enum BodyPart {
   Legs = "legs",
 }
 
-interface WardrobeItem {
+export interface WardrobeItem {
   image: {
     src: string;
     width: number;

@@ -6,7 +6,7 @@ import Image from "next/legacy/image";
 import styles from "./dresser.module.scss";
 import { CustomArrowProps } from "react-slick";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
-import { Status, BodyPart, WardrobeItems } from "@/typings/types";
+import { Status, BodyPart, WardrobeItem, WardrobeItems } from "@/typings/types";
 import classNames from "classnames";
 
 function Dresser() {
@@ -19,11 +19,11 @@ function Dresser() {
         wardrobeItem.status === Status.Dresser &&
         wardrobeItem.bodyPart === BodyPart.Head
     )
-    .map((headItem, index) => (
+    .map((headItem) => (
       <div
-        key={index}
+        key={headItem.id}
         className={styles.slideItemWrapper}
-        onClick={() => handleSlideClick(index)}
+        onClick={() => moveToWardrobe(headItem)}
       >
         <Image
           src={headItem.image.src}
@@ -31,7 +31,7 @@ function Dresser() {
           height={headItem.image.height}
           alt={headItem.image.alt}
         />
-        {selectedSlide === index && (
+        {selectedSlide === headItem.id && (
           <div className={styles.selectedIndicator}></div>
         )}
       </div>
@@ -43,8 +43,8 @@ function Dresser() {
         wardrobeItem.status === Status.Dresser &&
         wardrobeItem.bodyPart === BodyPart.Body
     )
-    .map((bodyItem, index) => (
-      <div key={index} className={styles.slideItemWrapper}>
+    .map((bodyItem) => (
+      <div key={bodyItem.id} className={styles.slideItemWrapper}>
         <Image
           src={bodyItem.image.src}
           width={bodyItem.image.width}
@@ -60,8 +60,8 @@ function Dresser() {
         wardrobeItem.status === Status.Dresser &&
         wardrobeItem.bodyPart === BodyPart.Legs
     )
-    .map((legsItem, index) => (
-      <div key={index} className={styles.slideItemWrapper}>
+    .map((legsItem) => (
+      <div key={legsItem.id} className={styles.slideItemWrapper}>
         <Image
           src={legsItem.image.src}
           width={legsItem.image.width}
@@ -74,6 +74,19 @@ function Dresser() {
   const handleSlideClick = (index: number | null) => {
     setSelectedSlide(index);
   };
+
+  function moveToWardrobe(clickedWardrobeItem: WardrobeItem) {
+    const updatedClickedWardrobeItem = {
+      ...clickedWardrobeItem,
+      status: Status.Wardrobe,
+    };
+
+    const nextWardrobeItems = wardrobeItems
+      .filter((item) => item.id !== clickedWardrobeItem.id)
+      .concat(updatedClickedWardrobeItem);
+
+    setWardrobeItems(nextWardrobeItems);
+  }
 
   const settings = {
     dots: false,
