@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { motion } from "framer-motion";
 import Image from "next/legacy/image";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
-import { Status, BodyPart, WardrobeItem, WardrobeItems } from "@/typings/types";
+import { Status, BodyPart, WardrobeItem } from "@/typings/types";
 import styles from "./wardrobeContainer.module.scss";
+import classNames from "classnames";
 
 function WardrobeContainer() {
   const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
@@ -31,7 +32,7 @@ function WardrobeContainer() {
       <motion.div
         key={headItem.id}
         layoutId={`item-${headItem.id}`}
-        className={styles.slideItemWrapper}
+        className={classNames(styles.itemWrapper, styles.fadeInOnly)}
         onClick={() => moveToAvatar(headItem)}
       >
         <Image
@@ -53,7 +54,7 @@ function WardrobeContainer() {
       <motion.div
         key={bodyItem.id}
         layoutId={`item-${bodyItem.id}`}
-        className={styles.slideItemWrapper}
+        className={classNames(styles.itemWrapper, styles.fadeInOnly)}
         onClick={() => moveToAvatar(bodyItem)}
       >
         <Image
@@ -75,7 +76,7 @@ function WardrobeContainer() {
       <motion.div
         key={legsItem.id}
         layoutId={`item-${legsItem.id}`}
-        className={styles.slideItemWrapper}
+        className={classNames(styles.itemWrapper, styles.fadeInOnly)}
         onClick={() => moveToAvatar(legsItem)}
       >
         <Image

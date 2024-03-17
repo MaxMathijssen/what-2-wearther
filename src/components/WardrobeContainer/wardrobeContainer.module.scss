@@ -4,20 +4,18 @@
   height: auto;
   display: grid;
   grid-template-rows: 2fr 9fr;
-  width: 100%;
+  max-width: 600px;
   margin-right: 15x;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
 }
 
 .body {
-  display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 15px 15px 15px;
   background-color: $brand-white;
-  height: 270px;
+  height: 280px;
   justify-content: space-around; // Ensures even spacing around items
-  padding: 20px 20px 30px 20px;
+  padding: 20px 20px 20px 20px;
 }
 
 .topRow,
@@ -27,13 +25,43 @@
   display: flex;
   width: 100%;
   justify-content: flex-end; // Aligns items to the right
-  padding: 15px;
   box-sizing: border-box; // Ensures padding is included in the height calculation
-  gap: 50px;
+  gap: 5px;
 }
 
 .topItem,
 .middleItem,
 .bottomItem {
   display: flex;
+}
+
+.itemWrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  border-radius: 10px;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+  background-color: transparent; /* Initial background-color */
+}
+
+.itemWrapper:hover {
+  background-color: rgba(142, 202, 230, 0.2); /* Background color on hover */
+  transform: scale(1.05); /* Slightly enlarge the wrapper to indicate hover */
+}
+
+@keyframes fadeInOnly {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeInOnly {
+  animation: fadeInOnly 0.5s;
 }
