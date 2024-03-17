@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import styles from "./dresser.module.scss";
 import { CustomArrowProps } from "react-slick";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
@@ -26,13 +26,12 @@ function Dresser() {
         className={styles.slideItemWrapper}
         onClick={() => moveToWardrobe(headItem)}
       >
-        <motion.div layoutId={`item-${headItem.id}`}>
+        <motion.div>
           <Image
             src={headItem.image.src}
             width={headItem.image.width}
             height={headItem.image.height}
             alt={headItem.image.alt}
-            layout="fixed" // ensure you're using the correct layout prop for Image
           />
         </motion.div>
       </div>

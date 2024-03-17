@@ -26,15 +26,14 @@
   flex: 1; // Makes each row take equal height
   display: flex;
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-end; // Aligns items to the right
   padding: 15px;
   box-sizing: border-box; // Ensures padding is included in the height calculation
+  gap: 50px;
 }
 
 .topItem,
 .middleItem,
 .bottomItem {
   display: flex;
-  align-items: center;
-  flex-direction: column;
 }
