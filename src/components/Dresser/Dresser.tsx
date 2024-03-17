@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { motion } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -21,19 +22,19 @@ function Dresser() {
     )
     .map((headItem) => (
       <div
-        key={headItem.id}
+        key={headItem.id} // key here on the outermost element
         className={styles.slideItemWrapper}
         onClick={() => moveToWardrobe(headItem)}
       >
-        <Image
-          src={headItem.image.src}
-          width={headItem.image.width}
-          height={headItem.image.height}
-          alt={headItem.image.alt}
-        />
-        {selectedSlide === headItem.id && (
-          <div className={styles.selectedIndicator}></div>
-        )}
+        <motion.div layoutId={`item-${headItem.id}`}>
+          <Image
+            src={headItem.image.src}
+            width={headItem.image.width}
+            height={headItem.image.height}
+            alt={headItem.image.alt}
+            layout="fixed" // ensure you're using the correct layout prop for Image
+          />
+        </motion.div>
       </div>
     ));
 
