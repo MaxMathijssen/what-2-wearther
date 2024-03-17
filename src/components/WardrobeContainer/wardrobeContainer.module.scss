@@ -14,18 +14,18 @@
   align-items: center;
   background-color: $brand-white;
   height: 280px;
-  justify-content: space-around; // Ensures even spacing around items
+  justify-content: space-around;
   padding: 20px 20px 20px 20px;
 }
 
 .topRow,
 .middleRow,
 .bottomRow {
-  flex: 1; // Makes each row take equal height
+  flex: 1;
   display: flex;
   width: 100%;
-  justify-content: flex-end; // Aligns items to the right
-  box-sizing: border-box; // Ensures padding is included in the height calculation
+  justify-content: flex-end;
+  box-sizing: border-box;
   gap: 5px;
 }
 
@@ -40,17 +40,17 @@
   width: 90px;
   height: 90px;
   display: flex;
-  justify-content: center; /* Center the content horizontally */
-  align-items: center; /* Center the content vertically */
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   transition: transform 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
-  background-color: transparent; /* Initial background-color */
+  background-color: transparent;
 }
 
 .itemWrapper:hover {
-  background-color: rgba(142, 202, 230, 0.2); /* Background color on hover */
-  transform: scale(1.05); /* Slightly enlarge the wrapper to indicate hover */
+  background-color: rgba(142, 202, 230, 0.2);
+  transform: scale(1.05);
 }
 
 @keyframes fadeInOnly {

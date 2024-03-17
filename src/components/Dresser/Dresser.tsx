@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { motion } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -7,7 +6,7 @@ import Image from "next/image";
 import styles from "./dresser.module.scss";
 import { CustomArrowProps } from "react-slick";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
-import { Status, BodyPart, WardrobeItem, WardrobeItems } from "@/typings/types";
+import { Status, BodyPart, WardrobeItem } from "@/typings/types";
 import classNames from "classnames";
 
 interface SliderSettings {
@@ -19,8 +18,8 @@ interface SliderSettings {
   swipeToSlide: boolean;
   centerMode: boolean;
   centerPadding: string;
-  nextArrow: React.ReactElement | undefined; // Adjusted type
-  prevArrow: React.ReactElement | undefined; // Adjusted type
+  nextArrow: React.ReactElement | undefined;
+  prevArrow: React.ReactElement | undefined;
 }
 
 interface SliderSettingsMap {
@@ -61,7 +60,7 @@ function Dresser() {
       swipeToSlide: true,
       centerMode: true,
       centerPadding: "0px",
-      nextArrow: <NextArrow onClick={() => {}} />, // Placeholder onClick, adjust as needed
+      nextArrow: <NextArrow onClick={() => {}} />,
       prevArrow: <PrevArrow onClick={() => {}} />,
     },
     body: {
@@ -73,7 +72,7 @@ function Dresser() {
       swipeToSlide: true,
       centerMode: true,
       centerPadding: "0px",
-      nextArrow: <NextArrow onClick={() => {}} />, // Placeholder onClick, adjust as needed
+      nextArrow: <NextArrow onClick={() => {}} />,
       prevArrow: <PrevArrow onClick={() => {}} />,
     },
     legs: {
@@ -85,7 +84,7 @@ function Dresser() {
       swipeToSlide: true,
       centerMode: true,
       centerPadding: "0px",
-      nextArrow: <NextArrow onClick={() => {}} />, // Placeholder onClick, adjust as needed
+      nextArrow: <NextArrow onClick={() => {}} />,
       prevArrow: <PrevArrow onClick={() => {}} />,
     },
   });
@@ -173,7 +172,6 @@ function Dresser() {
       .filter((item) => item.id !== clickedWardrobeItem.id)
       .concat(updatedClickedWardrobeItem);
 
-    // Determine the new length of items in the corresponding category
     const newLength = nextWardrobeItems.filter(
       (item) =>
         item.bodyPart === clickedWardrobeItem.bodyPart &&
@@ -182,7 +180,6 @@ function Dresser() {
 
     console.log(newLength);
 
-    // Determine the body part to update the settings for
     let bodyPartToUpdate: keyof SliderSettingsMap | null = null;
     switch (clickedWardrobeItem.bodyPart) {
       case BodyPart.Head:
@@ -198,7 +195,6 @@ function Dresser() {
         bodyPartToUpdate = null;
     }
 
-    // If the new length is less than 3, update the slider settings for the corresponding body part
     if (bodyPartToUpdate) {
       if (newLength === 2) {
         updateSliderSettings(bodyPartToUpdate, {
