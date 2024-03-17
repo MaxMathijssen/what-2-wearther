@@ -50,14 +50,41 @@ function WardrobeContainer() {
         wardrobeItem.bodyPart === BodyPart.Body
     )
     .map((bodyItem) => (
-      <div key={bodyItem.id} className={styles.slideItemWrapper}>
+      <motion.div
+        key={bodyItem.id}
+        layoutId={`item-${bodyItem.id}`}
+        className={styles.slideItemWrapper}
+        onClick={() => moveToAvatar(bodyItem)}
+      >
         <Image
           src={bodyItem.image.src}
           width={bodyItem.image.width}
           height={bodyItem.image.height}
           alt={bodyItem.image.alt}
         />
-      </div>
+      </motion.div>
+    ));
+
+  const legsImages = wardrobeItems
+    .filter(
+      (wardrobeItem) =>
+        wardrobeItem.status === Status.Wardrobe &&
+        wardrobeItem.bodyPart === BodyPart.Legs
+    )
+    .map((legsItem) => (
+      <motion.div
+        key={legsItem.id}
+        layoutId={`item-${legsItem.id}`}
+        className={styles.slideItemWrapper}
+        onClick={() => moveToAvatar(legsItem)}
+      >
+        <Image
+          src={legsItem.image.src}
+          width={legsItem.image.width}
+          height={legsItem.image.height}
+          alt={legsItem.image.alt}
+        />
+      </motion.div>
     ));
 
   return (
@@ -68,8 +95,8 @@ function WardrobeContainer() {
         </div>
         <div className={styles.body}>
           <div className={styles.topRow}>{headImages}</div>
-          <div className={styles.middleRow}></div>
-          <div className={styles.bottomRow}></div>
+          <div className={styles.middleRow}>{bodyImages}</div>
+          <div className={styles.bottomRow}>{legsImages}</div>
         </div>
       </div>
     </div>

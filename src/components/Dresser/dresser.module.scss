@@ -18,6 +18,13 @@
 .sliderContainer {
   width: 100%;
   max-width: 340px;
+  min-height: 90px; /* Ensure this matches your slideItemWrapper height or is enough to maintain layout */
+}
+
+.gridRow {
+  display: flex;
+  align-items: center;
+  min-height: 80px; /* Adjust based on your design */
 }
 
 .slideItemWrapper {
