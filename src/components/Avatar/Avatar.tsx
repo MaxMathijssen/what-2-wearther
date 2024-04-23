@@ -1,13 +1,37 @@
 import Image from "next/legacy/image";
 import styles from "./avatar.module.scss";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 import { Status, BodyPart, WardrobeItem } from "@/typings/types";
 import classNames from "classnames";
 
 function Avatar() {
-  const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
+  const { wardrobeItems } = useContext(WardrobeContext);
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  // Checks for each body part
+  const hasHeadAvatar = wardrobeItems.some(
+    (item) => item.status === Status.Avatar && item.bodyPart === BodyPart.Head
+  );
+  const hasBodyAvatar = wardrobeItems.some(
+    (item) => item.status === Status.Avatar && item.bodyPart === BodyPart.Body
+  );
+  const hasLegsAvatar = wardrobeItems.some(
+    (item) => item.status === Status.Avatar && item.bodyPart === BodyPart.Legs
+  );
+
+  const allReplaced = hasHeadAvatar && hasBodyAvatar && hasLegsAvatar;
+
+  useEffect(() => {
+    if (allReplaced) {
+      setShowAnimation(true);
+      const timer = setTimeout(() => {
+        setShowAnimation(false);
+      }, 3000); // Animation duration and fading
+      return () => clearTimeout(timer);
+    }
+  }, [allReplaced]);
 
   const headImage = wardrobeItems
     .filter(
@@ -76,6 +100,7 @@ function Avatar() {
     <div className={styles.avatarContainer}>
       <div className={styles.cardContainer}>
         <div className={styles.body}>
+          {showAnimation && <div className={styles.sunshineEffect}></div>}
           <div className={styles.topRow}>
             {headImage.length === 0 && (
               <Image
