@@ -67,6 +67,7 @@ export interface WardrobeItem {
   id: number;
   status: Status;
   bodyPart: BodyPart;
+  justMovedBack?: boolean; // add this line, using optional if it's not always present
 }
 
 export type WardrobeItems = WardrobeItem[];

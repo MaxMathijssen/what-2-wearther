@@ -9,6 +9,12 @@
   background-color: $brand-white;
   padding: 20px 20px 30px 20px;
   box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+  height: 280px; // Adjust height as needed
+  padding: 20px; // Uniform padding from all sides
+  align-items: center; // Centers children horizontally in the middle of the 'body'
+  justify-content: center; // Centers children vertically in the middle of the 'body'
+  height: 280px; // Adjust height as needed
+  padding: 20px; // Uniform padding from all sides
 }
 
 .rightColumnContainer {
@@ -83,4 +89,25 @@
   100% {
     transform: translateY(-50%) scale(1.1);
   }
+}
+
+.card .body .noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .body .noDataContainer h2 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 15px 15px;
+  text-align: center;
+}
+
+.card .body .noDataContainer h3 {
+  font-size: 14px;
+  font-weight: 300;
+  color: $brand-grey;
+  margin: 15px 15px;
+  text-align: center;
 }

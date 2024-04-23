@@ -9,16 +9,18 @@ import classNames from "classnames";
 function WardrobeContainer() {
   const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
 
+  const itemsInWardrobe = wardrobeItems.filter(
+    (item) => item.status === Status.Wardrobe
+  );
+
   function moveToAvatar(clickedWardrobeItem: WardrobeItem) {
     const updatedItems = wardrobeItems.map((item) => {
       if (item.id === clickedWardrobeItem.id) {
-        // Change the clicked item's status to Avatar and reset justMovedBack
         return { ...item, status: Status.Avatar, justMovedBack: false };
       } else if (
         item.status === Status.Avatar &&
         item.bodyPart === clickedWardrobeItem.bodyPart
       ) {
-        // Revert any existing Avatar item of the same body part to Wardrobe and set justMovedBack
         return { ...item, status: Status.Wardrobe, justMovedBack: true };
       }
       return item;
@@ -27,8 +29,7 @@ function WardrobeContainer() {
     setWardrobeItems(updatedItems);
   }
 
-  // Helper function to generate item components based on body part
-  const generateItemComponents = (bodyPart) =>
+  const generateItemComponents = (bodyPart: BodyPart) =>
     wardrobeItems
       .filter(
         (item) => item.status === Status.Wardrobe && item.bodyPart === bodyPart
@@ -58,15 +59,33 @@ function WardrobeContainer() {
           <h1>Wardrobe</h1>
         </div>
         <div className={styles.body}>
-          <div className={styles.topRow}>
-            {generateItemComponents(BodyPart.Head)}
-          </div>
-          <div className={styles.middleRow}>
-            {generateItemComponents(BodyPart.Body)}
-          </div>
-          <div className={styles.bottomRow}>
-            {generateItemComponents(BodyPart.Legs)}
-          </div>
+          {itemsInWardrobe.length === 0 ? (
+            <div className={classNames(styles.noDataContainer, styles.fadeIn)}>
+              <h2>It sure looks empty in here..</h2>
+              <Image
+                src="/wallet.png"
+                width={100}
+                height={100}
+                alt="No items"
+              />
+              <h3>
+                Fill up your wardrobe with items from the dresser to get
+                started!
+              </h3>
+            </div>
+          ) : (
+            <>
+              <div className={styles.topRow}>
+                {generateItemComponents(BodyPart.Head)}
+              </div>
+              <div className={styles.middleRow}>
+                {generateItemComponents(BodyPart.Body)}
+              </div>
+              <div className={styles.bottomRow}>
+                {generateItemComponents(BodyPart.Legs)}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

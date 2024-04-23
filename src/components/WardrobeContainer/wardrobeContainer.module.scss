@@ -10,12 +10,13 @@
 }
 
 .body {
-  flex-direction: column;
-  align-items: center;
+  display: flex; // Ensures that flexbox properties are applied
+  flex-direction: column; // Stacks the children vertically
+  align-items: center; // Centers children horizontally in the middle of the 'body'
+  justify-content: center; // Centers children vertically in the middle of the 'body'
   background-color: $brand-white;
-  height: 280px;
-  justify-content: space-around;
-  padding: 20px 20px 20px 20px;
+  height: 280px; // Adjust height as needed
+  padding: 20px; // Uniform padding from all sides
 }
 
 .topRow,
@@ -64,4 +65,25 @@
 
 .fadeInOnly {
   animation: fadeInOnly 0.5s;
+}
+
+.card .body .noDataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card .body .noDataContainer h2 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 15px 15px;
+  text-align: center;
+}
+
+.card .body .noDataContainer h3 {
+  font-size: 14px;
+  font-weight: 300;
+  color: $brand-grey;
+  margin: 15px 15px;
+  text-align: center;
 }

@@ -89,6 +89,10 @@ function Dresser() {
     },
   });
 
+  const dresserItems = wardrobeItems.filter(
+    (wardrobeItem) => wardrobeItem.status === Status.Dresser
+  );
+
   function updateSliderSettings(
     type: keyof SliderSettingsMap,
     newSettings: Partial<SliderSettings>
@@ -227,40 +231,48 @@ function Dresser() {
         <h1>Dresser</h1>
       </div>
       <div className={styles.body}>
-        <div className={styles.gridContainer}>
-          <div className={styles.rightColumnContainer}>
-            <div className={styles.gridRow}>
-              <div
-                className={classNames(
-                  styles.sliderContainer,
-                  styles.sliderWrapper
-                )}
-              >
-                <Slider {...sliderSettings.head}>{headImages}</Slider>
+        {dresserItems.length === 0 ? (
+          <div className={classNames(styles.noDataContainer, styles.fadeIn)}>
+            <h2>It sure looks empty in here..</h2>
+            <Image src="/wallet.png" width={100} height={100} alt="No items" />
+            <h3>Looks like you're all out of clothes!</h3>
+          </div>
+        ) : (
+          <div className={styles.gridContainer}>
+            <div className={styles.rightColumnContainer}>
+              <div className={styles.gridRow}>
+                <div
+                  className={classNames(
+                    styles.sliderContainer,
+                    styles.sliderWrapper
+                  )}
+                >
+                  <Slider {...sliderSettings.head}>{headImages}</Slider>
+                </div>
               </div>
-            </div>
-            <div className={styles.gridRow}>
-              <div
-                className={classNames(
-                  styles.sliderContainer,
-                  styles.sliderWrapper
-                )}
-              >
-                <Slider {...sliderSettings.body}>{bodyImages}</Slider>
+              <div className={styles.gridRow}>
+                <div
+                  className={classNames(
+                    styles.sliderContainer,
+                    styles.sliderWrapper
+                  )}
+                >
+                  <Slider {...sliderSettings.body}>{bodyImages}</Slider>
+                </div>
               </div>
-            </div>
-            <div className={styles.gridRow}>
-              <div
-                className={classNames(
-                  styles.sliderContainer,
-                  styles.sliderWrapper
-                )}
-              >
-                <Slider {...sliderSettings.legs}>{legsImages}</Slider>
+              <div className={styles.gridRow}>
+                <div
+                  className={classNames(
+                    styles.sliderContainer,
+                    styles.sliderWrapper
+                  )}
+                >
+                  <Slider {...sliderSettings.legs}>{legsImages}</Slider>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
