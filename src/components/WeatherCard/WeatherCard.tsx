@@ -1,7 +1,7 @@
-import { useCallback, memo } from "react";
+import { useCallback, memo, useContext } from "react";
 import { DailyForecast } from "@/typings/types";
 import Image from "next/legacy/image";
-
+import { WardrobeContext } from "@/providers/WardrobeProvider";
 import styles from "./weatherCard.module.scss";
 import classNames from "classnames";
 
@@ -25,6 +25,8 @@ function WeatherCard({
       selectDailyForecast(dailyForecast);
     }
   }, [selectDailyForecast, dailyForecast]);
+
+  const { avatar } = useContext(WardrobeContext);
 
   const gradient = dailyForecast?.color;
 
@@ -100,6 +102,16 @@ function WeatherCard({
                   height={80}
                   alt={dailyForecast.weather}
                 ></Image>
+              )}
+              {avatar?.isComplete && avatar.head !== undefined && (
+                <div className={styles.avatar}>
+                  <Image
+                    src={avatar.head.image.src}
+                    width={avatar.head.image.width * 0.3}
+                    height={avatar.head.image.height * 0.3}
+                    alt={avatar.head.image.alt}
+                  ></Image>
+                </div>
               )}
             </div>
             <div className={styles.rightColumn}>

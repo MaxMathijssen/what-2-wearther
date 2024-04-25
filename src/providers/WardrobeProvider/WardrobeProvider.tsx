@@ -30,6 +30,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 1,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     {
       image: {
@@ -41,6 +45,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 2,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     {
       image: {
@@ -52,6 +60,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 3,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     {
       image: {
@@ -63,6 +75,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 4,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     {
       image: {
@@ -74,6 +90,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 5,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     {
       image: {
@@ -85,6 +105,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 6,
       status: Status.Dresser,
       bodyPart: BodyPart.Head,
+      tempRange: {
+        min: 10,
+        max: 15,
+      },
     },
     // Body Items
     {
@@ -97,6 +121,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 7,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 26,
+        max: 50,
+      },
     },
     {
       image: {
@@ -108,12 +136,20 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 8,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 15,
+        max: 17,
+      },
     },
     {
       image: { src: "/body_suit.png", width: 50, height: 67, alt: "Body suit" },
       id: 9,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 15,
+        max: 16,
+      },
     },
     {
       image: {
@@ -125,6 +161,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 10,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 20,
+        max: 25,
+      },
     },
     {
       image: {
@@ -136,6 +176,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 11,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 12,
+        max: 15,
+      },
     },
     {
       image: {
@@ -147,6 +191,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 12,
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
+      tempRange: {
+        min: 11,
+        max: -50,
+      },
     },
     // Leg Items
     {
@@ -159,6 +207,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 13,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 12,
+        max: 15,
+      },
     },
     {
       image: {
@@ -170,6 +222,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 14,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 12,
+        max: 15,
+      },
     },
     {
       image: {
@@ -181,6 +237,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 15,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 26,
+        max: 50,
+      },
     },
     {
       image: {
@@ -192,12 +252,20 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 16,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 20,
+        max: 25,
+      },
     },
     {
       image: { src: "/legs_suit.png", width: 40, height: 80, alt: "Legs suit" },
       id: 17,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 15,
+        max: 16,
+      },
     },
     {
       image: {
@@ -209,6 +277,10 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       id: 18,
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
+      tempRange: {
+        min: 15,
+        max: 17,
+      },
     },
   ]);
 

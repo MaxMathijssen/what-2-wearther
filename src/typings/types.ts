@@ -67,14 +67,18 @@ export interface WardrobeItem {
   id: number;
   status: Status;
   bodyPart: BodyPart;
-  justMovedBack?: boolean; // add this line, using optional if it's not always present
+  justMovedBack?: boolean;
+  tempRange: {
+    min: number;
+    max: number;
+  };
 }
 
 export interface Avatar {
   head?: WardrobeItem;
   body?: WardrobeItem;
   legs?: WardrobeItem;
-  isComplete: boolean; // Now accepts both true or false
+  isComplete: boolean;
 }
 
 export type WardrobeItems = WardrobeItem[];
