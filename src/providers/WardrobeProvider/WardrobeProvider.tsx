@@ -1,6 +1,6 @@
 "use client";
 
-import { Status, BodyPart, WardrobeItems } from "@/typings/types";
+import { Status, BodyPart, WardrobeItems, Avatar } from "@/typings/types";
 import { createContext, useState, useMemo, PropsWithChildren } from "react";
 
 type WardrobeContextType = {
@@ -8,6 +8,8 @@ type WardrobeContextType = {
   setWardrobeEnabled: (wardrobeEnabled: boolean) => void;
   wardrobeItems: WardrobeItems;
   setWardrobeItems: (items: WardrobeItems) => void;
+  avatar: Avatar | null;
+  setAvatar: (avatar: Avatar | null) => void;
 };
 
 export const WardrobeContext = createContext<WardrobeContextType>({
@@ -15,6 +17,8 @@ export const WardrobeContext = createContext<WardrobeContextType>({
   setWardrobeEnabled: () => {},
   wardrobeItems: [],
   setWardrobeItems: () => {},
+  avatar: null,
+  setAvatar: () => {},
 });
 
 function WardrobeProvider({ children }: PropsWithChildren<{}>) {
@@ -208,14 +212,18 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
     },
   ]);
 
+  const [avatar, setAvatar] = useState<Avatar | null>(null);
+
   const contextValue = useMemo(
     () => ({
       wardrobeEnabled,
       setWardrobeEnabled,
       wardrobeItems,
       setWardrobeItems,
+      avatar,
+      setAvatar,
     }),
-    [wardrobeEnabled, wardrobeItems]
+    [wardrobeEnabled, wardrobeItems, avatar]
   );
 
   return (

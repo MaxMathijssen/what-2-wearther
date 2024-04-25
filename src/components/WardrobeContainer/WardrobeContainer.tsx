@@ -7,7 +7,8 @@ import styles from "./wardrobeContainer.module.scss";
 import classNames from "classnames";
 
 function WardrobeContainer() {
-  const { wardrobeItems, setWardrobeItems } = useContext(WardrobeContext);
+  const { wardrobeItems, setWardrobeItems, avatar, setAvatar } =
+    useContext(WardrobeContext);
 
   const itemsInWardrobe = wardrobeItems.filter(
     (item) => item.status === Status.Wardrobe
@@ -25,8 +26,31 @@ function WardrobeContainer() {
       }
       return item;
     });
-
     setWardrobeItems(updatedItems);
+
+    const newAvatar = {
+      head: updatedItems.find(
+        (item) =>
+          item.bodyPart === BodyPart.Head && item.status === Status.Avatar
+      ),
+      body: updatedItems.find(
+        (item) =>
+          item.bodyPart === BodyPart.Body && item.status === Status.Avatar
+      ),
+      legs: updatedItems.find(
+        (item) =>
+          item.bodyPart === BodyPart.Legs && item.status === Status.Avatar
+      ),
+      isComplete: false, // Start with false
+    };
+
+    // Check if all parts are filled to set isComplete to true
+    if (newAvatar.head && newAvatar.body && newAvatar.legs) {
+      newAvatar.isComplete = true;
+      console.log("IsComplete");
+    }
+
+    setAvatar(newAvatar);
   }
 
   const generateItemComponents = (bodyPart: BodyPart) =>

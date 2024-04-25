@@ -70,4 +70,11 @@ export interface WardrobeItem {
   justMovedBack?: boolean; // add this line, using optional if it's not always present
 }
 
+export interface Avatar {
+  head?: WardrobeItem;
+  body?: WardrobeItem;
+  legs?: WardrobeItem;
+  isComplete: boolean; // Now accepts both true or false
+}
+
 export type WardrobeItems = WardrobeItem[];

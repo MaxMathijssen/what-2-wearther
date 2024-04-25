@@ -1,16 +1,23 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
 import styles from "./umbrelly.module.scss";
 import Image from "next/image";
+import { WardrobeContext } from "@/providers/WardrobeProvider";
 
 function Umbrelly() {
+  const { avatar } = useContext(WardrobeContext);
   const [isShown, setIsShown] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
+    if (avatar?.isComplete) {
+      setIsShown(false);
+      return;
+    }
+
     if (wrapperRef.current) {
       observerRef.current = new IntersectionObserver((entries) => {
         const [entry] = entries;
@@ -25,7 +32,7 @@ function Umbrelly() {
         observerRef.current.disconnect();
       }
     };
-  }, []);
+  }, [avatar?.isComplete]);
 
   function handleClose() {
     setIsShown(false);
