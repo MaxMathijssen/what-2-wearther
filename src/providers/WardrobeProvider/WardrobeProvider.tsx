@@ -137,7 +137,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
       tempRange: {
-        min: 15,
+        min: -50,
         max: 17,
       },
     },
@@ -147,7 +147,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
       tempRange: {
-        min: 15,
+        min: -50,
         max: 16,
       },
     },
@@ -178,7 +178,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       bodyPart: BodyPart.Body,
       tempRange: {
         min: 12,
-        max: 15,
+        max: 19,
       },
     },
     {
@@ -192,8 +192,8 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       status: Status.Dresser,
       bodyPart: BodyPart.Body,
       tempRange: {
-        min: 11,
-        max: -50,
+        min: -50,
+        max: 18,
       },
     },
     // Leg Items
@@ -209,7 +209,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       bodyPart: BodyPart.Legs,
       tempRange: {
         min: 12,
-        max: 15,
+        max: 19,
       },
     },
     {
@@ -224,7 +224,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       bodyPart: BodyPart.Legs,
       tempRange: {
         min: 12,
-        max: 15,
+        max: 19,
       },
     },
     {
@@ -238,7 +238,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
       tempRange: {
-        min: 26,
+        min: 20,
         max: 50,
       },
     },
@@ -264,7 +264,7 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       bodyPart: BodyPart.Legs,
       tempRange: {
         min: 15,
-        max: 16,
+        max: 19,
       },
     },
     {
@@ -278,8 +278,8 @@ function WardrobeProvider({ children }: PropsWithChildren<{}>) {
       status: Status.Dresser,
       bodyPart: BodyPart.Legs,
       tempRange: {
-        min: 15,
-        max: 17,
+        min: -50,
+        max: 19,
       },
     },
   ]);

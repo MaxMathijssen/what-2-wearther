@@ -1,9 +1,9 @@
 import { useCallback, memo, useContext } from "react";
 import { DailyForecast } from "@/typings/types";
 import Image from "next/legacy/image";
-import { WardrobeContext } from "@/providers/WardrobeProvider";
 import styles from "./weatherCard.module.scss";
 import classNames from "classnames";
+import { Status, BodyPart, WardrobeItem } from "@/typings/types";
 
 interface WeatherCardProps {
   isSelected: boolean;
@@ -11,6 +11,9 @@ interface WeatherCardProps {
   isPlaceHolder: boolean;
   dailyForecast: DailyForecast | null;
   selectDailyForecast?: (dailyForecast: DailyForecast) => void;
+  headItem: WardrobeItem | undefined;
+  bodyItem: WardrobeItem | undefined;
+  legItem: WardrobeItem | undefined;
 }
 
 function WeatherCard({
@@ -19,14 +22,15 @@ function WeatherCard({
   isPlaceHolder,
   dailyForecast,
   selectDailyForecast,
+  headItem,
+  bodyItem,
+  legItem,
 }: WeatherCardProps): React.JSX.Element {
   const handleSelectDailyForecast = useCallback(() => {
     if (selectDailyForecast && dailyForecast) {
       selectDailyForecast(dailyForecast);
     }
   }, [selectDailyForecast, dailyForecast]);
-
-  const { avatar } = useContext(WardrobeContext);
 
   const gradient = dailyForecast?.color;
 
@@ -103,14 +107,36 @@ function WeatherCard({
                   alt={dailyForecast.weather}
                 ></Image>
               )}
-              {avatar?.isComplete && avatar.head !== undefined && (
+              {headItem && (
                 <div className={styles.avatar}>
-                  <Image
-                    src={avatar.head.image.src}
-                    width={avatar.head.image.width * 0.3}
-                    height={avatar.head.image.height * 0.3}
-                    alt={avatar.head.image.alt}
-                  ></Image>
+                  <div className={styles.topRow}>
+                    <Image
+                      src={headItem.image.src}
+                      width={headItem.image.width * 0.35}
+                      height={headItem.image.height * 0.35}
+                      alt={headItem.image.alt}
+                    ></Image>
+                  </div>
+                  {bodyItem && (
+                    <div className={styles.middleRow}>
+                      <Image
+                        src={bodyItem.image.src}
+                        width={bodyItem.image.width * 0.35}
+                        height={bodyItem.image.height * 0.35}
+                        alt={bodyItem.image.alt}
+                      ></Image>
+                    </div>
+                  )}
+                  {legItem && (
+                    <div className={styles.bottomRow}>
+                      <Image
+                        src={legItem.image.src}
+                        width={legItem.image.width * 0.35}
+                        height={legItem.image.height * 0.35}
+                        alt={legItem.image.alt}
+                      ></Image>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

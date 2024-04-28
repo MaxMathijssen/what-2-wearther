@@ -3,16 +3,24 @@
 import { useContext, useId, memo } from "react";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import WeatherCard from "../WeatherCard";
-import { DailyForecast } from "@/typings/types";
+import { DailyForecast, WardrobeItem } from "@/typings/types";
 import { range } from "@/helpers/utils";
 import { motion } from "framer-motion";
+import { WardrobeContext } from "@/providers/WardrobeProvider";
+import { Status, BodyPart } from "@/typings/types";
 
 import styles from "./weeklyForecast.module.scss";
 
 function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectedDailyForecast, selectDailyForecast, error } =
     useContext(ForecastContext);
+  const { avatar, wardrobeItems } = useContext(WardrobeContext);
 
+  const activeWardrobeItems = wardrobeItems.filter(
+    (wardrobeItem) =>
+      wardrobeItem.status === Status.Wardrobe ||
+      wardrobeItem.status === Status.Avatar
+  );
   const id = useId();
 
   return (
@@ -22,6 +30,27 @@ function WeeklyForecast(): React.JSX.Element {
       {weeklyForecast &&
         weeklyForecast.map((dailyForecast: DailyForecast) => {
           const isSelected = dailyForecast.dt === selectedDailyForecast?.dt;
+          const temp = dailyForecast.temp.current
+            ? dailyForecast.temp.current
+            : dailyForecast.temp.max;
+          const headItem =
+            avatar?.isComplete && avatar.head !== undefined
+              ? avatar.head
+              : undefined;
+          const bodyItem = activeWardrobeItems.find(
+            (bodyItem: WardrobeItem) =>
+              bodyItem.tempRange.max >= temp &&
+              bodyItem.tempRange.min <= temp &&
+              bodyItem.bodyPart === BodyPart.Body
+          );
+          const legItem = activeWardrobeItems.find(
+            (bodyItem: WardrobeItem) =>
+              bodyItem.tempRange.max >= temp &&
+              bodyItem.tempRange.min <= temp &&
+              bodyItem.bodyPart === BodyPart.Legs
+          );
+
+          console.log(temp, wardrobeItems, activeWardrobeItems);
           return (
             <div key={dailyForecast.dt} className={styles.weatherCardContainer}>
               {dailyForecast === selectedDailyForecast && (
@@ -35,6 +64,9 @@ function WeeklyForecast(): React.JSX.Element {
                 selectDailyForecast={() =>
                   selectDailyForecast(dailyForecast, null)
                 }
+                headItem={headItem}
+                bodyItem={bodyItem}
+                legItem={legItem}
               />
             </div>
           );
@@ -49,6 +81,9 @@ function WeeklyForecast(): React.JSX.Element {
               isError={true}
               isPlaceHolder={false}
               dailyForecast={null}
+              headItem={undefined}
+              bodyItem={undefined}
+              legItem={undefined}
             />
           );
         })}
@@ -62,6 +97,9 @@ function WeeklyForecast(): React.JSX.Element {
                 isError={false}
                 isPlaceHolder={true}
                 dailyForecast={null}
+                headItem={undefined}
+                bodyItem={undefined}
+                legItem={undefined}
               />
             </div>
           )))}
