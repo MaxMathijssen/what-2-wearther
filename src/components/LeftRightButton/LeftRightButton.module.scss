@@ -34,7 +34,7 @@
 
 .btnNextHours:active,
 .btnPrevHours:active {
-  animation: pressEffect 0.2s ease forwards;
+  animation: pressEffect 0.2s ease forwards; // Nice animation yo
 }
 
 @keyframes pressEffect {
