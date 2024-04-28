@@ -1,7 +1,7 @@
 import { useCallback, memo, useContext } from "react";
 import { DailyForecast } from "@/typings/types";
 import Image from "next/legacy/image";
-import styles from "./weatherCard.module.scss";
+import styles from "./WeatherCard.module.scss";
 import classNames from "classnames";
 import { Status, BodyPart, WardrobeItem } from "@/typings/types";
 
