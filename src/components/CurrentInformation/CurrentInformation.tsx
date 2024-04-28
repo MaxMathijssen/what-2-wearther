@@ -19,7 +19,7 @@ function CurrentInformation() {
   const [validationMessage, setValidationMessage] = useState("");
   const [currentTime, setCurrentTime] = useState<string>(getCurrentTime());
 
-  const endPoint = `http://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=1&appid=${API_KEY}`;
+  const endPoint = `https://api.openweathermap.org/geo/1.0/direct?q=${searchInput}&limit=1&appid=${API_KEY}`;
 
   useEffect(() => {
     const timer = setInterval(() => {
