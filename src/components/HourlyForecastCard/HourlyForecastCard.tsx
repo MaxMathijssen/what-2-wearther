@@ -6,7 +6,7 @@ import LeftRightButton, { Direction } from "../LeftRightButton";
 import { range } from "@/helpers/utils";
 import HourlyForecastIndicator from "../HourlyForecastIndicator/HourlyForecastIndicator";
 import Image from "next/legacy/image";
-import styles from "./hourlyForecastCard.module.scss";
+import styles from "./HourlyForecastCard.module.scss";
 import classNames from "classnames";
 
 interface HourlyForecastCardProps extends PropsWithChildren {

@@ -2,7 +2,7 @@ import { LayoutGroup } from "framer-motion";
 import Avatar from "../Avatar";
 import Dresser from "../Dresser";
 import WardrobeContainer from "../WardrobeContainer";
-import styles from "./wardrobe.module.scss";
+import styles from "./Wardrobe.module.scss";
 
 function Wardrobe() {
   return (

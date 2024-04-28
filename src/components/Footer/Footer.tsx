@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/legacy/image";
 
-import styles from "./footer.module.scss";
+import styles from "./Footer.module.scss";
 
 function Footer() {
   return (

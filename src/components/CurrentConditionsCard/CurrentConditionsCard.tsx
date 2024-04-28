@@ -1,5 +1,5 @@
 import { memo } from "react";
-import styles from "./currentConditionsCard.module.scss";
+import styles from "./CurrentConditionsCard.module.scss";
 import classNames from "classnames";
 import Image from "next/legacy/image";
 import { DailyForecast } from "@/typings/types";

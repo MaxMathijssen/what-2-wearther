@@ -1,5 +1,5 @@
 import Image from "next/legacy/image";
-import styles from "./avatar.module.scss";
+import styles from "./Avatar.module.scss";
 import { useContext, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { WardrobeContext } from "@/providers/WardrobeProvider";

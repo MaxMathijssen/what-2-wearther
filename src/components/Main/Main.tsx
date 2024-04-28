@@ -4,7 +4,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 import Forecast from "../Forecast";
 import Wardrobe from "../Wardrobe";
-import styles from "./main.module.scss";
+import styles from "./Main.module.scss";
 
 function Main() {
   const { wardrobeEnabled } = useContext(WardrobeContext);

@@ -1,7 +1,7 @@
 import React from "react";
 import WeeklyForecast from "../WeeklyForecast";
 import DailyForecast from "../DailyForecast";
-import styles from "./forecast.module.scss";
+import styles from "./Forecast.module.scss";
 
 function Forecast() {
   return (

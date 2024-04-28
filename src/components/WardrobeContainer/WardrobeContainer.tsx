@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "next/legacy/image";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 import { Status, BodyPart, WardrobeItem } from "@/typings/types";
-import styles from "./wardrobeContainer.module.scss";
+import styles from "./WardrobeContainer.module.scss";
 import classNames from "classnames";
 
 function WardrobeContainer() {

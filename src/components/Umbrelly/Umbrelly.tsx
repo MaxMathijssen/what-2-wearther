@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState, useContext } from "react";
 import { motion } from "framer-motion";
-import styles from "./umbrelly.module.scss";
+import styles from "./Umbrelly.module.scss";
 import Image from "next/image";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 

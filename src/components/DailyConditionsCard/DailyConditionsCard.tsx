@@ -1,4 +1,4 @@
-import styles from "./dailyConditionsCard.module.scss";
+import styles from "./DailyConditionsCard.module.scss";
 import { memo } from "react";
 import { DailyForecast } from "@/typings/types";
 import classNames from "classnames";

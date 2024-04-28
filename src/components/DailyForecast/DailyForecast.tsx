@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, memo } from "react";
-import styles from "./dailyForecast.module.scss";
+import styles from "./DailyForecast.module.scss";
 import { ForecastContext } from "../../providers/ForecastProvider";
 import CurrentConditionsCard from "../CurrentConditionsCard";
 import DailyConditionsCard from "../DailyConditionsCard";

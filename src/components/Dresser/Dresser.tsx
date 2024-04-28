@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from "next/image";
-import styles from "./dresser.module.scss";
+import styles from "./Dresser.module.scss";
 import { CustomArrowProps } from "react-slick";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 import { Status, BodyPart, WardrobeItem } from "@/typings/types";

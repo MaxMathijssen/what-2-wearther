@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { WardrobeContext } from "@/providers/WardrobeProvider";
 import { Status, BodyPart } from "@/typings/types";
 
-import styles from "./weeklyForecast.module.scss";
+import styles from "./WeeklyForecast.module.scss";
 
 function WeeklyForecast(): React.JSX.Element {
   const { weeklyForecast, selectedDailyForecast, selectDailyForecast, error } =

@@ -1,6 +1,6 @@
 import { MouseEventHandler, MouseEvent, memo } from "react";
 import Image from "next/image";
-import styles from "./leftRightButton.module.scss";
+import styles from "./LeftRightButton.module.scss";
 
 export enum Direction {
   LEFT,

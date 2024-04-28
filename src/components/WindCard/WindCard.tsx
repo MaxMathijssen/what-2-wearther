@@ -1,5 +1,5 @@
 import { memo } from "react";
-import styles from "./windCard.module.scss";
+import styles from "./WindCard.module.scss";
 import classNames from "classnames";
 import Image from "next/legacy/image";
 import { DailyForecast } from "@/typings/types";

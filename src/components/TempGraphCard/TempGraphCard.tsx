@@ -5,7 +5,7 @@ import HourlyForecastIndicator from "../HourlyForecastIndicator";
 import { DailyForecast, HourlyForecast } from "@/typings/types";
 import useVisibleHourlyForecast from "@/hooks/useVisibleHourlyForecast";
 import Image from "next/legacy/image";
-import styles from "./tempGraphCard.module.scss";
+import styles from "./TempGraphCard.module.scss";
 import classNames from "classnames";
 
 interface DataPoint {

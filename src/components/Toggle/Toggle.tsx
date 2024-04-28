@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import styles from "./toggle.module.scss";
+import styles from "./Toggle.module.scss";
 
 interface ToggleProps {
   value: boolean;
